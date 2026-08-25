@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Network Architecture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: transparent; overflow: hidden; }
+  #scene { display: block; width: 100vw; height: 100vh; touch-action: none; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setClearColor(0x000000, 0);
+
+const scene = new THREE.Scene();
+
+// Isometric-ish orthographic camera
+let aspect = window.innerWidth / window.innerHeight;
+const FRUST = 7.4;
+const camera = new THREE.OrthographicCamera(-FRUST*aspect, FRUST*aspect, FRUST, -FRUST, 0.1, 100);
+// True isometric viewing angle
+camera.position.set(10, 10, 10);
+camera.lookAt(0, 0, 0);
+
+const root = new THREE.Group();
+scene.add(root);
+
+const WHITE = 0xffffff;
+
+// ---------- helpers ----------
+function lineMat(opacity = 1) {
+  return new THREE.LineBasicMaterial({ color: WHITE, transparent: true, opacity });
+}
+function dottedMat(opacity = 1, dash = 0.07, gap = 0.11) {
+  return new THREE.LineDashedMaterial({ color: WHITE, transparent: true, opacity, dashSize: dash, gapSize: gap });
+}
+
+// Cube edge geometry from size, returns array of segment pairs (12 edges)
+function cubeEdges(s) {
+  const h = s / 2;
+  const v = [
+    [-h,-h,-h],[ h,-h,-h],[ h,-h, h],[-h,-h, h], // bottom
+    [-h, h,-h],[ h, h,-h],[ h, h, h],[-h, h, h], // top
+  ];
+  const e = [
+    [0,1],[1,2],[2,3],[3,0],
+    [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7],
+  ];
+  return e.map(([a,b]) => [v[a], v[b]]);
+}
+
+// Build an animatable wireframe cube (each edge can be drawn progressively)
+function makeWireCube(size, { dotted=false, opacity=1 } = {}) {
+  const g = new THREE.Group();
+  const edges = cubeEdges(size);
+  const segs = [];
+  for (const [a,b] of edges) {
+    const pa = new THREE.Vector3(...a), pb = new THREE.Vector3(...b);
+    const geo = new THREE.BufferGeometry().setFromPoints([pa.clone(), pa.clone()]);
+    const mat = dotted ? dottedMat(opacity) : lineMat(opacity);
+    const line = new THREE.Line(geo, mat);
+    if (dotted) line.computeLineDistances();
+    line.userData = { pa, pb, dotted };
+    g.add(line);
+    segs.push(line);
+  }
+  g.userData.segs = segs;
+  return g;
+}
+
+// progress 0..1 across all edges of a cube group, sequentially
+function drawCube(group, p) {
+  const segs = group.userData.segs;
+  const n = segs.length;
+  for (let i = 0; i < n; i++) {
+    const t0 = i / n, t1 = (i+1) / n;
+    let local = (p - t0) / (t1 - t0);
+    local = Math.max(0, Math.min(1, local));
+    const { pa, pb, dotted } = segs[i].userData;
+    const cur = pa.clone().lerp(pb, local);
+    segs[i].geometry.setFromPoints([pa, cur]);
+    if (dotted) segs[i].computeLineDistances();
+    segs[i].visible = local > 0;
+  }
+}
+
+// Server cube: wireframe cube + front panel details (slots + dots) drawn on the front-facing faces
+// Reference shows panel on the left-front face and the right-front face for some; we emulate the
+// look: horizontal slot bars on the two visible side faces near the bottom, plus small indicator dots.
+// With our camera at (10,10,10) looking at origin, the two faces visible to the
+// viewer as the "front" of the cube are the +X face (points screen-right-down) and
+// the +Z face (points screen-left-down). The reference shows the server panel on the
+// LEFT-pointing front face -> that's the +Z face. Slots run horizontally (along X),
+// stacked vertically (along Y), placed in the lower portion of the face.
+function makeServerCube(size, { dotted=false } = {}) {
+  const g = new THREE.Group();
+  const cube = makeWireCube(size, { dotted });
+  g.add(cube);
+
+  const detail = new THREE.Group();
+  const h = size/2;
+  const mk = () => dotted ? dottedMat(1) : lineMat(1);
+
+  // Panel sits on +Z face (z = +h). Face spans x in [-h,h], y in [-h,h].
+  // Reference: panel occupies left ~70% width, lower-middle band, with 3 slots.
+  const slots = new THREE.Group();
+  const inset = size * 0.10;
+  const xL = -h + inset;                 // left edge of slots
+  const xR =  h - inset - size*0.18;     // right edge (leaves room for dots)
+  const nSlots = 3;
+  const yTop = h * 0.36;                  // top slot y
+  const slotGap = size * 0.17;
+  const slotH = size * 0.075;
+
+  for (let i = 0; i < nSlots; i++) {
+    const y = yTop - i * slotGap;
+    const z = h + 0.001;                  // tiny offset to avoid z-fight on the face
+    // slot rectangle (outline)
+    const pts = [
+      new THREE.Vector3(xL, y,        z),
+      new THREE.Vector3(xR, y,        z),
+      new THREE.Vector3(xR, y - slotH, z),
+      new THREE.Vector3(xL, y - slotH, z),
+      new THREE.Vector3(xL, y,        z),
+    ];
+    const ln = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mk());
+    if (dotted) ln.computeLineDistances();
+    slots.add(ln);
+    // an inner horizontal line to read as a "vent/slot"
+    const inner = [
+      new THREE.Vector3(xL + size*0.03, y - slotH*0.5, z),
+      new THREE.Vector3(xR - size*0.03, y - slotH*0.5, z),
+    ];
+    const il = new THREE.Line(new THREE.BufferGeometry().setFromPoints(inner), mk());
+    if (dotted) il.computeLineDistances();
+    slots.add(il);
+  }
+  // two indicator dots to the right of the slot stack (like LEDs)
+  const dotMat = new THREE.MeshBasicMaterial({ color: WHITE });
+  const dotGeo = new THREE.SphereGeometry(size*0.026, 10, 10);
+  for (let i = 0; i < 2; i++) {
+    const d = new THREE.Mesh(dotGeo, dotMat);
+    d.position.set(h - inset - size*0.05, yTop - i*slotGap*1.4 - slotH*0.5, h + size*0.01);
+    slots.add(d);
+  }
+
+  detail.add(slots);
+  g.add(detail);
+  g.userData.cube = cube;
+  g.userData.detail = detail;
+  return g;
+}
+
+// glowing node sprite
+const glowTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const ctx = c.getContext('2d');
+  const grd = ctx.createRadialGradient(32,32,0, 32,32,32);
+  grd.addColorStop(0, 'rgba(255,255,255,1)');
+  grd.addColorStop(0.25, 'rgba(255,255,255,0.9)');
+  grd.addColorStop(0.5, 'rgba(255,255,255,0.35)');
+  grd.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = grd; ctx.fillRect(0,0,64,64);
+  return new THREE.CanvasTexture(c);
+})();
+function glowNode(scale) {
+  const m = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  m.scale.set(scale, scale, 1);
+  return m;
+}
+
+// ---------- scene layout ----------
+const CENTER_SIZE = 2.2;
+const SERVER_SIZE = 2.0;
+const DEPTH_SIZE = 4.6;
+
+// Central cube
+const center = makeWireCube(CENTER_SIZE);
+root.add(center);
+
+// Depth dotted cube (behind center, same location, larger)
+const depthCube = makeWireCube(DEPTH_SIZE, { dotted:true, opacity:0.5 });
+root.add(depthCube);
+
+// Internal data nodes (3)
+const innerNodes = [];
+const innerPos = [
+  new THREE.Vector3( 0.0,  0.35, 0.0),
+  new THREE.Vector3(-0.45, -0.4, 0.3),
+  new THREE.Vector3( 0.5, -0.35, -0.1),
+];
+for (const p of innerPos) {
+  const node = glowNode(0.9);
+  node.position.copy(p);
+  node.material.opacity = 0;
+  root.add(node);
+  innerNodes.push(node);
+}
+
+// Surrounding servers — placed in a flat ring on screen.
+// In iso projection, screen directions map to world directions.
+// We position the 6 servers in world space so they appear top, upper-L, upper-R,
+// bottom, lower-L, lower-R around center on screen.
+// Screen-up corresponds to world +Y essentially; left/right to a mix of X and Z.
+// We'll use empirical world offsets that read symmetric on screen.
+const D = 5.6;     // ring radius (screen)
+const DV = 4.9;    // vertical-ish distance for top/bottom
+
+// To get clean screen placement, define screen-space target angles and project.
+// Easier: place along world axes that we know map predictably.
+// top  -> +Y up: use world (0,+1,0)*? but pure Y looks straight up. Good for top/bottom.
+// corners -> combos of X and Z.
+// We'll compute world dirs by inverse of camera basis for screen vectors.
+
+// Build camera screen basis
+const camDir = new THREE.Vector3(); camera.getWorldDirection(camDir);
+const camRight = new THREE.Vector3().crossVectors(camDir, camera.up).normalize();
+const camUp = new THREE.Vector3().crossVectors(camRight, camDir).normalize();
+
+// project a screen-plane direction (sx right, sy up) into world (perp to camDir)
+function screenDir(sx, sy) {
+  return camRight.clone().multiplyScalar(sx).add(camUp.clone().multiplyScalar(sy)).normalize();
+}
+
+const RH = 6.2;  // horizontal spread
+const RV = 5.4;  // vertical spread
+const layout = [
+  { key:'top',   dir: screenDir(0,  1),     dist: RV, dotted:false },
+  { key:'bottom',dir: screenDir(0, -1),     dist: RV, dotted:false },
+  { key:'ul',    dir: screenDir(-0.92, 0.55), dist: RH, dotted:true },
+  { key:'ur',    dir: screenDir( 0.92, 0.55), dist: RH, dotted:true },
+  { key:'ll',    dir: screenDir(-0.92,-0.55), dist: RH, dotted:true },
+  { key:'lr',    dir: screenDir( 0.92,-0.55), dist: RH, dotted:true },
+];
+
+const servers = [];
+const connectors = [];   // {line, node, from, to, server}
+const flows = [];
+
+const CENTER_HALF = CENTER_SIZE/2;
+
+for (const L of layout) {
+  const pos = L.dir.clone().multiplyScalar(L.dist);
+  const srv = makeServerCube(SERVER_SIZE, { dotted: L.dotted });
+  srv.position.copy(pos);
+  root.add(srv);
+
+  // connection line: from center surface toward server's NEAR face.
+  // The near face along direction L.dir is offset from server center by roughly the
+  // cube's "radius" projected on that dir. Using half-size * ~1.0 keeps the node
+  // sitting just outside the wireframe rather than inside it.
+  const from = L.dir.clone().multiplyScalar(CENTER_HALF + 0.15);
+  const nearFace = SERVER_SIZE * 0.62;   // distance from server center to where line stops
+  const to = pos.clone().sub(L.dir.clone().multiplyScalar(nearFace));
+  const lgeo = new THREE.BufferGeometry().setFromPoints([from.clone(), from.clone()]);
+  const lmat = lineMat(1);
+  const line = new THREE.Line(lgeo, lmat);
+  root.add(line);
+
+  // glowing connection node near the server end
+  const cnode = glowNode(0.55);
+  cnode.position.copy(to);
+  cnode.material.opacity = 0;
+  root.add(cnode);
+
+  const obj = { ...L, pos, server: srv, line, from, to, node: cnode };
+  // floating motion params (gentle bob, world-space small amount ~ a few screen px)
+  srv.userData.restPos = pos.clone();
+  srv.userData.floatPhase = Math.random() * Math.PI * 2;
+  srv.userData.floatSpeed = 0.6 + Math.random() * 0.5;
+  servers.push(srv);
+  connectors.push(obj);
+}
+
+// ---- per-step build particle (travels the line while it grows) ----
+function makeBuildParticle() {
+  const p = glowNode(0.5);
+  p.material.opacity = 0;
+  root.add(p);
+  return p;
+}
+connectors.forEach(c => { c.buildParticle = makeBuildParticle(); });
+
+// ---- continuous data-flow streams (created in step 9) ----
+// Each connector gets several particles, some outbound (center->server),
+// some inbound (server->center), staggered in phase.
+const PARTS_OUT = 2;
+const PARTS_IN  = 2;
+function buildStreams() {
+  connectors.forEach(c => {
+    c.streams = [];
+    for (let i = 0; i < PARTS_OUT; i++) {
+      const s = glowNode(0.38);
+      s.material.opacity = 0;
+      root.add(s);
+      c.streams.push({ sprite: s, dir: 1, t: i / PARTS_OUT, speed: 0.34 + Math.random()*0.12 });
+    }
+    for (let i = 0; i < PARTS_IN; i++) {
+      const s = glowNode(0.32);
+      s.material.opacity = 0;
+      root.add(s);
+      c.streams.push({ sprite: s, dir: -1, t: i / PARTS_IN, speed: 0.30 + Math.random()*0.12 });
+    }
+    c.glow = 0;       // current illumination 0..1 of this connection line
+    c.burst = 0;      // random pulse burst envelope
+  });
+}
+
+// ---------- animation timeline ----------
+const T = {
+  center:  [0.0, 1.4],
+  inner:   [1.0, 1.8],
+  servers: [], // filled below, 6 sequential
+  depth:   [0, 0],
+  flow:    [0, 0],
+};
+let cursor = 1.8;
+const SRV_DUR = 0.9;
+// order: top, ur, lr, bottom, ll, ul
+const order = ['top','ur','lr','bottom','ll','ul'];
+for (const key of order) {
+  T.servers.push({ key, t0: cursor, line0: cursor, lineDur: 0.45, cubeDur: SRV_DUR, t1: cursor + 0.45 + SRV_DUR });
+  cursor += 0.55;
+}
+T.depth = [cursor + 0.1, cursor + 1.6];
+cursor += 1.7;
+T.flow = [cursor, cursor + 0.6];
+const FLOW_START = T.flow[0];
+
+const clock = new THREE.Clock();
+let elapsed = 0;
+
+function easeOut(x){ return 1 - Math.pow(1 - x, 3); }
+function seg(t, a, b){ return Math.max(0, Math.min(1, (t - a) / (b - a))); }
+
+let flowInit = false;
+let nextBurst = 0;          // time of next random pulse burst
+const centerCore = center;  // alias
+
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  elapsed += dt;
+  const t = elapsed;
+
+  // ---------- Step 1: central cube draw ----------
+  drawCube(centerCore, easeOut(seg(t, T.center[0], T.center[1])));
+
+  // central core "breathing" + occasional light burst
+  const coreBreath = 0.78 + 0.22 * Math.sin(t * 1.1);           // slow breathing
+  let coreBurst = 0;
+  const burstPeriod = 6.5;
+  const bp = (t % burstPeriod) / burstPeriod;
+  if (bp < 0.10) coreBurst = Math.sin((bp/0.10) * Math.PI) * 0.6; // brief swell
+  centerCore.userData.segs.forEach(s => {
+    const drawn = s.geometry.attributes.position.count > 0;
+    s.material.opacity = drawn ? Math.min(1, 0.85 * coreBreath + coreBurst) : s.material.opacity;
+  });
+
+  // inner nodes — pulse, breathe, and flash on core burst
+  const ip = seg(t, T.inner[0], T.inner[1]);
+  innerNodes.forEach((n, i) => {
+    const pulse = 0.55 + 0.45 * Math.sin(t * 2.2 + i * 1.7);
+    n.material.opacity = ip * (0.55 + 0.45 * pulse) * coreBreath + ip * coreBurst;
+    const s = 0.9 * (0.82 + 0.18 * pulse) * (1 + coreBurst * 0.5);
+    n.scale.set(s, s, 1);
+  });
+
+  // ---------- Steps 2-7: servers sequential build ----------
+  T.servers.forEach((S) => {
+    const conn = connectors.find(c => c.key === S.key);
+    // line growth
+    const lp = easeOut(seg(t, S.line0, S.line0 + S.lineDur));
+    const cur = conn.from.clone().lerp(conn.to, lp);
+    conn.line.geometry.setFromPoints([conn.from, cur]);
+    conn.line.visible = lp > 0;
+
+    // build particle rides the growing line tip, then fades as cube starts
+    const bpr = conn.buildParticle;
+    if (lp > 0 && lp < 1) {
+      bpr.position.copy(cur);
+      bpr.material.opacity = 0.95;
+      const ps = 0.5 * (0.8 + 0.4 * Math.sin(t * 12));
+      bpr.scale.set(ps, ps, 1);
+    } else if (lp >= 1 && bpr.material.opacity > 0) {
+      bpr.material.opacity = Math.max(0, bpr.material.opacity - dt * 4);
+    }
+
+    // node appears at end of line
+    conn.node.material.opacity = Math.max(conn.node.material.opacity, lp);
+
+    // cube draw (starts a bit after line begins)
+    const cp = easeOut(seg(t, S.line0 + S.lineDur*0.6, S.t1));
+    drawCube(conn.server.userData.cube, cp);
+    conn.server.userData.detail.visible = cp > 0.8;
+    conn.server.userData.detail.traverse(o => {
+      if (o.material && o.material.opacity !== undefined)
+        o.material.opacity = cp > 0.8 ? (cp-0.8)/0.2 : 0;
+    });
+  });
+
+  // ---------- Step 8: depth dotted cube ----------
+  const dpr = easeOut(seg(t, T.depth[0], T.depth[1]));
+  drawCube(depthCube, dpr);
+  depthCube.userData.segs.forEach(s => { s.material.opacity = 0.5 * dpr; });
+
+  // ---------- server floating motion (gentle bob) ----------
+  servers.forEach(srv => {
+    const u = srv.userData;
+    if (!u.restPos) return;
+    const bob = Math.sin(t * u.floatSpeed + u.floatPhase) * 0.05;   // small world offset
+    const sway = Math.cos(t * u.floatSpeed * 0.7 + u.floatPhase) * 0.03;
+    srv.position.set(u.restPos.x + sway, u.restPos.y + bob, u.restPos.z + sway);
+  });
+
+  // ---------- Step 9: network activation — continuous data flow ----------
+  if (t >= FLOW_START) {
+    if (!flowInit) { buildStreams(); flowInit = true; nextBurst = t + 1.5; }
+    const actFade = seg(t, FLOW_START, FLOW_START + 0.8);
+
+    // random pulse burst: pick a random connection, send a bright surge
+    if (t >= nextBurst) {
+      const c = connectors[Math.floor(Math.random() * connectors.length)];
+      c.burst = 1;
+      nextBurst = t + 0.6 + Math.random() * 1.8;
+    }
+
+    connectors.forEach((c, ci) => {
+      // decay burst
+      c.burst = Math.max(0, c.burst - dt * 1.6);
+      // baseline ambient glow + burst contribution; also driven by particle proximity
+      let nearTip = 0;
+      c.streams.forEach(st => {
+        st.t += dt * st.speed;
+        if (st.t > 1) st.t -= 1;
+        const along = st.dir === 1 ? st.t : (1 - st.t);
+        const pos = c.from.clone().lerp(c.to, along);
+        st.sprite.position.copy(pos);
+        const fade = Math.sin(st.t * Math.PI);   // fade in/out at ends
+        st.sprite.material.opacity = (0.85 * fade) * actFade * (st.dir === 1 ? 1 : 0.7);
+        const s = (st.dir === 1 ? 0.38 : 0.32) * (0.85 + 0.3 * fade);
+        st.sprite.scale.set(s, s, 1);
+        nearTip = Math.max(nearTip, fade);
+      });
+      // line illuminates as particles move + burst surge
+      const targetGlow = (0.5 + 0.5 * nearTip) * 0.55 + c.burst * 0.45;
+      c.glow += (targetGlow - c.glow) * Math.min(1, dt * 6);
+      c.line.material.opacity = Math.min(1, 0.45 + 0.55 * c.glow * actFade);
+
+      // connection node pulse + burst flash
+      const pulse = 0.6 + 0.4 * Math.sin(t * 2.5 + ci);
+      c.node.material.opacity = Math.min(1, 0.7 + 0.3 * pulse + c.burst * 0.5);
+      const ns = 0.55 * (0.85 + 0.2 * pulse + c.burst * 0.4);
+      c.node.scale.set(ns, ns, 1);
+    });
+  } else {
+    // before activation: keep connection nodes gently pulsing once visible
+    connectors.forEach((c, i) => {
+      if (c.node.material.opacity > 0.05) {
+        const pulse = 0.6 + 0.4 * Math.sin(t * 2.5 + i);
+        const ns = 0.55 * (0.85 + 0.2 * pulse);
+        c.node.scale.set(ns, ns, 1);
+      }
+    });
+  }
+
+  renderer.render(scene, camera);
+}
+
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(w, h, false);
+  aspect = w / h;
+  camera.left = -FRUST * aspect;
+  camera.right = FRUST * aspect;
+  camera.top = FRUST;
+  camera.bottom = -FRUST;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+animate();
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magnetic Grid</title>
+<style>
+  :root {
+    --cell: 38px;
+    --gap: 4px;
+    --cols: 8;
+    --pad: 12px;
+    --grid: calc(var(--cols) * var(--cell) + (var(--cols) - 1) * var(--gap));
+    --stage: calc(var(--grid) + 2 * var(--pad));
+
+    --bg: transparent;
+    --line: rgba(255, 255, 255, 0.45);
+    --line-dim: rgba(255, 255, 255, 0.13);
+    --dotted: rgba(255, 255, 255, 0.18);
+    --fill: #ece7d9;
+    --blue: #5b83ff;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --magenta: #d946ef;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    cursor: crosshair;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage {
+    position: relative;
+    width: var(--stage);
+    height: var(--stage);
+    border: 1px dotted var(--dotted);
+  }
+
+  .grid {
+    position: absolute;
+    left: var(--pad);
+    top: var(--pad);
+    width: var(--grid);
+    height: var(--grid);
+  }
+
+  .cell {
+    position: absolute;
+    width: var(--cell);
+    height: var(--cell);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    will-change: transform;
+  }
+  .cell.edge { border-color: var(--line-dim); }
+
+  /* Center 2×2 highlighted block */
+  .cell.fill {
+    background: var(--fill);
+    border-color: transparent;
+    border-width: 1.5px;
+  }
+  .cell.fill.tl { border-top-color: var(--blue);   border-left-color:  var(--magenta); }
+  .cell.fill.tr { border-top-color: var(--blue);   border-right-color: var(--green);   }
+  .cell.fill.bl { border-bottom-color: var(--yellow); border-left-color:  var(--magenta); }
+  .cell.fill.br { border-bottom-color: var(--yellow); border-right-color: var(--green);   }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <script>
+    // ---- config -----------------------------------------------------------
+    const CELL = 38;
+    const GAP  = 4;
+    const COLS = 8;
+    const ROWS = 8;
+    const STEP = CELL + GAP;
+
+    const RADIUS     = 200;   // influence radius in px (soft Gaussian falloff)
+    const STRENGTH   = 0.35;  // max pull fraction of (mouse - cellCenter)
+    const MAX_OFFSET = 16;    // hard cap on per-cell displacement (px) — prevents clustering
+    const EASE_M     = 0.08;  // mouse-position easing (lower = slower/smoother)
+    const EASE_C     = 0.12;  // per-cell offset easing
+    const ACT_EASE   = 0.06;  // how fast the field fades in/out on enter/leave
+
+    // ---- build grid -------------------------------------------------------
+    const grid  = document.getElementById("grid");
+    const cells = [];
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const el = document.createElement("div");
+        el.className = "cell";
+
+        const isEdge = r === 0 || r === ROWS - 1 || c === 0 || c === COLS - 1;
+        if (isEdge) el.classList.add("edge");
+
+        // Center 2×2 → rows 3–4, cols 3–4 (0-indexed)
+        if ((r === 3 || r === 4) && (c === 3 || c === 4)) {
+          el.classList.add("fill");
+          if (r === 3 && c === 3) el.classList.add("tl");
+          if (r === 3 && c === 4) el.classList.add("tr");
+          if (r === 4 && c === 3) el.classList.add("bl");
+          if (r === 4 && c === 4) el.classList.add("br");
+        }
+
+        const x = c * STEP;
+        const y = r * STEP;
+        el.style.left = x + "px";
+        el.style.top  = y + "px";
+
+        grid.appendChild(el);
+        cells.push({
+          el,
+          cx: x + CELL / 2,   // base center x (relative to grid)
+          cy: y + CELL / 2,   // base center y
+          ox: 0,              // current offset x
+          oy: 0,              // current offset y
+        });
+      }
+    }
+
+    // ---- mouse tracking ---------------------------------------------------
+    const gridSize = COLS * CELL + (COLS - 1) * GAP;
+    let mx = gridSize / 2, my = gridSize / 2;   // target mouse (grid-local)
+    let eX = mx, eY = my;                       // eased mouse
+    let targetActive = 0;                       // 0 or 1
+    let active = 0;                             // eased toward targetActive
+
+    function getScale() {
+      const winW = window.innerWidth;
+      const winH = window.innerHeight;
+      // We scale to fit within the viewport dimensions (356px stage size)
+      return Math.min(winW / 356, winH / 356, 1);
+    }
+
+    function adjustScale() {
+      const stageEl = document.getElementById("stage");
+      const scale = getScale();
+      stageEl.style.transform = `scale(${scale})`;
+      stageEl.style.transformOrigin = "center center";
+    }
+
+    function setMouse(clientX, clientY) {
+      const rect = grid.getBoundingClientRect();
+      const scale = getScale();
+      mx = (clientX - rect.left) / scale;
+      my = (clientY - rect.top) / scale;
+      targetActive = 1;
+    }
+
+    window.addEventListener("mousemove", (e) => setMouse(e.clientX, e.clientY));
+    window.addEventListener("touchmove", (e) => {
+      if (e.touches[0]) setMouse(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+    window.addEventListener("mouseleave", () => { targetActive = 0; });
+    window.addEventListener("blur",       () => { targetActive = 0; });
+
+    window.addEventListener("resize", adjustScale);
+    adjustScale();
+
+    // ---- animation loop ---------------------------------------------------
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function animate() {
+      // Ease mouse & activity
+      eX += (mx - eX) * EASE_M;
+      eY += (my - eY) * EASE_M;
+      active += (targetActive - active) * ACT_EASE;
+
+      const r2 = RADIUS * RADIUS;
+      const strength = STRENGTH * active;
+
+      for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i];
+        const dx = eX - cell.cx;
+        const dy = eY - cell.cy;
+        const d2 = dx * dx + dy * dy;
+
+        // Gaussian falloff — strong close, near-zero far away
+        const falloff = Math.exp(-d2 / r2);
+        const s = strength * falloff;
+
+        let tx = dx * s;
+        let ty = dy * s;
+
+        // Cap the per-cell displacement so nearby cells don't pile onto the cursor.
+        const mag = Math.hypot(tx, ty);
+        if (mag > MAX_OFFSET) {
+          const k = MAX_OFFSET / mag;
+          tx *= k;
+          ty *= k;
+        }
+
+        // Per-cell easing → soft, gliding follow
+        cell.ox += (tx - cell.ox) * (reduced ? 1 : EASE_C);
+        cell.oy += (ty - cell.oy) * (reduced ? 1 : EASE_C);
+
+        cell.el.style.transform =
+          `translate(${cell.ox.toFixed(2)}px, ${cell.oy.toFixed(2)}px)`;
+      }
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

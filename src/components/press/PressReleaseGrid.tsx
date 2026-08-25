@@ -483,18 +483,11 @@ export default function PressReleaseGrid() {
             style={fadeUp(80)}
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] max-w-4xl font-sans uppercase mb-4"
           >
-            Articles{" "}
+            DigiPowerX{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6ec8ff] via-[#3daeff] to-[#0091ff] font-extrabold">
-              for you
+              Press Releases
             </span>
           </h2>
-
-          <h3
-            style={fadeUp(110)}
-            className="text-[13px] md:text-[15px] font-semibold text-white/70 tracking-[0.14em] uppercase font-sans"
-          >
-            DigiPowerX Press Releases
-          </h3>
 
           <p style={fadeUp(140)} className="text-[14px] md:text-[16px] text-white/50 leading-relaxed max-w-3xl font-sans font-normal pt-2">
             Explore announcements, partnerships and technology milestones driving the future of infrastructure.

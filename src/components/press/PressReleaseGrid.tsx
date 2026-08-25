@@ -489,6 +489,13 @@ export default function PressReleaseGrid() {
             </span>
           </h2>
 
+          <h3
+            style={fadeUp(110)}
+            className="text-[13px] md:text-[15px] font-semibold text-white/70 tracking-[0.14em] uppercase font-sans"
+          >
+            DigiPowerX Press Releases
+          </h3>
+
           <p style={fadeUp(140)} className="text-[14px] md:text-[16px] text-white/50 leading-relaxed max-w-3xl font-sans font-normal pt-2">
             Explore announcements, partnerships and technology milestones driving the future of infrastructure.
           </p>

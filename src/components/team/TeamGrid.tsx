@@ -23,6 +23,13 @@ export default function TeamGrid() {
 
   const executiveCouncil: TeamMember[] = [
     {
+      id: "hans-vestberg",
+      name: "Hans Vestberg",
+      role: "Co-Founder",
+      image: "/images/97.jpg",
+      bio: "Cybersecurity strategist safeguarding DigiPowerX's high-performance compute networks, physical assets and data sovereignty."
+    },
+    {
       id: "michel-amar",
       name: "Michel Amar",
       role: "Chief Executive Officer",
@@ -84,13 +91,6 @@ export default function TeamGrid() {
       role: "VP of AI Infrastructure",
       image: "/images/ChatGPT%20Image%20May%2018%2C%202026%2C%2004_04_45%20PM.avif",
       bio: "Energy sector expert specializing in grid-scale renewable integration, microgrids and high-voltage substation designs."
-    },
-    {
-      id: "hans-vestberg",
-      name: "Hans Vestberg",
-      role: "Co-Founder",
-      image: "/images/97.jpg",
-      bio: "Cybersecurity strategist safeguarding DigiPowerX's high-performance compute networks, physical assets and data sovereignty."
     },
     {
       id: "naresh-kumar",

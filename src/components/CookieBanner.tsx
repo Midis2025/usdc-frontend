@@ -46,9 +46,12 @@ export default function CookieBanner() {
       }}
     >
       <style>{`
+        /* Only animate transform Y/scale — the aside is centered via the CSS
+           translate property (-translate-x-1/2), which composes with transform;
+           putting translate(-50%) here too would shift it left twice. */
         @keyframes cookieSlideUp {
-          from { opacity: 0; transform: translate(-50%, 20px) scale(0.97); }
-          to   { opacity: 1; transform: translate(-50%, 0) scale(1); }
+          from { opacity: 0; transform: translateY(20px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
         }
       `}</style>
 

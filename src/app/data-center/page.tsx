@@ -52,7 +52,7 @@ export default function DataCenterPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden">
+    <div className="relative min-h-dvh bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden max-w-full w-full">
       {/* Navigation Header */}
       <Navbar />
 

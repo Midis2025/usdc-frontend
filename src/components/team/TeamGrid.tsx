@@ -164,29 +164,29 @@ export default function TeamGrid() {
 
       {/* ── SYSTEM DOSSIER MODAL OVERLAY (FOR EXECUTIVE COUNCIL) ── */}
       {selectedMember && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-[fadeIn_0.3s_ease-out]">
-          <div className="relative w-full max-w-[800px] bg-[#02050c] border border-white/[0.08] rounded-[28px] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_50px_rgba(61,174,255,0.05)]">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-[fadeIn_0.3s_ease-out]">
+          <div className="relative w-full max-w-[800px] bg-[#02050c] border border-white/[0.08] rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_50px_rgba(61,174,255,0.05)]">
             {/* Modal HUD Header */}
-            <div className="flex items-center justify-between px-8 py-5 border-b border-white/[0.06] bg-white/[0.01]">
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-2 w-2">
+            <div className="flex items-center justify-between px-4 sm:px-8 py-3.5 sm:py-5 border-b border-white/[0.06] bg-white/[0.01]">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 pr-2">
+                <span className="relative flex h-2 w-2 flex-shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3daeff] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3daeff]"></span>
                 </span>
-                <span className="text-[10px] font-mono text-[#3daeff] tracking-[0.2em] uppercase font-bold">
-                  SYSTEM ACCESS: APPROVED // FILE_{selectedMember.id.toUpperCase()}_FULL
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#3daeff] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-bold truncate">
+                  FILE_{selectedMember.id.toUpperCase()}_FULL
                 </span>
               </div>
               <button
                 onClick={() => setSelectedMember(null)}
-                className="p-1.5 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/[0.08] hover:border-white/20 text-white/60 hover:text-white transition-all cursor-pointer"
+                className="p-1.5 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/[0.08] hover:border-white/20 text-white/60 hover:text-white transition-all cursor-pointer flex-shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Modal Core Contents */}
-            <div className="p-8 md:p-10 max-h-[75vh] overflow-y-auto">
+            <div className="p-5 sm:p-8 md:p-10 max-h-[80dvh] overflow-y-auto ios-scroll">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                 {/* Left Column: Headshot (4 cols) */}
                 <div className="md:col-span-4 flex flex-col items-center">

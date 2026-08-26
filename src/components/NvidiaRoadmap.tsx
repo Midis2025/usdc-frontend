@@ -67,7 +67,7 @@ function FeatureLabel({
 /* ──────────────────── Timeline Dot ──────────────────── */
 function TimelineDot({ active }: { active?: boolean }) {
   return (
-    <div className="absolute -left-[33px] top-[5px] w-[10px] h-[10px] flex items-center justify-center">
+    <div className="absolute -left-[28px] top-[5px] w-[10px] h-[10px] flex items-center justify-center">
       {/* Premium Ping Animation keyframes */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -258,10 +258,10 @@ export default function NvidiaRoadmap() {
       desc: "Optimized for high-density AI training and large-scale inference workloads.",
       img: "/Blackwell 200.avif",
       features: [
-        { text: "POWER READY", iconType: "power", x: "top-[-6px] left-[-4px]" },
-        { text: "DIRECT-TO-CHIP COOLING", iconType: "cooling", x: "top-[15%] right-[-2%] lg:right-[2%]" },
-        { text: "GPU OPTIMIZED", iconType: "gpu", x: "bottom-[20%] left-[-4%]" },
-        { text: "HIGH-SPEED NETWORKING", iconType: "network", x: "bottom-[2%] right-[8%] lg:right-[12%]" },
+        { text: "POWER READY", iconType: "power", x: "top-[-6px] left-[0%] lg:left-[-4%]" },
+        { text: "DIRECT-TO-CHIP COOLING", iconType: "cooling", x: "top-[15%] right-[0%] lg:right-[2%]" },
+        { text: "GPU OPTIMIZED", iconType: "gpu", x: "bottom-[20%] left-[0%] lg:left-[-4%]" },
+        { text: "HIGH-SPEED NETWORKING", iconType: "network", x: "bottom-[2%] right-[0%] lg:right-[12%]" },
       ]
     },
     {
@@ -270,10 +270,10 @@ export default function NvidiaRoadmap() {
       desc: "Purpose-built infrastructure supporting enterprise-scale AI deployment.",
       img: "/Oracle Blackwell.avif",
       features: [
-        { text: "ENTERPRISE SECURE", iconType: "shield", x: "top-[-6px] left-[-4px]" },
-        { text: "CLOUD INTEGRATED", iconType: "cloud", x: "top-[15%] right-[-2%] lg:right-[2%]" },
-        { text: "OCI COMPATIBLE", iconType: "oci", x: "bottom-[20%] left-[-4%]" },
-        { text: "99.99% RELIABLE", iconType: "check", x: "bottom-[2%] right-[8%] lg:right-[12%]" },
+        { text: "ENTERPRISE SECURE", iconType: "shield", x: "top-[-6px] left-[0%] lg:left-[-4%]" },
+        { text: "CLOUD INTEGRATED", iconType: "cloud", x: "top-[15%] right-[0%] lg:right-[2%]" },
+        { text: "OCI COMPATIBLE", iconType: "oci", x: "bottom-[20%] left-[0%] lg:left-[-4%]" },
+        { text: "99.99% RELIABLE", iconType: "check", x: "bottom-[2%] right-[0%] lg:right-[12%]" },
       ]
     },
     {
@@ -282,10 +282,10 @@ export default function NvidiaRoadmap() {
       desc: "Future-ready architecture designed for the next generation of AI compute.",
       img: "/Vera Rubin.avif",
       features: [
-        { text: "NEXT-GEN ARCH", iconType: "cpu", x: "top-[-6px] left-[-4px]" },
-        { text: "ULTRA-DENSE CORES", iconType: "density", x: "top-[15%] right-[-2%] lg:right-[2%]" },
-        { text: "3D STACKED MEMORY", iconType: "memory", x: "bottom-[20%] left-[-4%]" },
-        { text: "FUTURE READY", iconType: "zap", x: "bottom-[2%] right-[8%] lg:right-[12%]" },
+        { text: "NEXT-GEN ARCH", iconType: "cpu", x: "top-[-6px] left-[0%] lg:left-[-4%]" },
+        { text: "ULTRA-DENSE CORES", iconType: "density", x: "top-[15%] right-[0%] lg:right-[2%]" },
+        { text: "3D STACKED MEMORY", iconType: "memory", x: "bottom-[20%] left-[0%] lg:left-[-4%]" },
+        { text: "FUTURE READY", iconType: "zap", x: "bottom-[2%] right-[0%] lg:right-[12%]" },
       ]
     },
   ];
@@ -407,10 +407,10 @@ export default function NvidiaRoadmap() {
           </div>
 
           {/* ── Right Column: Timeline Items ── */}
-          <div className="relative pl-7 lg:pl-7 pt-2" style={fadeUp(400)}>
+          <div className="relative pl-8 lg:pl-8 pt-2" style={fadeUp(400)}>
             {/* Vertical timeline line (runs behind the dots on all screens) */}
             <div
-              className="absolute left-0 top-2 bottom-6 w-px"
+              className="absolute left-1 top-2 bottom-6 w-px"
               style={{
                 background:
                   "linear-gradient(to bottom, rgba(61,174,255,0.35) 0%, rgba(61,174,255,0.15) 70%, transparent 100%)",

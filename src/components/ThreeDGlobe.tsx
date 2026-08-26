@@ -221,9 +221,38 @@ export default function ThreeDGlobe() {
       pointer.isDragging = false;
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        pointer.isDragging = true;
+        pointer.startX = e.touches[0].clientX;
+        pointer.startY = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!pointer.isDragging || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - pointer.startX;
+      const dy = e.touches[0].clientY - pointer.startY;
+
+      // Only handle horizontal rotation via touch to allow smooth vertical page scroll
+      if (Math.abs(dx) > Math.abs(dy)) {
+        pointer.targetYaw += dx * 0.006;
+        pointer.targetPitch = Math.max(-1.4, Math.min(1.4, pointer.targetPitch + dy * 0.006));
+        pointer.startX = e.touches[0].clientX;
+        pointer.startY = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      pointer.isDragging = false;
+    };
+
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+    canvas.addEventListener("touchstart", handleTouchStart, { passive: true });
+    canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
+    canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -495,6 +524,9 @@ export default function ThreeDGlobe() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isClient]);
 

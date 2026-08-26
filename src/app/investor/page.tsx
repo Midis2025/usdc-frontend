@@ -336,15 +336,15 @@ export default function InvestorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
 
               {/* Left & Center: Interactive Stock Chart */}
-              <div className="lg:col-span-2 bg-[#080808]/80 border border-white/5 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 flex flex-col">
+              <div className="lg:col-span-2 bg-[#080808]/80 border border-white/5 rounded-[1.75rem] sm:rounded-[2.5rem] p-5 sm:p-8 md:p-10 flex flex-col">
 
                 {/* Header of Chart container */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
                   <div className="text-center sm:text-left">
-                    <h2 className="text-2xl font-semibold uppercase tracking-tight mb-2">
+                    <h2 className="text-xl sm:text-2xl font-semibold uppercase tracking-tight mb-1 sm:mb-2">
                       Stock Performance
                     </h2>
-                    <p className="text-white/40 text-xs uppercase tracking-widest font-medium">
+                    <p className="text-white/40 text-[10px] sm:text-xs uppercase tracking-widest font-medium">
                       Real-time market tracking
                     </p>
                   </div>
@@ -357,7 +357,7 @@ export default function InvestorPage() {
                         <button
                           key={timeframe}
                           onClick={() => handleTimeframeChange(timeframe)}
-                          className={`px-4 py-1.5 text-[10px] font-bold rounded-md transition-all cursor-pointer ${isActive
+                          className={`px-3 sm:px-4 py-1.5 text-[10px] font-bold rounded-md transition-all cursor-pointer ${isActive
                               ? "bg-[#3daeff] text-black shadow-lg shadow-[#3daeff]/20"
                               : "text-white/40 hover:text-white"
                             }`}
@@ -370,7 +370,7 @@ export default function InvestorPage() {
                 </div>
 
                 {/* Animated Chart Canvas (SVG mockup) */}
-                <div className="flex-1 min-h-[350px] w-full bg-white/[0.01] border border-white/5 rounded-2xl relative overflow-hidden p-6 flex flex-col justify-end">
+                <div className="flex-1 min-h-[280px] sm:min-h-[350px] w-full bg-white/[0.01] border border-white/5 rounded-2xl relative overflow-hidden p-4 sm:p-6 flex flex-col justify-end">
                   {/* Subtle Grid backdrop inside chart */}
                   <div className="absolute inset-0 grid grid-rows-5 grid-cols-6 pointer-events-none opacity-5">
                     {Array.from({ length: 30 }).map((_, i) => (
@@ -379,7 +379,7 @@ export default function InvestorPage() {
                   </div>
 
                   {/* SVG Chart Graphic */}
-                  <div className="absolute inset-x-6 top-12 bottom-12">
+                  <div className="absolute inset-x-4 sm:inset-x-6 top-8 sm:top-12 bottom-8 sm:bottom-12">
                     <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 600 200">
                       {/* Gradient fill underneath the stock line */}
                       <defs>
@@ -420,8 +420,8 @@ export default function InvestorPage() {
                   </div>
 
                   {/* Legend labels */}
-                  <div className="relative z-10 flex items-center justify-between text-[10px] text-white/20 border-t border-white/5 pt-4 mt-auto">
-                    <span>Performance data is mock historical tracking.</span>
+                  <div className="relative z-10 flex items-center justify-between text-[9px] sm:text-[10px] text-white/20 border-t border-white/5 pt-3 sm:pt-4 mt-auto">
+                    <span>Mock historical tracking.</span>
                     <span>Source: Market Center</span>
                   </div>
                 </div>
@@ -432,12 +432,12 @@ export default function InvestorPage() {
               <div className="space-y-6">
 
                 {/* Nasdaq Ticker details */}
-                <div className="bg-[#080808]/80 border border-white/5 rounded-[2.5rem] p-10 flex flex-col justify-between min-h-[280px]">
+                <div className="bg-[#080808]/80 border border-white/5 rounded-[1.75rem] sm:rounded-[2.5rem] p-6 sm:p-10 flex flex-col justify-between min-h-[260px] sm:min-h-[280px]">
                   <div>
                     <div className="flex items-start justify-between">
                       <div>
                         {/* Interactive price loader */}
-                        <div className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-2 font-sans flex items-baseline gap-1">
+                        <div className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-2 font-sans flex items-baseline gap-1">
                           {isLoadingStock ? (
                             <span className="animate-pulse">---</span>
                           ) : (
@@ -517,7 +517,7 @@ export default function InvestorPage() {
                 </div>
 
                 {/* Latest Press Announcements Feed */}
-                <div className="bg-[#080808]/80 border border-white/5 rounded-[2.5rem] p-8">
+                <div className="bg-[#080808]/80 border border-white/5 rounded-[1.75rem] sm:rounded-[2.5rem] p-6 sm:p-8">
                   <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-6 pb-3 border-b border-white/5 text-center lg:text-left">
                     Latest Announcements
                   </h3>

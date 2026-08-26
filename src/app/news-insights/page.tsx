@@ -119,7 +119,7 @@ export default function NewsInsightsPage() {
   const featuredStory = sortedArticles[0];
 
   return (
-    <div className="relative min-h-screen bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden select-none">
+    <div className="relative min-h-dvh bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden max-w-full w-full select-none">
       {/* Navbar Integration */}
       <Navbar />
 

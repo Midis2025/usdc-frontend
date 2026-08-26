@@ -102,6 +102,12 @@ export default function Navbar() {
     });
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setMobileAccordionOpen(null);
+  }, [pathname]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -149,10 +155,13 @@ export default function Navbar() {
 
   return (
     <header
-      className={`w-full fixed top-0 left-0 z-50 flex items-center justify-between px-6 md:px-12 transition-all duration-300 ${isScrolled
-        ? "bg-[#04070f]/75 border-b border-white/[0.06] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] h-[70px]"
+      className={`w-full fixed top-0 left-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-12 transition-all duration-300 ${isScrolled
+        ? "bg-[#04070f]/85 border-b border-white/[0.06] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] h-[70px]"
         : "bg-transparent h-[85px]"
         }`}
+      style={{
+        paddingTop: "env(safe-area-inset-top, 0px)",
+      }}
     >
       {/* Left Section - USDC Logo (Visible on all screens) */}
       <div className="flex-shrink-0 relative z-50">
@@ -328,30 +337,52 @@ export default function Navbar() {
       </nav>
 
       {/* ═══ Mobile Menu Toggle ═══ */}
-      <div className="flex lg:hidden items-center gap-4">
+      <div className="flex lg:hidden items-center gap-4 relative z-50">
         <button
+          type="button"
           onClick={handleMobileMenuToggle}
-          className={`flex items-center justify-center w-11 h-11 text-white cursor-pointer border rounded-[10px] bg-white/[0.03] transition-all duration-300 ${isMobileMenuOpen
+          className={`flex items-center justify-center w-11 h-11 text-white cursor-pointer border rounded-[10px] bg-white/[0.03] transition-all duration-300 select-none ${isMobileMenuOpen
             ? "border-[#3daeff]/40 bg-[#3daeff]/[0.06] text-[#3daeff] shadow-[0_0_15px_rgba(61,174,255,0.15)]"
             : "border-white/[0.08] hover:border-[#3daeff]/20 hover:bg-white/[0.06]"
             }`}
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+          }}
           aria-expanded={isMobileMenuOpen}
           aria-label="Toggle Navigation Menu"
         >
           {isMobileMenuOpen ? (
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 pointer-events-none" />
           ) : (
-            <Menu className="w-5.5 h-5.5" />
+            <Menu className="w-5.5 h-5.5 pointer-events-none" />
           )}
         </button>
       </div>
 
+      {/* ═══ Mobile Drawer Backdrop ═══ */}
+      <div
+        onClick={() => {
+          setIsMobileMenuOpen(false);
+          setMobileAccordionOpen(null);
+        }}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${
+          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        style={{ touchAction: "none" }}
+        aria-hidden="true"
+      />
+
       {/* ═══ Mobile Drawer ═══ */}
       <div
-        className={`absolute top-full left-0 w-full bg-gradient-to-b from-[#04070f]/98 to-[#070c1a]/98 border-b border-white/[0.08] backdrop-blur-2xl flex flex-col py-6 px-8 gap-4 lg:hidden shadow-[0_15px_40px_rgba(0,0,0,0.85)] transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] origin-top overflow-y-auto max-h-[calc(100vh-75px)] ${isMobileMenuOpen
-          ? "opacity-100 translate-y-0 scale-y-100 pointer-events-auto"
-          : "opacity-0 -translate-y-4 scale-y-95 pointer-events-none"
+        className={`fixed top-[70px] sm:top-[85px] left-0 w-full bg-[#04070f]/98 border-b border-white/[0.08] backdrop-blur-2xl flex flex-col pt-4 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] px-5 sm:px-8 gap-4 lg:hidden shadow-[0_20px_50px_rgba(0,0,0,0.95)] transition-all duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-h-[calc(100dvh-70px)] sm:max-h-[calc(100dvh-85px)] overflow-y-auto overscroll-contain ios-scroll z-50 ${isMobileMenuOpen
+          ? "opacity-100 translate-y-0 visible pointer-events-auto"
+          : "opacity-0 -translate-y-3 invisible pointer-events-none"
           }`}
+        style={{
+          WebkitOverflowScrolling: "touch",
+          touchAction: "pan-y",
+        }}
       >
         {/* Telemetry Dashboard */}
         <div

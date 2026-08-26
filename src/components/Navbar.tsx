@@ -82,6 +82,7 @@ const navLinks: NavLink[] = [
       },
     ],
   },
+  { label: "Use Cases", href: "/use-cases" },
   { label: "Career", href: "/career" },
 ];
 

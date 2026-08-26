@@ -26,7 +26,7 @@ export default function UsdcByNumbers() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(18px)",
-    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const stats = [
@@ -69,7 +69,7 @@ export default function UsdcByNumbers() {
 
         {/* ── Stats Card ── */}
         <div
-          className="w-full rounded-2xl border border-white/[0.08] bg-[#080d1a]/80 backdrop-blur-sm overflow-hidden"
+          className="w-full rounded-2xl border border-white/[0.08] bg-[#080d1a]/80 overflow-hidden"
           style={{
             boxShadow: "0 4px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03)",
             ...fadeUp(120),

@@ -281,7 +281,7 @@ export default function InvestorPage() {
             <div className="flex flex-col items-center text-center transition-all duration-700">
 
               {/* Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                 <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
                 <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
                   Investor Relations
@@ -336,7 +336,7 @@ export default function InvestorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
 
               {/* Left & Center: Interactive Stock Chart */}
-              <div className="lg:col-span-2 bg-[#080808]/80 border border-white/5 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 flex flex-col backdrop-blur-md">
+              <div className="lg:col-span-2 bg-[#080808]/80 border border-white/5 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 flex flex-col">
 
                 {/* Header of Chart container */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
@@ -432,7 +432,7 @@ export default function InvestorPage() {
               <div className="space-y-6">
 
                 {/* Nasdaq Ticker details */}
-                <div className="bg-[#080808]/80 border border-white/5 rounded-[2.5rem] p-10 flex flex-col justify-between min-h-[280px] backdrop-blur-md">
+                <div className="bg-[#080808]/80 border border-white/5 rounded-[2.5rem] p-10 flex flex-col justify-between min-h-[280px]">
                   <div>
                     <div className="flex items-start justify-between">
                       <div>
@@ -517,7 +517,7 @@ export default function InvestorPage() {
                 </div>
 
                 {/* Latest Press Announcements Feed */}
-                <div className="bg-[#080808]/80 border border-white/5 rounded-[2.5rem] p-8 backdrop-blur-md">
+                <div className="bg-[#080808]/80 border border-white/5 rounded-[2.5rem] p-8">
                   <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-6 pb-3 border-b border-white/5 text-center lg:text-left">
                     Latest Announcements
                   </h3>
@@ -600,7 +600,7 @@ export default function InvestorPage() {
               {/* Card 1: SEC Filings */}
               <Link
                 href="/sec-filings"
-                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block backdrop-blur-sm"
+                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block"
               >
                 <div className="relative z-10 w-full">
                   <div className="flex items-center gap-4 mb-4">
@@ -624,7 +624,7 @@ export default function InvestorPage() {
               {/* Card 2: Events & Presentations */}
               <Link
                 href="/investor"
-                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block backdrop-blur-sm"
+                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block"
               >
                 <div className="relative z-10 w-full">
                   <div className="flex items-center gap-4 mb-4">
@@ -648,7 +648,7 @@ export default function InvestorPage() {
               {/* Card 3: Stock Information */}
               <Link
                 href="/investor"
-                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block backdrop-blur-sm"
+                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block"
               >
                 <div className="relative z-10 w-full">
                   <div className="flex items-center gap-4 mb-4">
@@ -672,7 +672,7 @@ export default function InvestorPage() {
               {/* Card 4: Press Releases */}
               <Link
                 href="/press-release"
-                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block backdrop-blur-sm"
+                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block"
               >
                 <div className="relative z-10 w-full">
                   <div className="flex items-center gap-4 mb-4">
@@ -696,7 +696,7 @@ export default function InvestorPage() {
               {/* Card 5: Governance */}
               <Link
                 href="/management-team"
-                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block backdrop-blur-sm"
+                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block"
               >
                 <div className="relative z-10 w-full">
                   <div className="flex items-center gap-4 mb-4">
@@ -720,7 +720,7 @@ export default function InvestorPage() {
               {/* Card 6: Contact IR */}
               <Link
                 href="/contact"
-                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block backdrop-blur-sm"
+                className="group relative bg-[#0a0a0a]/60 border border-white/5 p-8 rounded-[2rem] overflow-hidden hover:border-[#3daeff]/35 transition-all duration-500 block"
               >
                 <div className="relative z-10 w-full">
                   <div className="flex items-center gap-4 mb-4">

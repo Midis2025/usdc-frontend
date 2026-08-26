@@ -405,9 +405,10 @@ function initScene(canvas: HTMLCanvasElement) {
 
   // ── Clock ──
   let lastTime = performance.now();
+  let rafId = 0;
 
   function animate() {
-    const rafId = requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
     const now = performance.now();
     const dt = Math.min((now - lastTime) / 1000, 0.1);
     lastTime = now;
@@ -507,6 +508,22 @@ function initScene(canvas: HTMLCanvasElement) {
     renderer.render(scene, camera);
   }
   animate();
+
+  // pause animation while off-screen
+  let running = true;
+  const io = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      if (!running) {
+        running = true;
+        lastTime = performance.now();
+        animate();
+      }
+    } else {
+      running = false;
+      cancelAnimationFrame(rafId);
+    }
+  });
+  io.observe(canvas);
 
   // Resize observer
   const ro = new ResizeObserver(() => {

@@ -18,7 +18,7 @@ export default function PressReleaseHero() {
   const enter = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(32px)",
-    transition: `all 1.3s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   return (
@@ -65,7 +65,7 @@ export default function PressReleaseHero() {
         {/* Pill Badge */}
         <div
           style={enter(100)}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
         >
           <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
           <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">

@@ -172,8 +172,24 @@ export default function BlockchainParticles() {
 
     animate();
 
+    // pause animation while off-screen
+    let running = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!running) {
+          running = true;
+          animate();
+        }
+      } else {
+        running = false;
+        cancelAnimationFrame(animationFrameId);
+      }
+    });
+    observer.observe(canvas);
+
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);

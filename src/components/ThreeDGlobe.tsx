@@ -458,7 +458,20 @@ export default function ThreeDGlobe() {
       animationId = requestAnimationFrame(render);
     };
 
-    render();
+    // pause animation while off-screen
+    let isAnimating = false;
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!isAnimating) {
+          isAnimating = true;
+          render();
+        }
+      } else if (isAnimating) {
+        isAnimating = false;
+        cancelAnimationFrame(animationId);
+      }
+    });
+    intersectionObserver.observe(container);
 
     const handleResize = () => {
       if (!container || !canvas) return;
@@ -477,6 +490,7 @@ export default function ThreeDGlobe() {
 
     return () => {
       cancelAnimationFrame(animationId);
+      intersectionObserver.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);

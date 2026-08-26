@@ -153,7 +153,7 @@ export default function AboutJourneySection() {
         <div className="lg:col-span-5 lg:sticky lg:top-36 lg:h-[fit-content] flex flex-col items-start pr-0 lg:pr-8 mb-8 lg:mb-0">
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.25em] uppercase font-sans">
               OUR JOURNEY
@@ -235,7 +235,7 @@ export default function AboutJourneySection() {
 
                   {/* Right Side: Premium Milestone Card */}
                   <div
-                    className={`flex-1 flex flex-col sm:flex-row items-center gap-6 p-6 rounded-2xl border bg-[#02050c]/25 backdrop-blur-md transition-all duration-700 hover:-translate-y-1 relative overflow-hidden ${isActive
+                    className={`flex-1 flex flex-col sm:flex-row items-center gap-6 p-6 rounded-2xl border bg-[#02050c]/25 transition-all duration-700 hover:-translate-y-1 relative overflow-hidden ${isActive
                         ? "border-[#0091ff]/35 shadow-[0_6px_30px_rgba(0,145,255,0.08)] bg-[#02050c]/40 scale-[1.01]"
                         : "border-white/[0.06] hover:border-white/20"
                       }`}

@@ -25,7 +25,7 @@ export default function ArmsGallery() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(24px)",
-    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const galleryItems = [
@@ -60,7 +60,7 @@ export default function ArmsGallery() {
         <div className="flex flex-col items-center text-center max-w-[800px] mx-auto mb-10">
           {/* Pill Badge */}
           <div
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
             style={fadeUp(0)}
           >
             <span className="w-3.5 h-[1.5px] bg-[#3daeff] rounded-full" />
@@ -70,7 +70,7 @@ export default function ArmsGallery() {
           </div>
 
           <h2
-            className="text-[38px] sm:text-[46px] md:text-[56px] lg:text-[56px] font-bold tracking-tight text-white mb-6 font-sans leading-[1.1] uppercase sm:whitespace-nowrap"
+            className="text-[38px] sm:text-[46px] md:text-[56px] lg:text-[56px] font-bold tracking-tight text-white mb-6 font-sans leading-[1.1] uppercase lg:whitespace-nowrap"
             style={fadeUp(100)}
           >
             Physical <span className="text-[#3daeff]">Infrastructure</span> Reality
@@ -109,7 +109,7 @@ export default function ArmsGallery() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300 pointer-events-none" />
 
                 {/* Floating Glassmorphic Badge */}
-                <div className="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full border border-white/10 bg-black/60 backdrop-blur-md">
+                <div className="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full border border-white/10 bg-black/60">
                   <span className="text-[9px] font-extrabold tracking-widest text-[#3daeff] uppercase font-sans">
                     {item.badge}
                   </span>

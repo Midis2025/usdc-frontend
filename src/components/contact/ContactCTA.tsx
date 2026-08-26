@@ -37,7 +37,7 @@ export default function ContactCTA() {
           </div>
 
           {/* panel */}
-          <div className="relative rounded-[29px] bg-[#070b16]/85 backdrop-blur-2xl border border-white/[0.08] px-5 sm:px-14 py-10 md:py-18 text-center shadow-[0_40px_100px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.05)] overflow-hidden">
+          <div className="relative rounded-[29px] bg-[#070b16]/85 border border-white/[0.08] px-5 sm:px-14 py-10 md:py-18 text-center shadow-[0_40px_100px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.05)] overflow-hidden">
             {/* inner grid texture */}
             <div
               className="absolute inset-0 opacity-[0.4] pointer-events-none"
@@ -77,7 +77,7 @@ export default function ContactCTA() {
                 <MagneticCTA />
                 <a
                   href="#contact-portal"
-                  className="px-7 py-4 rounded-xl border border-white/12 hover:border-white/25 hover:bg-white/[0.03] text-white/85 hover:text-white text-[13px] font-semibold transition-all backdrop-blur-sm"
+                  className="px-7 py-4 rounded-xl border border-white/12 hover:border-white/25 hover:bg-white/[0.03] text-white/85 hover:text-white text-[13px] font-semibold transition-all"
                 >
                   Talk to an architect
                 </a>

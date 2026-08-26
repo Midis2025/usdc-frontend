@@ -59,7 +59,7 @@ export default function ContactHero() {
         <div className="relative">
           {/* Badge */}
           <div
-            className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-7 shadow-[0_4px_12px_rgba(0,0,0,0.5)] ${enter(80)}`}
+            className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-7 shadow-[0_4px_12px_rgba(0,0,0,0.5)] ${enter(80)}`}
           >
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
@@ -115,7 +115,7 @@ export default function ContactHero() {
             </a>
             <a
               href="#global-presence"
-              className="px-6 py-3.5 rounded-[10px] border border-white/12 hover:border-white/25 hover:bg-white/[0.03] text-white/90 hover:text-white text-[13px] font-semibold flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all backdrop-blur-sm"
+              className="px-6 py-3.5 rounded-[10px] border border-white/12 hover:border-white/25 hover:bg-white/[0.03] text-white/90 hover:text-white text-[13px] font-semibold flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all"
             >
               <ArrowUpRight className="w-4 h-4 text-[#3daeff]" />
               <span>View Global Network</span>
@@ -124,7 +124,7 @@ export default function ContactHero() {
 
           {/* Mini live-status glass strip */}
           <div
-            className={`inline-flex flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 rounded-2xl bg-[#02050c]/55 backdrop-blur-xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.5)] ${enter(400)}`}
+            className={`inline-flex flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 rounded-2xl bg-[#02050c]/55 border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.5)] ${enter(400)}`}
           >
             <div className="flex items-center gap-2">
               <span className="relative flex w-2 h-2">

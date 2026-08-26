@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 export default function Arms200Advantages() {
   return (
@@ -19,7 +20,7 @@ export default function Arms200Advantages() {
           <div className="lg:col-span-5 flex flex-col items-start text-left">
 
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
               <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
               <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
                 What Is ARMS 200
@@ -43,10 +44,12 @@ export default function Arms200Advantages() {
           {/* Right Column - 3D Model Image */}
           <div className="lg:col-span-7 flex items-center justify-center relative">
             <div className="w-full max-w-[600px] flex items-center justify-center">
-              <img
+              <Image
                 src="/USDC (5) 2.avif"
                 alt="ARMS 200 3D Model"
-                loading="lazy"
+                width={945}
+                height={770}
+                sizes="(max-width: 1024px) 100vw, 600px"
                 className="w-full h-auto object-contain drop-shadow-[0_20px_60px_rgba(61,174,255,0.15)]"
               />
             </div>

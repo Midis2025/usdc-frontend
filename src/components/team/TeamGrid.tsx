@@ -8,6 +8,7 @@ import {
   Mail,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface TeamMember {
   id: string;
@@ -129,10 +130,11 @@ export default function TeamGrid() {
                 className="group relative aspect-[3/4] rounded-[24px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.65)] hover:shadow-[0_25px_60px_rgba(61,174,255,0.15)] transition-all duration-500 hover:scale-[1.02] cursor-pointer flex flex-col border border-white/[0.05]"
               >
                 {/* Background Headshot Image */}
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 380px"
                   className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
                 />
 
@@ -189,10 +191,11 @@ export default function TeamGrid() {
                 {/* Left Column: Headshot (4 cols) */}
                 <div className="md:col-span-4 flex flex-col items-center">
                   <div className="w-[180px] h-[220px] rounded-2xl border border-[#3daeff]/30 flex items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(61,174,255,0.15)] bg-[#030810]">
-                    <img
+                    <Image
                       src={selectedMember.image}
                       alt={selectedMember.name}
-                      loading="lazy"
+                      fill
+                      sizes="180px"
                       className="w-full h-full object-cover"
                     />
                     {/* Scanning laser line animation */}

@@ -628,8 +628,24 @@ export default function EnergyHeroModel() {
 
     render();
 
+    // pause animation while off-screen
+    let running = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!running) {
+          running = true;
+          render();
+        }
+      } else {
+        running = false;
+        cancelAnimationFrame(animationFrameId);
+      }
+    });
+    observer.observe(container);
+
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);

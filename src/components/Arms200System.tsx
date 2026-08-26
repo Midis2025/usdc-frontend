@@ -251,7 +251,7 @@ export default function Arms200System() {
             }}
           >
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
               <span className="w-3.5 h-[1.5px] bg-[#3daeff] rounded-full" />
               <span className="text-[10px] font-bold text-white/80 tracking-[0.2em] uppercase font-sans">
                 WHY ARMS 200
@@ -281,7 +281,7 @@ export default function Arms200System() {
                 return (
                   <div
                     key={feat.title}
-                    className="group/card relative p-6 rounded-2xl border border-white/[0.06] bg-[#02050c]/30 backdrop-blur-md transition-all duration-300 hover:border-[#3daeff]/35 hover:bg-[#02050c]/60 flex flex-col items-center text-center overflow-hidden"
+                    className="group/card relative p-6 rounded-2xl border border-white/[0.06] bg-[#02050c]/30 transition-all duration-300 hover:border-[#3daeff]/35 hover:bg-[#02050c]/60 flex flex-col items-center text-center overflow-hidden"
                   >
                     {/* Hover glow effect background */}
                     <div className="absolute inset-0 bg-gradient-to-b from-[#3daeff]/[0.02] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />

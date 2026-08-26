@@ -1034,7 +1034,7 @@ export default function AIInfrastructureExcellence() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(24px)",
-    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   return (
@@ -1076,7 +1076,7 @@ export default function AIInfrastructureExcellence() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {/* Card 1: POWER ADVANTAGE */}
             <div
-              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 backdrop-blur-md p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)] min-h-[200px]"
+              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)] min-h-[200px]"
               style={{
                 ...fadeUp(140),
               }}
@@ -1099,7 +1099,7 @@ export default function AIInfrastructureExcellence() {
 
             {/* Card 2: RAPID DEPLOYMENT */}
             <div
-              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 backdrop-blur-md p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)]"
+              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)]"
               style={{
                 ...fadeUp(200),
               }}
@@ -1152,7 +1152,7 @@ export default function AIInfrastructureExcellence() {
           <div className="grid grid-cols-1 lg:grid-cols-[3.5fr_3fr_3.5fr] gap-3 md:gap-4">
             {/* Card 3: ADVANCED COOLING */}
             <div
-              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 backdrop-blur-md p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)]"
+              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)]"
               style={{
                 ...fadeUp(260),
               }}
@@ -1177,7 +1177,7 @@ export default function AIInfrastructureExcellence() {
 
             {/* Card 4: AI OPTIMIZED */}
             <div
-              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 backdrop-blur-md p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)] min-h-[200px]"
+              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)] min-h-[200px]"
               style={{
                 ...fadeUp(320),
               }}
@@ -1201,7 +1201,7 @@ export default function AIInfrastructureExcellence() {
 
             {/* Card 5: ENTERPRISE GRADE */}
             <div
-              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 backdrop-blur-md p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)] min-h-[200px]"
+              className="relative rounded-[16px] border border-white/[0.08] bg-[#060b18]/60 p-5 md:p-7 overflow-hidden group transition-all duration-500 hover:border-[#3daeff]/35 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.55),0_0_20px_rgba(61,174,255,0.08)] min-h-[200px]"
               style={{
                 ...fadeUp(380),
               }}

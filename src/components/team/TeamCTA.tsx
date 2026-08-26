@@ -24,7 +24,7 @@ export default function TeamCTA() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(22px)",
-    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const opportunities = [

@@ -64,7 +64,7 @@ export default function AIDemand() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(20px)",
-    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const stats = [
@@ -98,7 +98,7 @@ export default function AIDemand() {
 
             {/* Pill Badge */}
             <div
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]"
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]"
               style={fadeUp(0)}
             >
               <span className="w-6 h-[1.5px] bg-[#3daeff] rounded-full" />
@@ -151,7 +151,7 @@ export default function AIDemand() {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-start gap-3 p-4 rounded-xl bg-[#060b18]/45 border border-white/[0.06] backdrop-blur-sm hover:border-[#3daeff]/35 hover:bg-[#060b18]/70 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,145,255,0.06)] transition-all duration-300 group cursor-default"
+                  className="flex flex-col items-start gap-3 p-4 rounded-xl bg-[#060b18]/45 border border-white/[0.06] hover:border-[#3daeff]/35 hover:bg-[#060b18]/70 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,145,255,0.06)] transition-all duration-300 group cursor-default"
                 >
                   {/* Icon + Value */}
                   <div className="flex items-center gap-3">

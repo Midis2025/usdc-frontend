@@ -394,7 +394,23 @@ export default function CommunicationHub3D() {
 
       renderer.render(scene, camera);
     };
-    animate();
+
+    // pause animation while off-screen
+    let isRunning = false;
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!isRunning) {
+          isRunning = true;
+          animate();
+        }
+      } else {
+        if (isRunning) {
+          isRunning = false;
+          cancelAnimationFrame(frameRef.current);
+        }
+      }
+    });
+    intersectionObserver.observe(container);
 
     const onResize = () => {
       width = container.clientWidth || width;
@@ -415,6 +431,7 @@ export default function CommunicationHub3D() {
 
     return () => {
       cancelAnimationFrame(frameRef.current);
+      intersectionObserver.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("resize", onResize);
       glowTex.dispose();

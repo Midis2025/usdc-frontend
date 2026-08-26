@@ -9,7 +9,7 @@ export default function EnergyEconomicsAdvantage() {
       <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center text-center">
 
         {/* Center-Aligned Pill Badge */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
           <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
           <span className="text-[10px] font-semibold text-white/90 tracking-[0.25em] uppercase font-sans">
             THE ENERGY ECONOMICS ADVANTAGE
@@ -33,7 +33,7 @@ export default function EnergyEconomicsAdvantage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-[1160px]">
 
           {/* Card 1: Strategic Independence */}
-          <div className="relative group rounded-2xl border border-white/[0.08] hover:border-[#0091ff]/30 bg-[#02050c]/25 backdrop-blur-md p-8 md:p-10 transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)] flex flex-col items-start text-left justify-between min-h-[380px]">
+          <div className="relative group rounded-2xl border border-white/[0.08] hover:border-[#0091ff]/30 bg-[#02050c]/25 p-8 md:p-10 transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)] flex flex-col items-start text-left justify-between min-h-[380px]">
             <div className="w-full text-left">
               {/* Header Title with Shield Icon */}
               <div className="flex items-center justify-start gap-3.5 mb-6">
@@ -68,7 +68,7 @@ export default function EnergyEconomicsAdvantage() {
           </div>
 
           {/* Card 2: Margin Expansion */}
-          <div className="relative group rounded-2xl border border-white/[0.08] hover:border-[#0091ff]/30 bg-[#02050c]/25 backdrop-blur-md p-8 md:p-10 transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)] flex flex-col items-start text-left justify-between min-h-[380px]">
+          <div className="relative group rounded-2xl border border-white/[0.08] hover:border-[#0091ff]/30 bg-[#02050c]/25 p-8 md:p-10 transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)] flex flex-col items-start text-left justify-between min-h-[380px]">
             <div className="w-full text-left">
               {/* Header Title with ECG/Pulse Icon */}
               <div className="flex items-center justify-start gap-3.5 mb-6">

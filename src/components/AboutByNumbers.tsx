@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function AboutByNumbers() {
   const [inView, setInView] = useState(false);
@@ -76,7 +77,7 @@ export default function AboutByNumbers() {
 
         {/* Stats Card */}
         <div
-          className="w-full max-w-[1100px] border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-xl rounded-[16px] shadow-[0_24px_50px_rgba(0,0,0,0.55)] transition-all duration-1000 delay-200 transform mb-10 md:mb-20"
+          className="w-full max-w-[1100px] border border-white/[0.08] bg-[#02050c]/80 rounded-[16px] shadow-[0_24px_50px_rgba(0,0,0,0.55)] transition-all duration-1000 delay-200 transform mb-10 md:mb-20"
           style={{
             opacity: inView ? 1 : 0,
             transform: inView ? "translateY(0)" : "translateY(30px)",
@@ -116,10 +117,11 @@ export default function AboutByNumbers() {
         >
           {/* North America Map Image */}
           <div className="w-full aspect-[4/3] max-h-[500px] flex items-center justify-center relative overflow-hidden rounded-2xl">
-            <img
+            <Image
               src="/usa_sites_map.avif"
               alt="USDC Operating and Development Sites Map"
-              loading="lazy"
+              fill
+              sizes="(max-width: 900px) 100vw, 900px"
               className="w-full h-full object-cover opacity-60 mix-blend-screen"
             />
 

@@ -30,7 +30,7 @@ export default function LatestNews() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(22px)",
-    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   /* Two most recent articles, shared with the /news-insights page */
@@ -66,7 +66,7 @@ export default function LatestNews() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-16">
           <div className="flex flex-col items-start" style={fadeUp(0)}>
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.12] bg-[#02050c]/85 backdrop-blur-md mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.12] bg-[#02050c]/85 mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
               <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
               <span className="text-[9px] font-bold text-white/70 tracking-[0.25em] uppercase">
                 NEWS & INSIGHTS
@@ -133,7 +133,7 @@ export default function LatestNews() {
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 400px"
                     className="object-cover"
                   />
                 </div>

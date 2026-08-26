@@ -49,7 +49,7 @@ export default function SuperiorEconomics() {
         </p>
 
         {/* Horizontal Divided Panel */}
-        <div className="w-full max-w-[1160px] relative border border-white/[0.08] rounded-2xl bg-[#02050c]/40 backdrop-blur-md py-12 px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-0 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="w-full max-w-[1160px] relative border border-white/[0.08] rounded-2xl bg-[#02050c]/40 py-12 px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-0 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
           {metrics.map((item, idx) => {
             const Icon = item.Icon;
             return (

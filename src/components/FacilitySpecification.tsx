@@ -70,8 +70,8 @@ export default function FacilitySpecification() {
         </p>
 
         {/* Premium Glassmorphic Table Card Container */}
-        <div className="relative rounded-2xl p-[1px] bg-gradient-to-b from-[#3daeff]/35 via-white/[0.05] to-[#3daeff]/5 shadow-[0_0_60px_rgba(61,174,255,0.04)] overflow-hidden">
-          <div className="w-full bg-[#02050c]/90 backdrop-blur-xl rounded-2xl p-6 md:p-12 relative overflow-hidden">
+        <div className="w-full relative rounded-2xl p-[1px] bg-gradient-to-b from-[#3daeff]/35 via-white/[0.05] to-[#3daeff]/5 shadow-[0_0_60px_rgba(61,174,255,0.04)] overflow-hidden">
+          <div className="w-full bg-[#02050c]/90 rounded-2xl p-6 md:p-12 relative overflow-hidden">
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.4] pointer-events-none mix-blend-screen"
               style={{ backgroundImage: "url('/bg.webp')" }}

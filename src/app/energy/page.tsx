@@ -68,7 +68,7 @@ export default function EnergyPage() {
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center text-center">
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.25em] uppercase font-sans">
               SUSTAINABLE POWER
@@ -185,7 +185,7 @@ export default function EnergyPage() {
 
             {/* Right Column: Interactive Visual Model */}
             <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
-              <div className="relative w-full aspect-square max-w-[480px] rounded-2xl overflow-hidden bg-[#02050c]/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex items-center justify-center">
+              <div className="relative w-full aspect-square max-w-[480px] rounded-2xl overflow-hidden bg-[#02050c]/30 shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex items-center justify-center">
                 <iframe
                   src="/magnetic-grid.html"
                   title="Core Grid Capabilities Visualization"

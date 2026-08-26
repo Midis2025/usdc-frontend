@@ -59,9 +59,9 @@ export default function WhyUsdcSection() {
         </div>
 
         {/* Heading */}
-        <h2 className="text-[38px] sm:text-[46px] md:text-[54px] lg:text-[60px] font-black tracking-tight leading-[0.95] text-white uppercase font-sans mb-8 mx-auto">
+        <h2 className="text-[32px] sm:text-[46px] md:text-[54px] lg:text-[60px] font-black tracking-tight leading-[0.95] text-white uppercase font-sans mb-8 mx-auto">
           THE ADVANTAGE IS <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3daeff] to-[#0091ff] sm:whitespace-nowrap">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3daeff] to-[#0091ff]">
             INTEGRATED INFRASTRUCTURE.
           </span>
         </h2>
@@ -76,7 +76,7 @@ export default function WhyUsdcSection() {
 
           {/* ── 4-COLUMN GLASSMORPHIC CARD ── */}
           <div className="w-full relative z-20 rounded-2xl p-[1px] bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-transparent shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-            <div className="w-full bg-[#02050c]/85 backdrop-blur-xl rounded-2xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-white/[0.08]">
+            <div className="w-full bg-[#02050c]/85 rounded-2xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-white/[0.08]">
               {cards.map((card, idx) => {
                 const Icon = card.Icon;
                 return (

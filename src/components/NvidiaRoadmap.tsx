@@ -23,7 +23,7 @@ function FeatureLabel({
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0) scale(1)" : "translateY(10px) scale(0.95)",
-        transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
       }}
     >
       {/* CSS Styles for floating and glowing */}
@@ -49,7 +49,7 @@ function FeatureLabel({
       `}} />
 
       <div
-        className="flex items-center gap-2 px-3.5 py-[7px] rounded-full bg-[#080e1e]/90 border border-white/[0.08] backdrop-blur-md animate-label-premium"
+        className="flex items-center gap-2 px-3.5 py-[7px] rounded-full bg-[#080e1e]/90 border border-white/[0.08] animate-label-premium"
         style={{
           // Apply staggered animation delay for a wavy floating effect
           animationDelay: `${delay}ms, ${delay + 500}ms`
@@ -143,7 +143,7 @@ export default function NvidiaRoadmap() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(20px)",
-    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const getFeatureIcon = (type: string) => {
@@ -318,7 +318,7 @@ export default function NvidiaRoadmap() {
         <div className="mb-8 md:mb-16">
           {/* Pill Badge */}
           <div
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]"
             style={fadeUp(0)}
           >
             <span className="w-6 h-[1.5px] bg-[#3daeff] rounded-full" />
@@ -427,7 +427,7 @@ export default function NvidiaRoadmap() {
                   style={{
                     opacity: inView ? 1 : 0,
                     transform: inView ? "translateY(0)" : "translateY(16px)",
-                    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${500 + i * 120}ms`,
+                    transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${500 + i * 120}ms`,
                   }}
                 >
                   <TimelineDot active={isActive} />
@@ -451,7 +451,7 @@ export default function NvidiaRoadmap() {
 
         {/* ═══ Bottom Stats Bar ═══ */}
         <div
-          className="grid w-full grid-cols-2 md:grid-cols-4 gap-4 p-2 bg-[#080d1a]/40 border border-white/[0.06] rounded-2xl backdrop-blur-sm shadow-[0_15px_40px_rgba(0,0,0,0.4)]"
+          className="grid w-full grid-cols-2 md:grid-cols-4 gap-4 p-2 bg-[#080d1a]/40 border border-white/[0.06] rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.4)]"
           style={fadeUp(700)}
         >
           {stats.map((stat, i) => (

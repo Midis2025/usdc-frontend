@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import PhaseDeploymentStage from "./PhaseDeploymentStage";
+import DisaggregatedServingStage from "./DisaggregatedServingStage";
 
 /* -------------------------------------------------------------
  * 1. Index View Interactive Cards
@@ -28,7 +30,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         href="#/ra-01"
         onClick={(e) => handleClick(e, "/ra-01")}
       >
-        <span className="eyebrow">Reference Architecture 01</span>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <span className="eyebrow" style={{ margin: 0 }}>Reference Architecture 01</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#8fd0ff", background: "rgba(79,139,255,0.15)", border: "1px solid rgba(79,139,255,0.4)", borderRadius: 6, padding: "3px 8px", fontWeight: 600 }}>MODULAR PODS</span>
+        </div>
         <h2>Start with one pod and grow to a cluster without redesigning the build.</h2>
         <p className="sum">
           Most buyers need two to three megawatts now and cannot commit to twenty. The pod is the unit of purchase, so the second and sixth pod land on the same design as the first.
@@ -170,7 +175,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         href="#/ra-02"
         onClick={(e) => handleClick(e, "/ra-02")}
       >
-        <span className="eyebrow">Reference Architecture 02</span>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <span className="eyebrow" style={{ margin: 0 }}>Reference Architecture 02</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#e5b96c", background: "rgba(229,185,108,0.15)", border: "1px solid rgba(229,185,108,0.4)", borderRadius: 6, padding: "3px 8px", fontWeight: 600 }}>DISAGGREGATED SERVING</span>
+        </div>
         <h2>A pod is two machines, a prefill sidecar and a decode floor.</h2>
         <p className="sum">
           Serving a model has two phases with opposite hardware appetites. Splitting them inside one pod lets each phase run on the silicon it actually needs.
@@ -291,7 +299,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         href="#/ra-03"
         onClick={(e) => handleClick(e, "/ra-03")}
       >
-        <span className="eyebrow">Reference Architecture 03</span>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <span className="eyebrow" style={{ margin: 0 }}>Reference Architecture 03</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#cbb8ff", background: "rgba(203,184,255,0.15)", border: "1px solid rgba(203,184,255,0.4)", borderRadius: 6, padding: "3px 8px", fontWeight: 600 }}>DISTRIBUTED FABRIC</span>
+        </div>
         <h2>KV cache becomes a network service across the USDC footprint.</h2>
         <p className="sum">
           Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage, and it only works if the sites sit on good fiber.
@@ -570,98 +581,9 @@ export function Ra1PhaseTabs() {
         </button>
       </div>
 
-      <div className="panel phase-stage reveal" data-delay="1" id="ra1-stage" role="tabpanel" aria-labelledby={`ra1-tab-${currentPhase}`}>
-        <div className="bar">
-          <span className="micro" data-phase-title>{currentInfo.title}</span>
-          <span className="micro">Plan view · not to scale</span>
-        </div>
-        <svg className="dg ps" data-phase-svg viewBox="0 0 600 340" aria-hidden="true">
-          <rect x="10" y="10" width="580" height="320" rx="5" fill="rgba(255,255,255,.02)" stroke="var(--line-strong)" strokeDasharray="3 3" />
-          <text x="20" y="30">Shared campus systems · sized for end state</text>
-          <g transform="translate(20,46)">
-            <rect className="box" width="150" height="40" rx="3" />
-            <text x="10" y="24">Substation</text>
-          </g>
-          <g transform="translate(225,46)">
-            <rect className="box" width="150" height="40" rx="3" />
-            <text x="10" y="24">Control plane</text>
-          </g>
-          <g transform="translate(430,46)">
-            <rect className="box" width="150" height="40" rx="3" />
-            <text x="10" y="24">Cooling plant</text>
-          </g>
-          <path className="wire power pwr on-line" d="M95 86 V120 H505" />
-          <path className="wire cool cl on-line" d="M505 86 V132 H95" />
-          <text x="102" y="115">Bus</text>
-          <text x="440" y="146">Headers</text>
-          <path className="wire power pwr d1 on-line" d="M90 120 V160" />
-          <path className="wire cool cl d1 on-line" d="M106 132 V160" />
-          <path className={`wire power pwr d2 ${currentPhase >= 2 ? "on-line" : ""}`} d="M290 120 V160" />
-          <path className={`wire cool cl d2 ${currentPhase >= 2 ? "on-line" : ""}`} d="M306 132 V160" />
-          <path className={`wire power pwr d3 ${currentPhase >= 2 ? "on-line" : ""}`} d="M490 120 V160" />
-          <path className={`wire cool cl d3 ${currentPhase >= 2 ? "on-line" : ""}`} d="M506 132 V160" />
-
-          {/* Pods */}
-          <g className="pod p1 on" transform="translate(20,160)">
-            <rect className="frame" width="160" height="80" rx="3" />
-            <g className="rk">
-              <line x1="16" y1="36" x2="144" y2="36" />
-              <line x1="16" y1="46" x2="144" y2="46" />
-              <line x1="16" y1="56" x2="144" y2="56" />
-              <line x1="16" y1="66" x2="144" y2="66" />
-            </g>
-            <text x="10" y="22">Pod 01</text>
-          </g>
-
-          <g className={`pod p2 ${currentPhase >= 2 ? "on" : ""}`} transform="translate(220,160)">
-            <rect className="frame" width="160" height="80" rx="3" />
-            <g className="rk">
-              <line x1="16" y1="36" x2="144" y2="36" />
-              <line x1="16" y1="46" x2="144" y2="46" />
-              <line x1="16" y1="56" x2="144" y2="56" />
-              <line x1="16" y1="66" x2="144" y2="66" />
-            </g>
-            <text x="10" y="22">Pod 02</text>
-          </g>
-
-          <g className={`pod p3 ${currentPhase >= 2 ? "on" : ""}`} transform="translate(420,160)">
-            <rect className="frame" width="160" height="80" rx="3" />
-            <g className="rk">
-              <line x1="16" y1="36" x2="144" y2="36" />
-              <line x1="16" y1="46" x2="144" y2="46" />
-              <line x1="16" y1="56" x2="144" y2="56" />
-              <line x1="16" y1="66" x2="144" y2="66" />
-            </g>
-            <text x="10" y="22">Pod 03</text>
-          </g>
-
-          <g className={`island isl ${currentPhase === 2 ? "on" : ""}`}>
-            <rect x="14" y="154" width="172" height="92" rx="4" />
-            <rect x="214" y="154" width="172" height="92" rx="4" />
-            <rect x="414" y="154" width="172" height="92" rx="4" />
-            <text x="20" y="262">Three islands · no shared fabric yet</text>
-          </g>
-
-          <path className={`wire net draw fab ${currentPhase >= 3 ? "on" : ""}`} d="M100 240 V270 H500 V240" />
-          <path className={`wire net draw fab ${currentPhase >= 3 ? "on" : ""}`} d="M300 240 V285" />
-
-          <g transform="translate(220,285)">
-            <g className={`rise skid ${currentPhase >= 3 ? "on" : ""}`}>
-              <rect className="box" width="160" height="36" rx="3" style={{ stroke: "var(--net)" }} />
-              <text x="10" y="22">Network skid · 1 per 5 IT pods</text>
-            </g>
-          </g>
-
-          <path data-pulse="power" data-phase="1" data-dur="4" data-n="2" d="M95 86 V120 H90 V160" className="on" />
-          <path data-pulse="cool" data-phase="1" data-dur="4.5" data-n="1" d="M505 86 V132 H106 V160" className="on" />
-          <path data-pulse="power" data-phase="2" data-dur="4.5" data-n="2" d="M95 86 V120 H290 V160" className={currentPhase >= 2 ? "on" : ""} />
-          <path data-pulse="power" data-phase="2" data-dur="5" data-n="2" d="M95 86 V120 H490 V160" className={currentPhase >= 2 ? "on" : ""} />
-          <path data-pulse="cool" data-phase="2" data-dur="4" data-n="1" d="M505 86 V132 H306 V160" className={currentPhase >= 2 ? "on" : ""} />
-          <path data-pulse="cool" data-phase="2" data-dur="3.6" data-n="1" d="M505 86 V132 H506 V160" className={currentPhase >= 2 ? "on" : ""} />
-          <path data-pulse="net" data-phase="3" data-dur="3" data-n="2" d="M300 285 V270 H100 V240" className={currentPhase >= 3 ? "on" : ""} />
-          <path data-pulse="net" data-phase="3" data-dur="3" data-n="2" d="M300 285 V270 H500 V240" className={currentPhase >= 3 ? "on" : ""} />
-        </svg>
-        <p className="phase-note" data-phase-note dangerouslySetInnerHTML={{ __html: currentInfo.note }} />
+      <div className="panel phase-stage reveal" data-delay="1" id="ra1-stage" role="tabpanel" aria-labelledby={`ra1-tab-${currentPhase}`} style={{ background: "transparent", border: "none", padding: 0 }}>
+        <PhaseDeploymentStage currentPhase={currentPhase} />
+        <p className="phase-note" data-phase-note style={{ marginTop: 14 }} dangerouslySetInnerHTML={{ __html: currentInfo.note }} />
       </div>
     </div>
   );
@@ -740,48 +662,15 @@ export function StepsSwitcher({ id }: StepsSwitcherProps) {
         })}
       </div>
 
-      <div className="panel phase-stage reveal" data-delay="1">
-        <div className="bar">
-          <span className="micro" data-step-title>{stepInfo.title}</span>
-          <span className="micro">{id === "ra2" ? "Disaggregated serving" : "Software layer"}</span>
-        </div>
-
-        {id === "ra2" && (
-          <svg className="dg" data-step-svg viewBox="0 0 600 300" aria-hidden="true">
-            <g transform="translate(20,20)">
-              <rect className="box" width="130" height="40" rx="3" />
-              <text x="10" y="24" className="t2">Router</text>
-            </g>
-            <g transform="translate(20,110)">
-              <rect className="box" width="230" height="110" rx="3" />
-              <text x="10" y="22" className="t2">Prefill worker</text>
-              <text x="10" y="38" className="sec">GPU memory</text>
-              <rect className={`hot fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="52" width="210" height="44" rx="3" />
-              <text x="18" y="78" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2">KV cache</text>
-            </g>
-            <g transform="translate(350,110)">
-              <rect className="box" width="230" height="110" rx="3" />
-              <text x="10" y="22" className="t2">Decode worker</text>
-              <text x="10" y="38" className="sec">GPU memory</text>
-              <rect className={`cold fade ${currentStep >= 3 ? "on" : ""}`} data-step-on="3" x="10" y="52" width="210" height="44" rx="3" />
-              <text x="18" y="78" className={`fade ${currentStep >= 3 ? "on" : ""}`} data-step-on="3">KV cache</text>
-            </g>
-            <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M85 60 V110" />
-            <path className={`wire warm draw ${currentStep >= 3 ? "on" : ""}`} data-step-on="3" d="M250 165 H350" />
-            <text x="262" y="158" className={`sec fade ${currentStep >= 3 ? "on" : ""}`} data-step-on="3">NIXL</text>
-            <text x="262" y="184" className={`sec fade ${currentStep >= 3 ? "on" : ""}`} data-step-on="3">Non-blocking</text>
-            <path className={`wire power draw ${currentStep >= 4 ? "on" : ""}`} data-step-on="4" d="M465 220 V262" />
-            <g className={`rise ${currentStep >= 4 ? "on" : ""}`} data-step-on="4" transform="translate(380,262)">
-              <rect className="box" width="170" height="30" rx="3" />
-              <text x="10" y="19" className="t2">Tokens out</text>
-            </g>
-            <text x="20" y="262" className={`fade sec ${currentStep >= 3 ? "on" : ""}`} data-step-on="3">Forward passes keep serving other requests</text>
-
-            <path data-pulse="net" data-step="1" data-dur="1.8" data-n="1" d="M85 60 V110" className={currentStep === 1 ? "on" : ""} />
-            <path data-pulse="warm" data-step="3" data-dur="1.6" data-n="3" d="M250 165 H350" className={currentStep === 3 ? "on" : ""} />
-            <path data-pulse="power" data-step="4" data-dur="1.4" data-n="3" d="M465 220 V262" className={currentStep === 4 ? "on" : ""} />
-          </svg>
-        )}
+      <div className="panel phase-stage reveal" data-delay="1" style={id === "ra2" ? { background: "transparent", border: "none", padding: 0 } : undefined}>
+        {id === "ra2" ? (
+          <DisaggregatedServingStage currentStep={currentStep} />
+        ) : (
+          <>
+            <div className="bar">
+              <span className="micro" data-step-title>{stepInfo.title}</span>
+              <span className="micro">Software layer</span>
+            </div>
 
         {id === "ra3" && (
           <svg className="dg" data-step-svg viewBox="0 0 600 300" aria-hidden="true">
@@ -833,11 +722,17 @@ export function StepsSwitcher({ id }: StepsSwitcherProps) {
           </svg>
         )}
 
-        <p className="phase-note" data-step-note dangerouslySetInnerHTML={{ __html: stepInfo.note }} />
-        {data.source && (
-          <p className="source" style={{ marginTop: 16 }}>
-            <b>Source.</b> {data.source}
-          </p>
+        {id === "ra3" && (
+          <>
+            <p className="phase-note" data-step-note dangerouslySetInnerHTML={{ __html: stepInfo.note }} />
+            {data.source && (
+              <p className="source" style={{ marginTop: 16 }}>
+                <b>Source.</b> {data.source}
+              </p>
+            )}
+          </>
+        )}
+        </>
         )}
       </div>
     </div>

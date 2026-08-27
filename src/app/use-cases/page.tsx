@@ -5,6 +5,8 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CampusSchematicModel from "@/components/reference-architectures/CampusSchematicModel";
+import WhatUsdcDeploysModel from "@/components/reference-architectures/WhatUsdcDeploysModel";
+import PodReferenceCards from "@/components/reference-architectures/PodReferenceCards";
 import {
   IndexCards,
   FlowToggle,
@@ -360,131 +362,8 @@ export default function UseCasesPage() {
                 <FlowToggle id="ra1" activeFlow={flowRa1} onFlowChange={setFlowRa1} />
               </div>
 
-              <div className="panel campus reveal" data-delay="1" data-campus data-flow={flowRa1 || undefined}>
-                <svg className="dg" viewBox="0 0 640 600" role="img" aria-label="Campus stack diagram">
-                  {/* rails */}
-                  <text x="30" y="14" textAnchor="middle" className="sec">Pwr</text>
-                  <text x="62" y="14" textAnchor="middle" className="sec">Cool</text>
-                  <text x="94" y="14" textAnchor="middle" className="sec">Net</text>
-                  <line className="rail power" x1="30" y1="24" x2="30" y2="590" />
-                  <line className="rail cool" x1="62" y1="24" x2="62" y2="590" />
-                  <line className="rail net" x1="94" y1="24" x2="94" y2="590" />
-                  {/* vertical connectors between nodes */}
-                  <line className="tapv" x1="380" y1="86" x2="380" y2="104" />
-                  <line className="tapv" x1="380" y1="166" x2="380" y2="184" />
-                  <line className="tapv" x1="380" y1="246" x2="380" y2="204" />
-                  <line className="tapv" x1="380" y1="246" x2="380" y2="264" />
-                  <line className="tapv" x1="380" y1="326" x2="380" y2="344" />
-                  <line className="tapv" x1="380" y1="520" x2="380" y2="536" />
-                  {/* taps */}
-                  <line className="tap power" x1="30" y1="55" x2="130" y2="55" />
-                  <line className="tap power" x1="30" y1="135" x2="130" y2="135" />
-                  <line className="tap cool" x1="62" y1="215" x2="130" y2="215" />
-                  <line className="tap net" x1="94" y1="295" x2="130" y2="295" />
-                  <line className="tap power" x1="30" y1="288" x2="130" y2="288" />
-                  <line className="tap cool" x1="62" y1="302" x2="130" y2="302" />
-                  <line className="tap power" x1="30" y1="376" x2="130" y2="376" />
-                  <line className="tap cool" x1="62" y1="386" x2="130" y2="386" />
-                  <line className="tap net" x1="94" y1="396" x2="130" y2="396" />
-                  <line className="tap net" x1="94" y1="562" x2="130" y2="562" />
-                  {/* pod tap bus */}
-                  <line className="tap power" x1="130" y1="376" x2="606" y2="376" />
-                  <line className="tap cool" x1="130" y1="386" x2="606" y2="386" />
-                  <line className="tap net" x1="130" y1="396" x2="606" y2="396" />
-                  {/* nodes */}
-                  <g className="node" data-power>
-                    <rect x="130" y="24" width="480" height="62" rx="4" />
-                    <text x="146" y="48" className="t1">Utility interconnect</text>
-                    <text x="146" y="66">One interconnect for the whole campus · not modular</text>
-                    <rect x="548" y="40" width="48" height="18" rx="3" fill="none" stroke="var(--line)" />
-                    <text x="572" y="52" textAnchor="middle" style={{ fontSize: 8 }}>Shared</text>
-                  </g>
-                  <g className="node" data-power>
-                    <rect x="130" y="104" width="480" height="62" rx="4" />
-                    <text x="146" y="128" className="t1">Substation / site infrastructure</text>
-                    <text x="146" y="146">Pad, yard, perimeter sized for the end state</text>
-                    <rect x="548" y="120" width="48" height="18" rx="3" fill="none" stroke="var(--line)" />
-                    <text x="572" y="132" textAnchor="middle" style={{ fontSize: 8 }}>Shared</text>
-                  </g>
-                  <g className="node" data-cooling>
-                    <rect x="130" y="184" width="480" height="62" rx="4" />
-                    <text x="146" y="208" className="t1">Cooling plant + headers</text>
-                    <text x="146" y="226">One plant · headers sized for the campus</text>
-                    <rect x="548" y="200" width="48" height="18" rx="3" fill="none" stroke="var(--line)" />
-                    <text x="572" y="212" textAnchor="middle" style={{ fontSize: 8 }}>Shared</text>
-                  </g>
-                  <g className="node" data-power data-cooling data-network>
-                    <rect x="130" y="264" width="480" height="62" rx="4" />
-                    <text x="146" y="288" className="t1">Control plane</text>
-                    <text x="146" y="306">One control plane across every pod on the site</text>
-                    <rect x="548" y="280" width="48" height="18" rx="3" fill="none" stroke="var(--line)" />
-                    <text x="572" y="292" textAnchor="middle" style={{ fontSize: 8 }}>Shared</text>
-                  </g>
-                  {/* pods */}
-                  <g className="node podn" data-power data-cooling data-network>
-                    <rect x="130" y="344" width="150" height="80" rx="4" />
-                    <line className="lbar" x1="131" y1="348" x2="131" y2="420" />
-                    <text x="146" y="368" className="t1">Pod 01</text>
-                    <text x="146" y="386">Built, energized</text>
-                    <text x="146" y="410" style={{ fill: "var(--accent)", fontSize: 8.5 }}>IT pod</text>
-                  </g>
-                  <g className="node podn" data-power data-cooling data-network>
-                    <rect x="295" y="344" width="150" height="80" rx="4" />
-                    <line className="lbar" x1="296" y1="348" x2="296" y2="420" />
-                    <text x="311" y="368" className="t1">Pod 02</text>
-                    <text x="311" y="386">Same design</text>
-                    <text x="311" y="410" style={{ fill: "var(--accent)", fontSize: 8.5 }}>IT pod</text>
-                  </g>
-                  <g className="node podn" data-power data-cooling data-network>
-                    <rect x="460" y="344" width="150" height="80" rx="4" />
-                    <line className="lbar" x1="461" y1="348" x2="461" y2="420" />
-                    <text x="476" y="368" className="t1">Pod 03</text>
-                    <text x="476" y="386">Silicon per pod</text>
-                    <text x="476" y="410" style={{ fill: "var(--accent)", fontSize: 8.5 }}>IT pod</text>
-                  </g>
-                  <g className="node ghostn">
-                    <rect x="130" y="436" width="150" height="48" rx="4" />
-                    <line className="lbar" x1="131" y1="440" x2="131" y2="480" />
-                    <text x="146" y="456">Pod 04 · planned</text>
-                    <text x="146" y="472" className="dim">Not yet paid for</text>
-                  </g>
-                  <g className="node ghostn">
-                    <rect x="295" y="436" width="150" height="48" rx="4" />
-                    <line className="lbar" x1="296" y1="440" x2="296" y2="480" />
-                    <text x="311" y="456">Pod 05 · planned</text>
-                    <text x="311" y="472" className="dim">Not yet paid for</text>
-                  </g>
-                  <g className="node ghostn">
-                    <rect x="460" y="436" width="150" height="48" rx="4" />
-                    <line className="lbar" x1="461" y1="440" x2="461" y2="480" />
-                    <text x="476" y="456">Pod 06 · planned</text>
-                    <text x="476" y="472" className="dim">Not yet paid for</text>
-                  </g>
-                  {/* fabric */}
-                  <path className="tap net" d="M205 424 V500 H535 V424" />
-                  <path className="tap net" d="M370 424 V500" />
-                  <path className="tap net" d="M370 500 V536" />
-                  <g className="node" data-network>
-                    <rect x="130" y="536" width="480" height="54" rx="4" />
-                    <text x="146" y="558" className="t1">Network skid</text>
-                    <text x="146" y="576">One per five IT pods · turns islands into one fabric</text>
-                    <rect x="548" y="548" width="48" height="18" rx="3" fill="none" stroke="var(--net)" />
-                    <text x="572" y="560" textAnchor="middle" style={{ fontSize: 8, fill: "var(--net)" }}>Fabric</text>
-                  </g>
-                  {/* pulses */}
-                  <path data-pulse="power" data-dur="4" data-n="3" d="M30 24 V55 H130 M30 55 V135 H130" />
-                  <path data-pulse="power" data-dur="5" data-n="3" d="M30 135 V376 H606" />
-                  <path data-pulse="cool" data-dur="4" data-n="2" d="M62 24 V215 H130" />
-                  <path data-pulse="cool" data-dur="5" data-n="3" d="M62 215 V386 H606" />
-                  <path data-pulse="net" data-dur="4" data-n="2" d="M94 24 V562 H130" />
-                  <path data-pulse="net" data-dur="3.4" data-n="2" d="M370 536 V500 H205 V424" />
-                  <path data-pulse="net" data-dur="3.4" data-n="2" d="M370 536 V500 H535 V424" />
-                </svg>
-                <span className="pan-hint" aria-hidden="true">Pan the diagram →</span>
-                <div className="campus-foot">
-                  <span>Shared once · built per pod</span>
-                  <span>10–15 MW campus ≈ 4–6 pods + 1–2 skids</span>
-                </div>
+              <div className="reveal" data-delay="1">
+                <WhatUsdcDeploysModel activeFlow={flowRa1} />
               </div>
             </div>
           </section>
@@ -519,96 +398,7 @@ export default function UseCasesPage() {
                   Both figures come from named engineering documents, not from a marketing estimate. They define the envelope a pod must accommodate.
                 </p>
               </div>
-              <div className="grid-2">
-                <article className="panel env-card reveal">
-                  <div className="env-head">
-                    <span className="micro">Pod reference · 01</span>
-                    <span className="name">NVIDIA Vera Rubin NVL72</span>
-                  </div>
-                  <div className="env-body">
-                    <p className="micro">IT load</p>
-                    <p className="env-load">
-                      <span className="pre">About</span>2.8<small>MW</small>
-                    </p>
-                    <div className="env-rows">
-                      <div className="env-row">
-                        <span className="k">Physical unit</span>
-                        <span>14 IT racks plus 2 network and storage racks in a single row, network racks in the middle.</span>
-                      </div>
-                      <div className="env-row">
-                        <span className="k">Source</span>
-                        <span>Vera Rubin NVL72 Facility Planning Summary</span>
-                      </div>
-                    </div>
-                    <div className="env-viz" aria-hidden="true">
-                      <svg viewBox="0 0 400 60">
-                        <g>
-                          <rect className="it" x="4" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="28" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="52" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="76" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="100" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="124" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="148" y="14" width="20" height="32" rx="1" />
-                          <rect className="nw" x="176" y="14" width="20" height="32" rx="1" />
-                          <rect className="nw" x="200" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="228" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="252" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="276" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="300" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="324" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="348" y="14" width="20" height="32" rx="1" />
-                          <rect className="it" x="372" y="14" width="20" height="32" rx="1" />
-                        </g>
-                        <text x="4" y="8">14 IT racks</text>
-                        <text x="164" y="8">2 NW / storage</text>
-                        <text x="396" y="58" textAnchor="end">Single row</text>
-                      </svg>
-                    </div>
-                  </div>
-                </article>
-                <article className="panel env-card reveal" data-delay="1">
-                  <div className="env-head">
-                    <span className="micro">Pod reference · 02</span>
-                    <span className="name">Cerebras CS4</span>
-                  </div>
-                  <div className="env-body">
-                    <p className="micro">IT load</p>
-                    <p className="env-load">
-                      2.5<small>MW</small>
-                    </p>
-                    <div className="env-rows">
-                      <div className="env-row">
-                        <span className="k">Physical unit</span>
-                        <span>11 containers, about 3,970 sq ft.</span>
-                      </div>
-                      <div className="env-row">
-                        <span className="k">Source</span>
-                        <span>DigiPowerX Cerebras CS4 Business Case</span>
-                      </div>
-                    </div>
-                    <div className="env-viz" aria-hidden="true">
-                      <svg viewBox="0 0 400 60">
-                        <g>
-                          <rect className="it" x="4" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="40" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="76" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="112" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="148" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="184" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="220" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="256" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="292" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="328" y="14" width="30" height="32" rx="1" />
-                          <rect className="it" x="364" y="14" width="30" height="32" rx="1" />
-                        </g>
-                        <text x="4" y="8">11 containers</text>
-                        <text x="396" y="58" textAnchor="end">≈ 3,970 sq ft</text>
-                      </svg>
-                    </div>
-                  </div>
-                </article>
-              </div>
+              <PodReferenceCards />
               <div className="note reveal" data-delay="2">
                 <span className="micro">Multi-pod layout</span>
                 <span>
@@ -821,19 +611,40 @@ export default function UseCasesPage() {
                 </p>
               </div>
               <div className="panel limit-viz reveal" data-delay="1" aria-hidden="true">
-                <svg className="dg" viewBox="0 0 800 150">
-                  <line x1="20" y1="90" x2="780" y2="90" stroke="var(--line-strong)" />
-                  <rect x="20" y="40" width="300" height="50" rx="3" className="cold" />
-                  <text x="32" y="62" className="t2">Training run</text>
-                  <text x="32" y="78" className="sec">Homogeneous GPU block · fully used</text>
-                  <rect x="340" y="40" width="200" height="50" rx="3" fill="none" stroke="var(--text-3)" strokeDasharray="3 3" />
-                  <text x="352" y="62" className="t2">Run ends</text>
-                  <text x="352" y="78" className="sec">Idle capital</text>
-                  <rect x="560" y="40" width="220" height="50" rx="3" fill="none" stroke="var(--line-strong)" />
-                  <text x="572" y="62" className="t2">Serve inference?</text>
-                  <text x="572" y="78" className="sec">Wrong shape for two phases</text>
-                  <text x="20" y="120">Time</text>
-                  <text x="780" y="120" textAnchor="end" className="sec">Same pod, three states</text>
+                <svg className="dg" viewBox="0 0 800 110">
+                  {/* Card 01 - Training run */}
+                  <g transform="translate(20, 8)">
+                    <rect width="280" height="52" rx="8" className="cold" />
+                    <text x="18" y="24" className="t1" style={{ fontSize: 12.5, fontWeight: 700, fill: "#ffffff" }}>TRAINING RUN</text>
+                    <text x="18" y="40" className="sec" style={{ fontSize: 9.5, fill: "#8fd0ff", letterSpacing: "0.05em" }}>HOMOGENEOUS GPU BLOCK · FULLY USED</text>
+                  </g>
+
+                  {/* Card 02 - Run ends */}
+                  <g transform="translate(318, 8)">
+                    <rect width="210" height="52" rx="8" fill="rgba(229,185,108,0.06)" stroke="var(--warm)" strokeDasharray="3 3" />
+                    <text x="18" y="24" className="t1" style={{ fontSize: 12.5, fontWeight: 700, fill: "var(--warm)" }}>RUN ENDS</text>
+                    <text x="18" y="40" className="sec" style={{ fontSize: 9.5, fill: "var(--warm)", letterSpacing: "0.05em" }}>IDLE CAPITAL</text>
+                  </g>
+
+                  {/* Card 03 - Serve inference? */}
+                  <g transform="translate(546, 8)">
+                    <rect width="234" height="52" rx="8" fill="none" stroke="var(--line-strong)" />
+                    <text x="18" y="24" className="t1" style={{ fontSize: 12.5, fontWeight: 700, fill: "#ffffff" }}>SERVE INFERENCE?</text>
+                    <text x="18" y="40" className="sec" style={{ fontSize: 9.5, fill: "var(--text-3)", letterSpacing: "0.05em" }}>WRONG SHAPE FOR TWO PHASES</text>
+                  </g>
+
+                  {/* Timeline Baseline */}
+                  <line x1="20" y1="74" x2="780" y2="74" stroke="var(--line-strong)" strokeWidth="1.5" />
+                  <circle cx="20" cy="74" r="3" fill="var(--accent)" />
+                  <circle cx="780" cy="74" r="3" fill="var(--line-strong)" />
+
+                  {/* Footer Labels */}
+                  <text x="20" y="96" className="micro" style={{ fill: "var(--accent)", letterSpacing: "0.14em", fontWeight: 600 }}>
+                    TIME &rarr;
+                  </text>
+                  <text x="780" y="96" textAnchor="end" className="micro" style={{ fill: "var(--text-3)", letterSpacing: "0.14em" }}>
+                    SAME POD &middot; THREE STATES
+                  </text>
                 </svg>
               </div>
             </div>
@@ -1267,26 +1078,65 @@ export default function UseCasesPage() {
                 </p>
               </div>
               <div className="panel limit-viz reveal" data-delay="1" aria-hidden="true">
-                <svg className="dg" viewBox="0 0 800 170">
-                  <text x="20" y="24">Agent turns →</text>
-                  <g>
-                    <rect x="20" y="40" width="130" height="44" rx="3" className="cold" />
-                    <text x="30" y="58" className="t2">Turn 1</text>
-                    <text x="30" y="74" className="sec">Prefix · full prefill</text>
-                    <rect x="170" y="40" width="130" height="44" rx="3" className="hot" />
-                    <text x="180" y="58" className="t2">Turn 2</text>
-                    <text x="180" y="74" className="sec">Same prefix · recomputed</text>
-                    <rect x="320" y="40" width="130" height="44" rx="3" className="hot" />
-                    <text x="330" y="58" className="t2">Turn 3</text>
-                    <text x="330" y="74" className="sec">Same prefix · recomputed</text>
-                    <rect x="470" y="40" width="130" height="44" rx="3" className="hot" />
-                    <text x="480" y="58" className="t2">Turn 4</text>
-                    <text x="480" y="74" className="sec">Same prefix · recomputed</text>
-                    <text x="620" y="66" className="sec">… every turn</text>
+                <svg className="dg" viewBox="0 0 820 185">
+                  <text x="20" y="24" className="micro" style={{ fill: "var(--accent)", letterSpacing: "0.18em", fontWeight: 700 }}>
+                    AGENT TURNS &rarr;
+                  </text>
+                  <text x="800" y="24" textAnchor="end" className="micro" style={{ fill: "var(--text-3)", letterSpacing: "0.14em" }}>
+                    PREFIX CACHING CHALLENGE
+                  </text>
+
+                  {/* Turn 01 - Cold Full Prefill */}
+                  <g transform="translate(20, 38)">
+                    <rect width="144" height="66" rx="8" className="cold" />
+                    <text x="72" y="26" textAnchor="middle" className="t1" style={{ fontSize: 13, fontWeight: 700, fill: "#ffffff" }}>TURN 1</text>
+                    <text x="72" y="44" textAnchor="middle" className="sec" style={{ fontSize: 10, fill: "#8fd0ff", letterSpacing: "0.06em" }}>PREFIX</text>
+                    <text x="72" y="56" textAnchor="middle" className="sec" style={{ fontSize: 9, fill: "rgba(143, 208, 255, 0.75)", letterSpacing: "0.06em" }}>FULL PREFILL</text>
                   </g>
-                  <path className="wire warm" d="M20 120 H780" />
-                  <text x="20" y="145" style={{ fill: "var(--warm)" }}>Cost the user sees · time to first token</text>
-                  <text x="780" y="145" textAnchor="end" style={{ fill: "var(--warm)" }}>Cost the operator sees · GPU hours</text>
+
+                  {/* Turn 02 - Redundant Recompute */}
+                  <g transform="translate(178, 38)">
+                    <rect width="144" height="66" rx="8" className="hot" />
+                    <text x="72" y="26" textAnchor="middle" className="t1" style={{ fontSize: 13, fontWeight: 700, fill: "#ffffff" }}>TURN 2</text>
+                    <text x="72" y="44" textAnchor="middle" className="sec" style={{ fontSize: 10, fill: "#e5b96c", letterSpacing: "0.06em" }}>SAME PREFIX</text>
+                    <text x="72" y="56" textAnchor="middle" className="sec" style={{ fontSize: 9, fill: "rgba(229, 185, 108, 0.75)", letterSpacing: "0.06em" }}>RECOMPUTED</text>
+                  </g>
+
+                  {/* Turn 03 - Redundant Recompute */}
+                  <g transform="translate(336, 38)">
+                    <rect width="144" height="66" rx="8" className="hot" />
+                    <text x="72" y="26" textAnchor="middle" className="t1" style={{ fontSize: 13, fontWeight: 700, fill: "#ffffff" }}>TURN 3</text>
+                    <text x="72" y="44" textAnchor="middle" className="sec" style={{ fontSize: 10, fill: "#e5b96c", letterSpacing: "0.06em" }}>SAME PREFIX</text>
+                    <text x="72" y="56" textAnchor="middle" className="sec" style={{ fontSize: 9, fill: "rgba(229, 185, 108, 0.75)", letterSpacing: "0.06em" }}>RECOMPUTED</text>
+                  </g>
+
+                  {/* Turn 04 - Redundant Recompute */}
+                  <g transform="translate(494, 38)">
+                    <rect width="144" height="66" rx="8" className="hot" />
+                    <text x="72" y="26" textAnchor="middle" className="t1" style={{ fontSize: 13, fontWeight: 700, fill: "#ffffff" }}>TURN 4</text>
+                    <text x="72" y="44" textAnchor="middle" className="sec" style={{ fontSize: 10, fill: "#e5b96c", letterSpacing: "0.06em" }}>SAME PREFIX</text>
+                    <text x="72" y="56" textAnchor="middle" className="sec" style={{ fontSize: 9, fill: "rgba(229, 185, 108, 0.75)", letterSpacing: "0.06em" }}>RECOMPUTED</text>
+                  </g>
+
+                  {/* Turn N - Repeat */}
+                  <g transform="translate(652, 38)">
+                    <rect width="148" height="66" rx="8" fill="rgba(255,255,255,0.02)" stroke="var(--line-strong)" strokeDasharray="3 3" />
+                    <text x="74" y="26" textAnchor="middle" className="t1" style={{ fontSize: 13, fontWeight: 700, fill: "var(--text-3)" }}>… EVERY TURN</text>
+                    <text x="74" y="44" textAnchor="middle" className="sec" style={{ fontSize: 10, fill: "var(--text-3)", letterSpacing: "0.06em" }}>SAME PREFIX</text>
+                    <text x="74" y="56" textAnchor="middle" className="sec" style={{ fontSize: 9, fill: "var(--text-3)", letterSpacing: "0.06em" }}>RECOMPUTED</text>
+                  </g>
+
+                  {/* Cost baseline */}
+                  <line x1="20" y1="132" x2="800" y2="132" stroke="var(--warm)" strokeWidth="1.5" />
+                  <circle cx="20" cy="132" r="3.5" fill="var(--warm)" />
+                  <circle cx="800" cy="132" r="3.5" fill="var(--warm)" />
+
+                  <text x="20" y="158" style={{ fill: "var(--warm)", fontSize: 11.5, letterSpacing: "0.1em", fontWeight: 600 }}>
+                    COST THE USER SEES · TIME TO FIRST TOKEN
+                  </text>
+                  <text x="800" y="158" textAnchor="end" style={{ fill: "var(--warm)", fontSize: 11.5, letterSpacing: "0.1em", fontWeight: 600 }}>
+                    COST THE OPERATOR SEES · GPU HOURS
+                  </text>
                 </svg>
               </div>
             </div>
@@ -1708,32 +1558,32 @@ export default function UseCasesPage() {
       {/* Embedded CSS styling for the Reference Architecture views */}
       <style jsx global>{`
         .ra-page-root {
-          --bg: #070a10;
-          --bg-2: #0b1019;
-          --bg-3: #0f1622;
-          --line: rgba(148, 172, 204, 0.14);
-          --line-strong: rgba(148, 172, 204, 0.28);
-          --grid: rgba(148, 172, 204, 0.05);
-          --text: #e7edf5;
-          --text-2: #a9b6c8;
-          --text-3: #6e7d94;
-          --accent: #4c8dff;
-          --accent-soft: rgba(76, 141, 255, 0.14);
-          --cool: #5fc3d2;
-          --cool-soft: rgba(95, 195, 210, 0.12);
-          --net: #c9d3e2;
-          --net-soft: rgba(201, 211, 226, 0.1);
-          --warm: #e0b36a;
-          --warm-soft: rgba(224, 179, 106, 0.12);
-          --radius: 6px;
-          --radius-lg: 10px;
-          --max: 1240px;
+          --bg: #040711;
+          --bg-2: #070c18;
+          --bg-3: #0a1324;
+          --line: rgba(74, 144, 255, 0.18);
+          --line-strong: rgba(120, 175, 255, 0.38);
+          --grid: rgba(74, 144, 255, 0.05);
+          --text: #e6effd;
+          --text-2: #a4bde2;
+          --text-3: #6b86b4;
+          --accent: #4f8bff;
+          --accent-soft: rgba(79, 139, 255, 0.16);
+          --cool: #2fdbe6;
+          --cool-soft: rgba(47, 219, 230, 0.14);
+          --net: #cbb8ff;
+          --net-soft: rgba(203, 184, 255, 0.12);
+          --warm: #e5b96c;
+          --warm-soft: rgba(229, 185, 108, 0.14);
+          --radius: 8px;
+          --radius-lg: 14px;
+          --max: 1280px;
           --gutter: clamp(20px, 4vw, 48px);
           --font-ui: var(--font-geist-sans), var(--font-sans), system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, Roboto, sans-serif;
           --font-mono: var(--font-geist-mono), var(--font-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
           --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-          background: var(--bg);
+          background: radial-gradient(120% 90% at 50% -10%, #0a1736 0%, #060b18 45%, #03060e 100%);
           color: var(--text);
           font-family: var(--font-ui);
           min-height: 100vh;
@@ -1749,8 +1599,8 @@ export default function UseCasesPage() {
           pointer-events: none;
           background-image: linear-gradient(var(--grid) 1px, transparent 1px),
             linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-          background-size: 64px 64px;
-          mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.6));
+          background-size: 50px 50px;
+          mask-image: radial-gradient(130% 110% at 50% 10%, #000 60%, transparent 100%);
         }
 
         .ra-page-root .sr-only {
@@ -1765,50 +1615,58 @@ export default function UseCasesPage() {
         .ra-page-root .eyebrow {
           font-family: var(--font-mono);
           font-size: 11px;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--accent);
           display: inline-flex;
           align-items: center;
           gap: 10px;
+          font-weight: 600;
         }
         .ra-page-root .eyebrow::before {
           content: "";
-          width: 18px;
-          height: 1px;
-          background: var(--accent);
-          opacity: 0.8;
+          width: 16px;
+          height: 2px;
+          border-radius: 1px;
+          background: linear-gradient(90deg, var(--accent), #8fd0ff);
+          box-shadow: 0 0 8px var(--accent);
         }
 
         .ra-page-root .micro {
           font-family: var(--font-mono);
           font-size: 10.5px;
-          letter-spacing: 0.14em;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
           color: var(--text-3);
+          font-weight: 600;
         }
 
         .ra-page-root .h-display {
           font-size: clamp(34px, 4.4vw, 56px);
-          line-height: 1.04;
+          line-height: 1.06;
           letter-spacing: -0.03em;
-          font-weight: 500;
+          font-weight: 600;
+          background: linear-gradient(135deg, #ffffff 40%, #c4d7fe 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
         .ra-page-root .h-section {
           font-size: clamp(26px, 3vw, 38px);
-          font-weight: 500;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          color: #ffffff;
         }
         .ra-page-root .lead {
-          font-size: clamp(16px, 1.2vw, 18px);
+          font-size: clamp(16px, 1.2vw, 18.5px);
           color: var(--text-2);
-          max-width: 60ch;
-          line-height: 1.6;
+          max-width: 62ch;
+          line-height: 1.65;
         }
         .ra-page-root .prose {
           color: var(--text-2);
           font-size: 15.5px;
           max-width: 62ch;
-          line-height: 1.6;
+          line-height: 1.65;
         }
         .ra-page-root .prose p + p {
           margin-top: 14px;
@@ -1833,7 +1691,7 @@ export default function UseCasesPage() {
         }
         .ra-page-root .section-head {
           display: grid;
-          grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+          grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
           gap: 40px;
           align-items: end;
           margin-bottom: clamp(36px, 5vw, 60px);
@@ -1844,179 +1702,86 @@ export default function UseCasesPage() {
         .ra-page-root .section-index {
           font-family: var(--font-mono);
           font-size: 11px;
-          color: var(--text-3);
-          letter-spacing: 0.14em;
+          color: var(--accent);
+          letter-spacing: 0.18em;
           margin-bottom: 12px;
+          font-weight: 600;
         }
         .ra-page-root .panel {
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0)), var(--bg-2);
+          background: linear-gradient(180deg, rgba(16, 28, 54, 0.55) 0%, rgba(6, 12, 26, 0.7) 100%);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border: 1px solid var(--line);
           border-radius: var(--radius-lg);
           position: relative;
+          box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .ra-page-root .panel::before {
           content: "";
           position: absolute;
-          inset: 8px;
+          left: 20px;
+          right: 20px;
+          top: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(120, 190, 255, 0.4), transparent);
           pointer-events: none;
-          border-radius: 4px;
-          background: linear-gradient(var(--line-strong), var(--line-strong)) top left / 8px 1px no-repeat,
-            linear-gradient(var(--line-strong), var(--line-strong)) top left / 1px 8px no-repeat,
-            linear-gradient(var(--line-strong), var(--line-strong)) bottom right / 8px 1px no-repeat,
-            linear-gradient(var(--line-strong), var(--line-strong)) bottom right / 1px 8px no-repeat;
         }
         .ra-page-root .btn {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          height: 44px;
-          padding: 0 20px;
+          height: 46px;
+          padding: 0 24px;
           border-radius: var(--radius);
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 600;
+          letter-spacing: 0.04em;
           border: 1px solid var(--line-strong);
           white-space: nowrap;
-          transition: background 0.2s, border-color 0.2s;
+          transition: all 0.25s var(--ease);
+          cursor: pointer;
         }
         .ra-page-root .btn:hover {
-          border-color: rgba(148, 172, 204, 0.5);
+          border-color: rgba(120, 175, 255, 0.65);
+          box-shadow: 0 0 20px rgba(79, 139, 255, 0.25);
+          transform: translateY(-1px);
         }
         .ra-page-root .btn-primary {
-          background: var(--accent);
-          border-color: var(--accent);
-          color: #fff;
+          background: linear-gradient(135deg, #4f8bff 0%, #3572e8 100%);
+          border-color: #79abff;
+          color: #ffffff;
+          box-shadow: 0 0 20px rgba(79, 139, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         .ra-page-root .btn-primary:hover {
-          background: #3d7cf0;
-          border-color: #3d7cf0;
+          background: linear-gradient(135deg, #629aff 0%, #447df0 100%);
+          border-color: #a4c4ff;
+          box-shadow: 0 0 28px rgba(79, 139, 255, 0.6);
         }
         .ra-page-root .btn-ghost {
-          color: var(--text-2);
+          color: var(--text);
+          background: rgba(12, 24, 48, 0.5);
+          border-color: var(--line);
+        }
+        .ra-page-root .btn-ghost:hover {
+          background: rgba(20, 40, 80, 0.6);
+          border-color: var(--line-strong);
         }
         .ra-page-root .btn .arrow {
           transition: transform 0.25s var(--ease);
         }
         .ra-page-root .btn:hover .arrow {
-          transform: translateX(3px);
+          transform: translateX(4px);
         }
         .ra-page-root .grid-2 {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 20px;
+          gap: 24px;
         }
         .ra-page-root .grid-4 {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 16px;
-        }
-
-        /* Header */
-        .ra-page-root .site-header {
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          background: rgba(7, 10, 16, 0.72);
-          backdrop-filter: saturate(140%) blur(14px);
-          -webkit-backdrop-filter: saturate(140%) blur(14px);
-          border-bottom: 1px solid transparent;
-          transition: border-color 0.3s;
-        }
-        .ra-page-root .site-header.is-scrolled {
-          border-bottom-color: var(--line);
-        }
-        .ra-page-root .nav {
-          height: 64px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 24px;
-        }
-        .ra-page-root .brand {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          font-size: 14px;
-        }
-        .ra-page-root .brand-mark {
-          width: 26px;
-          height: 26px;
-          border: 1px solid var(--line-strong);
-          border-radius: 5px;
-          display: grid;
-          place-items: center;
-        }
-        .ra-page-root .brand-mark span {
-          width: 10px;
-          height: 10px;
-          background: var(--accent);
-          border-radius: 2px;
-          box-shadow: 0 0 12px rgba(76, 141, 255, 0.55);
-        }
-        .ra-page-root .nav-links {
-          display: flex;
-          gap: 6px;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-        .ra-page-root .nav-links a {
-          display: block;
-          padding: 8px 14px;
-          border-radius: var(--radius);
-          font-size: 14px;
-          color: var(--text-2);
-          position: relative;
-          transition: color 0.2s;
-        }
-        .ra-page-root .nav-links a:hover,
-        .ra-page-root .nav-links a[aria-current="page"] {
-          color: var(--text);
-        }
-        .ra-page-root .nav-links a[aria-current="page"]::after {
-          content: "";
-          position: absolute;
-          left: 14px;
-          right: 14px;
-          bottom: 2px;
-          height: 1px;
-          background: var(--accent);
-        }
-        .ra-page-root .nav-cta {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .ra-page-root .nav-toggle {
-          display: none;
-          width: 40px;
-          height: 40px;
-          border: 1px solid var(--line);
-          border-radius: var(--radius);
-          place-items: center;
-        }
-        .ra-page-root .nav-toggle span {
-          display: block;
-          width: 16px;
-          height: 1px;
-          background: var(--text);
-          position: relative;
-        }
-        .ra-page-root .nav-toggle span::before,
-        .ra-page-root .nav-toggle span::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          width: 16px;
-          height: 1px;
-          background: var(--text);
-        }
-        .ra-page-root .nav-toggle span::before {
-          top: -5px;
-        }
-        .ra-page-root .nav-toggle span::after {
-          top: 5px;
+          gap: 20px;
         }
 
         /* Views */
@@ -2043,18 +1808,23 @@ export default function UseCasesPage() {
           display: block !important;
         }
         .ra-page-root .crumbs {
-          padding: 22px 0 0;
+          padding: 24px 0 0;
           display: flex;
           gap: 10px;
           align-items: center;
           font-family: var(--font-mono);
-          font-size: 10.5px;
-          letter-spacing: 0.14em;
+          font-size: 11px;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
           color: var(--text-3);
+          font-weight: 500;
+        }
+        .ra-page-root .crumbs a {
+          color: var(--text-2);
+          transition: color 0.2s;
         }
         .ra-page-root .crumbs a:hover {
-          color: var(--text);
+          color: #ffffff;
         }
         .ra-page-root .crumbs i {
           width: 14px;
@@ -2063,27 +1833,33 @@ export default function UseCasesPage() {
         }
         .ra-page-root .ra-switch {
           display: flex;
-          gap: 6px;
+          gap: 8px;
           flex-wrap: wrap;
-          margin-top: 22px;
+          margin-top: 24px;
         }
         .ra-page-root .ra-switch a {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 11px;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          padding: 8px 12px;
+          padding: 9px 16px;
           border: 1px solid var(--line);
-          border-radius: var(--radius);
-          color: var(--text-3);
-          transition: border-color 0.2s, color 0.2s;
+          border-radius: 20px;
+          color: var(--text-2);
+          background: rgba(10, 18, 38, 0.45);
+          transition: all 0.25s ease;
+          font-weight: 600;
         }
         .ra-page-root .ra-switch a:hover {
-          color: var(--text);
+          color: #ffffff;
+          border-color: rgba(79, 139, 255, 0.45);
+          background: rgba(20, 36, 72, 0.6);
         }
         .ra-page-root .ra-switch a[aria-current="page"] {
-          color: var(--accent);
-          border-color: rgba(76, 141, 255, 0.4);
+          color: #ffffff;
+          border-color: #4f8bff;
+          background: linear-gradient(135deg, rgba(79, 139, 255, 0.25) 0%, rgba(47, 219, 230, 0.15) 100%);
+          box-shadow: 0 0 16px rgba(79, 139, 255, 0.35);
         }
 
         /* Hero */
@@ -2092,19 +1868,9 @@ export default function UseCasesPage() {
           position: relative;
           overflow: hidden;
         }
-        .ra-page-root .hero::after {
-          content: "";
-          position: absolute;
-          right: -10%;
-          top: 0;
-          width: 60%;
-          height: 100%;
-          pointer-events: none;
-          background: radial-gradient(ellipse at 60% 40%, rgba(76, 141, 255, 0.1), transparent 60%);
-        }
         .ra-page-root .hero-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
           gap: clamp(32px, 5vw, 64px);
           align-items: center;
           position: relative;
@@ -2115,58 +1881,68 @@ export default function UseCasesPage() {
         }
         .ra-page-root .hero-copy h1 {
           margin-bottom: 22px;
-          max-width: 16ch;
+          max-width: 18ch;
         }
         .ra-page-root .hero-copy .lead {
           margin-bottom: 32px;
         }
         .ra-page-root .hero-actions {
           display: flex;
-          gap: 12px;
+          gap: 14px;
           flex-wrap: wrap;
-          margin-bottom: 44px;
+          margin-bottom: 40px;
         }
         .ra-page-root .metrics {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          border-top: 1px solid var(--line);
-          border-bottom: 1px solid var(--line);
+          gap: 12px;
+          border: none;
           margin: 0;
         }
         .ra-page-root .metric {
-          padding: 18px 18px 18px 0;
-          border-left: 1px solid var(--line);
-          padding-left: 18px;
+          padding: 16px 18px;
+          background: rgba(10, 20, 44, 0.55);
+          border: 1px solid rgba(74, 144, 255, 0.22);
+          border-radius: 12px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+          transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .ra-page-root .metric:hover {
+          border-color: rgba(110, 160, 255, 0.55);
+          transform: translateY(-2px);
         }
         .ra-page-root .metric:first-child {
-          border-left: 0;
-          padding-left: 0;
+          border-left: 1px solid rgba(74, 144, 255, 0.22);
+          padding-left: 18px;
         }
         .ra-page-root .metric .val {
           font-family: var(--font-mono);
-          font-size: clamp(22px, 2vw, 28px);
-          letter-spacing: -0.03em;
-          color: var(--text);
+          font-size: clamp(22px, 2.2vw, 28px);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: #ffffff;
           margin: 0 0 6px;
           font-variant-numeric: tabular-nums;
+          text-shadow: 0 0 16px rgba(79, 139, 255, 0.35);
         }
         .ra-page-root .metric .val small {
-          font-size: 0.58em;
-          color: var(--text-3);
-          margin-left: 4px;
-          letter-spacing: 0.04em;
+          font-size: 0.52em;
+          color: var(--accent);
+          margin-left: 6px;
+          letter-spacing: 0.08em;
+          font-weight: 600;
         }
         .ra-page-root .metric .lbl {
-          font-size: 12px;
-          color: var(--text-3);
-          line-height: 1.45;
+          font-size: 11.5px;
+          color: var(--text-2);
+          line-height: 1.4;
           margin: 0;
         }
         .ra-page-root .metric.qual .val {
-          font-family: var(--font-ui);
+          font-family: var(--font-mono);
           font-size: 15px;
-          letter-spacing: -0.01em;
-          padding-top: 6px;
+          letter-spacing: 0.02em;
+          color: #8fd0ff;
         }
 
         /* Frame */
@@ -2449,48 +2225,79 @@ export default function UseCasesPage() {
           display: grid;
           grid-template-columns: 1fr auto 1fr;
           align-items: stretch;
+          gap: 0;
         }
         .ra-page-root .sit-panel {
-          padding: clamp(24px, 3vw, 40px);
-          min-height: 280px;
+          padding: clamp(28px, 3.5vw, 44px);
+          min-height: 290px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          background: linear-gradient(180deg, rgba(14, 26, 52, 0.7) 0%, rgba(6, 12, 26, 0.85) 100%);
+          border: 1px solid rgba(74, 144, 255, 0.25);
+          border-radius: var(--radius-lg);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+          position: relative;
+          overflow: hidden;
+        }
+        .ra-page-root .sit-panel.now {
+          border-color: rgba(79, 139, 255, 0.45);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 139, 255, 0.12);
+        }
+        .ra-page-root .sit-panel.future {
+          border-color: rgba(229, 185, 108, 0.35);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(229, 185, 108, 0.08);
         }
         .ra-page-root .sit-panel .big {
           font-family: var(--font-mono);
-          font-size: clamp(44px, 6vw, 80px);
+          font-size: clamp(48px, 6vw, 84px);
+          font-weight: 700;
           line-height: 1;
           letter-spacing: -0.04em;
-          margin: 28px 0 12px;
+          margin: 24px 0 14px;
+          color: #ffffff;
+          text-shadow: 0 0 24px rgba(79, 139, 255, 0.4);
         }
         .ra-page-root .sit-panel .big small {
-          font-size: 0.4em;
-          color: var(--text-3);
+          font-size: 0.38em;
+          color: var(--accent);
           letter-spacing: 0.04em;
           margin-left: 8px;
+          font-weight: 600;
         }
         .ra-page-root .sit-panel .sub {
           color: var(--text-2);
           font-size: 15px;
+          line-height: 1.55;
         }
         .ra-page-root .sit-panel.future .big {
-          color: var(--text-3);
+          color: var(--warm);
+          text-shadow: 0 0 24px rgba(229, 185, 108, 0.4);
         }
         .ra-page-root .sit-panel .meta {
           display: flex;
           justify-content: space-between;
+          align-items: center;
           font-family: var(--font-mono);
-          font-size: 10.5px;
-          letter-spacing: 0.14em;
+          font-size: 11px;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
           color: var(--text-3);
+          font-weight: 600;
         }
         .ra-page-root .sit-panel .meta .tag {
-          color: var(--accent);
+          color: #ffffff;
+          background: rgba(79, 139, 255, 0.2);
+          border: 1px solid rgba(79, 139, 255, 0.5);
+          padding: 4px 10px;
+          border-radius: 12px;
+          box-shadow: 0 0 10px rgba(79, 139, 255, 0.3);
         }
         .ra-page-root .sit-panel.future .meta .tag {
-          color: var(--text-3);
+          color: #ffffff;
+          background: rgba(229, 185, 108, 0.2);
+          border: 1px solid rgba(229, 185, 108, 0.5);
+          box-shadow: 0 0 10px rgba(229, 185, 108, 0.3);
         }
         .ra-page-root .sit-link {
           width: clamp(80px, 12vw, 180px);
@@ -2504,19 +2311,21 @@ export default function UseCasesPage() {
         }
         .ra-page-root .sit-link .solid {
           stroke: var(--accent);
-          stroke-width: 1.5;
+          stroke-width: 2;
           fill: none;
           stroke-dasharray: 200;
           stroke-dashoffset: 200;
           transition: stroke-dashoffset 1.2s var(--ease);
+          filter: drop-shadow(0 0 6px rgba(79, 139, 255, 0.6));
         }
         .ra-page-root .sit-link .dotted {
-          stroke: var(--text-3);
-          stroke-width: 1.5;
+          stroke: var(--warm);
+          stroke-width: 1.8;
           fill: none;
-          stroke-dasharray: 3 5;
+          stroke-dasharray: 4 6;
           opacity: 0;
           transition: opacity 0.8s 0.9s;
+          filter: drop-shadow(0 0 6px rgba(229, 185, 108, 0.5));
         }
         .ra-page-root .in-view .sit-link .solid {
           stroke-dashoffset: 0;
@@ -2532,10 +2341,11 @@ export default function UseCasesPage() {
         }
         .ra-page-root .demand {
           margin-top: 48px;
-          border: 1px solid var(--line);
+          border: 1px solid rgba(74, 144, 255, 0.25);
           border-radius: var(--radius-lg);
-          padding: 20px 24px 12px;
-          background: var(--bg-2);
+          padding: 24px 28px 16px;
+          background: linear-gradient(180deg, rgba(12, 22, 44, 0.6) 0%, rgba(6, 12, 24, 0.8) 100%);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
         }
         .ra-page-root .demand svg {
           width: 100%;
@@ -2546,23 +2356,25 @@ export default function UseCasesPage() {
           stroke: var(--line-strong);
         }
         .ra-page-root .demand .band {
-          fill: var(--accent-soft);
+          fill: rgba(79, 139, 255, 0.12);
         }
         .ra-page-root .demand .known {
           stroke: var(--accent);
-          stroke-width: 2;
+          stroke-width: 2.2;
           fill: none;
           stroke-dasharray: 400;
           stroke-dashoffset: 400;
           transition: stroke-dashoffset 1.4s var(--ease);
+          filter: drop-shadow(0 0 8px rgba(79, 139, 255, 0.6));
         }
         .ra-page-root .demand .unknown {
-          stroke: var(--text-3);
-          stroke-width: 1.5;
+          stroke: var(--warm);
+          stroke-width: 1.8;
           fill: none;
           stroke-dasharray: 4 6;
           opacity: 0;
           transition: opacity 0.8s 1s;
+          filter: drop-shadow(0 0 6px rgba(229, 185, 108, 0.4));
         }
         .ra-page-root .demand .ceiling {
           stroke: var(--text-3);
@@ -2571,8 +2383,8 @@ export default function UseCasesPage() {
         .ra-page-root .demand text {
           font-family: var(--font-mono);
           font-size: 10px;
-          fill: var(--text-3);
-          letter-spacing: 0.12em;
+          fill: var(--text-2);
+          letter-spacing: 0.14em;
           text-transform: uppercase;
         }
         .ra-page-root .demand.in-view .known {
@@ -2594,19 +2406,23 @@ export default function UseCasesPage() {
         }
 
         .ra-page-root .compare-col {
-          padding: clamp(24px, 3vw, 36px);
+          padding: clamp(28px, 3.5vw, 40px);
+          background: linear-gradient(180deg, rgba(14, 24, 48, 0.55) 0%, rgba(6, 12, 26, 0.7) 100%);
+          border: 1px solid var(--line);
+          border-radius: var(--radius-lg);
         }
         .ra-page-root .compare-col > .micro {
-          margin-bottom: 22px;
+          margin-bottom: 24px;
           display: flex;
           justify-content: space-between;
           gap: 12px;
         }
         .ra-page-root .compare-col.modular {
-          border-color: rgba(76, 141, 255, 0.35);
+          border-color: rgba(79, 139, 255, 0.45);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 139, 255, 0.12);
         }
         .ra-page-root .compare-col.modular > .micro {
-          color: var(--accent);
+          color: #8fd0ff;
         }
         .ra-page-root .compare-list {
           list-style: none;
@@ -2615,9 +2431,10 @@ export default function UseCasesPage() {
         }
         .ra-page-root .compare-list li {
           display: grid;
-          grid-template-columns: 20px 1fr;
+          grid-template-columns: 24px 1fr;
           gap: 14px;
-          padding: 14px 0;
+          align-items: center;
+          padding: 16px 0;
           border-top: 1px solid var(--line);
           font-size: 15px;
           color: var(--text-2);
@@ -2626,32 +2443,33 @@ export default function UseCasesPage() {
           border-bottom: 1px solid var(--line);
         }
         .ra-page-root .compare-list .g {
-          width: 20px;
-          height: 20px;
+          width: 22px;
+          height: 22px;
           position: relative;
         }
         .ra-page-root .compare-list .g::before {
           content: "";
           position: absolute;
-          inset: 5px;
+          inset: 4px;
           border: 1px solid var(--text-3);
-          border-radius: 2px;
+          border-radius: 3px;
         }
         .ra-page-root .modular .compare-list .g::before {
           border-color: var(--accent);
-          background: var(--accent-soft);
+          background: rgba(79, 139, 255, 0.25);
+          box-shadow: 0 0 8px rgba(79, 139, 255, 0.5);
         }
         .ra-page-root .traditional .compare-list .g::after {
           content: "";
           position: absolute;
           left: 4px;
           right: 4px;
-          top: 9.5px;
+          top: 10.5px;
           height: 1px;
           background: var(--text-3);
         }
         .ra-page-root .compare-viz {
-          margin-top: 18px;
+          margin-top: 24px;
         }
         .ra-page-root .compare-viz svg {
           width: 100%;
@@ -2668,18 +2486,18 @@ export default function UseCasesPage() {
         }
         .ra-page-root .compare-viz .podbox {
           stroke: var(--accent);
-          fill: var(--accent-soft);
+          fill: rgba(79, 139, 255, 0.2);
         }
         .ra-page-root .compare-viz .podbox.future {
           fill: none;
           stroke-dasharray: 3 3;
-          stroke: rgba(76, 141, 255, 0.5);
+          stroke: rgba(79, 139, 255, 0.5);
         }
         .ra-page-root .compare-viz text {
           font-family: var(--font-mono);
-          font-size: 8.5px;
-          fill: var(--text-3);
-          letter-spacing: 0.12em;
+          font-size: 9px;
+          fill: var(--text-2);
+          letter-spacing: 0.14em;
         }
 
         .ra-page-root .deploy-grid {
@@ -3110,15 +2928,32 @@ export default function UseCasesPage() {
         }
 
         .ra-page-root .fac {
-          padding: 24px;
-          min-height: 230px;
+          padding: 26px 22px;
+          min-height: 250px;
           display: flex;
           flex-direction: column;
-          gap: 18px;
+          gap: 16px;
+          background: linear-gradient(180deg, rgba(14, 24, 48, 0.6) 0%, rgba(6, 12, 26, 0.8) 100%);
+          border: 1px solid rgba(74, 144, 255, 0.22);
+          border-radius: var(--radius-lg);
+          transition: all 0.3s ease;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+        .ra-page-root .fac:hover {
+          border-color: rgba(110, 165, 255, 0.6);
+          transform: translateY(-4px);
+          box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(79, 139, 255, 0.2);
         }
         .ra-page-root .fac .ico {
-          width: 40px;
-          height: 40px;
+          width: 42px;
+          height: 42px;
+          display: grid;
+          place-items: center;
+          border-radius: 10px;
+          background: rgba(79, 139, 255, 0.12);
+          border: 1px solid rgba(79, 139, 255, 0.35);
+          box-shadow: 0 0 16px rgba(79, 139, 255, 0.2);
+          padding: 6px;
         }
         .ra-page-root .fac .ico svg {
           width: 100%;
@@ -3126,29 +2961,36 @@ export default function UseCasesPage() {
           overflow: visible;
         }
         .ra-page-root .fac .ico * {
-          stroke: var(--accent);
+          stroke: #8fd0ff;
           fill: none;
-          stroke-width: 1.2;
+          stroke-width: 1.5;
           stroke-linecap: round;
         }
         .ra-page-root .fac h3 {
           font-family: var(--font-mono);
-          font-size: 11.5px;
-          letter-spacing: 0.16em;
+          font-size: 12px;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
-          font-weight: 500;
-          color: var(--text);
+          font-weight: 700;
+          color: #ffffff;
         }
         .ra-page-root .fac p {
-          font-size: 14.5px;
+          font-size: 14px;
           color: var(--text-2);
+          line-height: 1.6;
           flex: 1;
         }
         .ra-page-root .fac .idx {
           font-family: var(--font-mono);
           font-size: 10px;
-          color: var(--text-3);
+          color: var(--accent);
           letter-spacing: 0.14em;
+          padding: 4px 10px;
+          border-radius: 6px;
+          background: rgba(79, 139, 255, 0.12);
+          border: 1px solid rgba(79, 139, 255, 0.3);
+          align-self: flex-start;
+          font-weight: 600;
         }
 
         .ra-page-root .limits {
@@ -3169,6 +3011,7 @@ export default function UseCasesPage() {
           letter-spacing: -0.01em;
           margin-bottom: 28px;
           max-width: 32ch;
+          line-height: 1.5;
         }
         .ra-page-root .fixed-list {
           list-style: none;
@@ -3181,9 +3024,14 @@ export default function UseCasesPage() {
           grid-template-columns: 110px 1fr auto;
           gap: 16px;
           align-items: center;
-          padding: 16px 0;
+          padding: 16px 12px;
           border-bottom: 1px solid var(--line);
           font-size: 15px;
+          border-radius: 6px;
+          transition: background 0.2s ease;
+        }
+        .ra-page-root .fixed-list li:hover {
+          background: rgba(79, 139, 255, 0.05);
         }
         .ra-page-root .fixed-list .k {
           font-family: var(--font-mono);
@@ -3191,29 +3039,35 @@ export default function UseCasesPage() {
           letter-spacing: 0.14em;
           text-transform: uppercase;
           color: var(--text-3);
+          font-weight: 600;
         }
         .ra-page-root .fixed-list .s {
           font-family: var(--font-mono);
           font-size: 10px;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: var(--text-3);
+          color: var(--text-2);
+          background: rgba(14, 24, 48, 0.6);
           border: 1px solid var(--line-strong);
-          border-radius: 3px;
-          padding: 4px 8px;
+          border-radius: 4px;
+          padding: 5px 10px;
           white-space: nowrap;
+          font-weight: 600;
         }
         .ra-page-root .fixed-list .s.mod {
-          color: var(--accent);
-          border-color: rgba(76, 141, 255, 0.4);
+          color: #ffffff;
+          background: rgba(79, 139, 255, 0.2);
+          border-color: rgba(79, 139, 255, 0.6);
+          box-shadow: 0 0 10px rgba(79, 139, 255, 0.3);
         }
         .ra-page-root .callout {
           margin-top: 36px;
           padding: 26px 28px;
-          border: 1px solid rgba(76, 141, 255, 0.35);
-          border-left: 2px solid var(--accent);
+          border: 1px solid rgba(79, 139, 255, 0.4);
+          border-left: 3px solid var(--accent);
           border-radius: var(--radius);
-          background: linear-gradient(90deg, rgba(76, 141, 255, 0.08), transparent 70%);
+          background: linear-gradient(90deg, rgba(79, 139, 255, 0.12), transparent 70%);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
         }
         .ra-page-root .callout p.micro {
           margin-bottom: 10px;
@@ -3224,7 +3078,7 @@ export default function UseCasesPage() {
           line-height: 1.3;
         }
         .ra-page-root .limit-viz {
-          padding: clamp(18px, 2.4vw, 28px);
+          padding: 16px 22px 14px;
         }
         .ra-page-root .limit-viz svg {
           width: 100%;
@@ -3241,17 +3095,40 @@ export default function UseCasesPage() {
           grid-template-columns: minmax(0, 1.2fr) auto;
           gap: 32px;
           align-items: center;
+          background: radial-gradient(120% 120% at 20% 0%, rgba(79, 139, 255, 0.2) 0%, rgba(14, 26, 52, 0.75) 50%, rgba(6, 12, 26, 0.9) 100%);
+          border: 1px solid rgba(79, 139, 255, 0.4);
+          border-radius: var(--radius-lg);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          position: relative;
+          overflow: hidden;
+        }
+        .ra-page-root .cta-box::after {
+          content: "";
+          position: absolute;
+          right: -80px;
+          top: -80px;
+          width: 320px;
+          height: 320px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(79, 139, 255, 0.25) 0%, transparent 70%);
+          pointer-events: none;
         }
         .ra-page-root .cta-box .eyebrow {
           margin-bottom: 18px;
         }
         .ra-page-root .cta-box h2 {
-          max-width: 20ch;
+          max-width: 22ch;
+          color: #ffffff;
+          font-size: clamp(26px, 2.8vw, 36px);
+          line-height: 1.15;
+          letter-spacing: -0.02em;
         }
         .ra-page-root .cta-box p.sub {
           margin-top: 14px;
           color: var(--text-2);
-          max-width: 48ch;
+          max-width: 50ch;
+          font-size: 15.5px;
+          line-height: 1.6;
         }
         .ra-page-root .source {
           margin-top: 28px;
@@ -3285,53 +3162,63 @@ export default function UseCasesPage() {
           padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 4vw, 56px);
         }
         .ra-page-root .index-hero h1 {
-          max-width: 18ch;
+          max-width: 20ch;
           margin: 20px 0 20px;
         }
         .ra-page-root .cards {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
+          gap: 24px;
           padding-bottom: clamp(72px, 8vw, 120px);
         }
         .ra-page-root .card {
           display: flex;
           flex-direction: column;
-          padding: 24px;
+          padding: 28px 24px;
           min-height: 520px;
           opacity: 1 !important;
           visibility: visible !important;
-          transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+          background: linear-gradient(180deg, rgba(14, 24, 48, 0.6) 0%, rgba(6, 12, 26, 0.8) 100%);
+          border: 1px solid rgba(74, 144, 255, 0.22);
+          border-radius: var(--radius-lg);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+          transition: all 0.35s var(--ease);
           cursor: pointer;
+          position: relative;
         }
         .ra-page-root .card:hover {
-          border-color: rgba(76, 141, 255, 0.45);
-          transform: translateY(-2px);
+          border-color: rgba(110, 165, 255, 0.65);
+          transform: translateY(-4px);
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 32px rgba(79, 139, 255, 0.2);
         }
         .ra-page-root .card .eyebrow {
           margin-bottom: 16px;
         }
         .ra-page-root .card h2 {
           font-size: clamp(20px, 1.6vw, 23px);
-          line-height: 1.25;
+          line-height: 1.28;
           margin-bottom: 12px;
+          color: #ffffff;
+          font-weight: 600;
         }
         .ra-page-root .card .sum {
           font-size: 14px;
           color: var(--text-2);
+          line-height: 1.55;
           flex: 0;
         }
         .ra-page-root .card .viz {
           margin: 22px 0;
-          border: 1px solid var(--line);
+          border: 1px solid rgba(74, 144, 255, 0.2);
           border-radius: var(--radius);
-          background: var(--bg-3);
+          background: rgba(10, 18, 38, 0.8);
           padding: 14px;
           flex: 1;
           display: grid;
           place-items: center;
           position: relative;
           overflow: hidden;
+          box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
         }
         .ra-page-root .card .viz::before {
           content: "";
@@ -3364,6 +3251,8 @@ export default function UseCasesPage() {
         .ra-page-root .card .mstrip .v {
           font-family: var(--font-mono);
           font-size: 18px;
+          font-weight: 700;
+          color: #ffffff;
           letter-spacing: -0.02em;
         }
         .ra-page-root .card .mstrip .v.q {
@@ -3371,6 +3260,7 @@ export default function UseCasesPage() {
           font-size: 13.5px;
           line-height: 1.35;
           padding-top: 4px;
+          color: var(--text);
         }
         .ra-page-root .card .mstrip .l {
           font-size: 11px;
@@ -3384,41 +3274,104 @@ export default function UseCasesPage() {
           display: inline-flex;
           gap: 8px;
           align-items: center;
+          font-weight: 600;
         }
         .ra-page-root .card .link .arrow {
           transition: transform 0.25s var(--ease);
         }
         .ra-page-root .card:hover .link .arrow {
-          transform: translateX(3px);
+          transform: translateX(4px);
         }
         .ra-page-root .template-row {
           display: grid;
           grid-template-columns: repeat(7, 1fr);
-          gap: 8px;
-          margin-top: 28px;
+          gap: 10px;
+          margin-top: 32px;
         }
         .ra-page-root .template-row div {
-          border: 1px solid var(--line);
-          border-radius: 4px;
-          padding: 10px 10px;
+          background: rgba(12, 22, 44, 0.6);
+          border: 1px solid rgba(74, 144, 255, 0.2);
+          border-radius: 8px;
+          padding: 12px 10px;
           font-family: var(--font-mono);
-          font-size: 9.5px;
+          font-size: 10px;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--text-3);
-          line-height: 1.5;
+          color: var(--text-2);
+          line-height: 1.4;
+          transition: all 0.25s ease;
+        }
+        .ra-page-root .template-row div:hover {
+          border-color: rgba(79, 139, 255, 0.5);
+          background: rgba(20, 36, 72, 0.7);
+          transform: translateY(-2px);
         }
         .ra-page-root .template-row div b {
           display: block;
-          color: var(--text-2);
-          font-weight: 500;
+          color: #8fd0ff;
+          font-weight: 700;
           margin-bottom: 4px;
+          font-size: 11px;
         }
         .ra-page-root .template-row div.last {
-          border-color: rgba(76, 141, 255, 0.4);
+          border-color: rgba(79, 139, 255, 0.45);
+          background: rgba(79, 139, 255, 0.1);
         }
         .ra-page-root .template-row div.last b {
           color: var(--accent);
+        }
+
+        /* Facility Cards */
+        .ra-page-root .fac {
+          padding: clamp(24px, 2.5vw, 32px);
+          background: linear-gradient(180deg, rgba(14, 24, 48, 0.6) 0%, rgba(6, 12, 26, 0.75) 100%);
+          border: 1px solid rgba(74, 144, 255, 0.22);
+          border-radius: var(--radius-lg);
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 240px;
+        }
+        .ra-page-root .fac:hover {
+          border-color: rgba(110, 165, 255, 0.6);
+          transform: translateY(-3px);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(79, 139, 255, 0.15);
+        }
+        .ra-page-root .fac h3 {
+          font-size: 19px;
+          color: #ffffff;
+          font-weight: 600;
+          margin: 12px 0 8px;
+        }
+        .ra-page-root .fac p {
+          color: var(--text-2);
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        /* Checklist Cards */
+        .ra-page-root .check-card {
+          padding: 24px;
+          background: linear-gradient(180deg, rgba(12, 22, 44, 0.6) 0%, rgba(6, 12, 26, 0.75) 100%);
+          border: 1px solid rgba(74, 144, 255, 0.22);
+          border-radius: var(--radius-lg);
+          transition: all 0.3s ease;
+        }
+        .ra-page-root .check-card:hover {
+          border-color: rgba(110, 165, 255, 0.55);
+          transform: translateY(-2px);
+        }
+        .ra-page-root .check-card h3 {
+          font-size: 18px;
+          color: #ffffff;
+          margin-bottom: 8px;
+          font-weight: 600;
+        }
+        .ra-page-root .check-card p {
+          font-size: 14px;
+          color: var(--text-2);
+          line-height: 1.55;
         }
 
         /* RA-02 / RA-03 specific */

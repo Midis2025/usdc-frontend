@@ -113,8 +113,21 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Escape closes whatever is open
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenDropdown(null);
+      setIsMobileMenuOpen(false);
+      setMobileAccordionOpen(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   useEffect(() => {
@@ -173,7 +186,7 @@ export default function Navbar() {
             width={130}
             height={46}
             className="h-[32px] sm:h-[38px] md:h-[42px] w-auto transition-all duration-300"
-            priority
+            preload
           />
         </Link>
       </div>
@@ -190,9 +203,16 @@ export default function Navbar() {
                   className="relative py-1.5"
                   onMouseEnter={() => handleMouseEnter(link.label)}
                   onMouseLeave={handleMouseLeave}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenDropdown(null);
+                  }}
                 >
                   {/* Dropdown trigger button */}
                   <button
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenDropdown(isOpen ? null : link.label)}
                     className={`flex items-center gap-1 text-[13px] xl:text-[14px] 2xl:text-[15px] font-medium transition-all duration-300 cursor-pointer font-sans whitespace-nowrap ${isOpen ? "text-[#3daeff]" : "text-white/80 hover:text-[#3daeff]"
                       }`}
                   >
@@ -367,7 +387,7 @@ export default function Navbar() {
           setIsMobileMenuOpen(false);
           setMobileAccordionOpen(null);
         }}
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${
+        className={`absolute top-0 left-0 w-full h-dvh bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${
           isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         style={{ touchAction: "none" }}
@@ -376,7 +396,7 @@ export default function Navbar() {
 
       {/* ═══ Mobile Drawer ═══ */}
       <div
-        className={`fixed top-[70px] sm:top-[85px] left-0 w-full bg-[#04070f]/98 border-b border-white/[0.08] backdrop-blur-2xl flex flex-col pt-4 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] px-5 sm:px-8 gap-4 lg:hidden shadow-[0_20px_50px_rgba(0,0,0,0.95)] transition-all duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-h-[calc(100dvh-70px)] sm:max-h-[calc(100dvh-85px)] overflow-y-auto overscroll-contain ios-scroll z-50 ${isMobileMenuOpen
+        className={`absolute top-full left-0 w-full bg-[#04070f]/98 border-b border-white/[0.08] backdrop-blur-2xl flex flex-col pt-4 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] px-5 sm:px-8 gap-4 lg:hidden shadow-[0_20px_50px_rgba(0,0,0,0.95)] transition-all duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-h-[calc(100dvh-85px)] overflow-y-auto overscroll-contain ios-scroll z-50 ${isMobileMenuOpen
           ? "opacity-100 translate-y-0 visible pointer-events-auto"
           : "opacity-0 -translate-y-3 invisible pointer-events-none"
           }`}

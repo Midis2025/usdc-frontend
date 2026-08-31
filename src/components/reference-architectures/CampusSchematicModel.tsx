@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import CampusSchematicDetailed from "./CampusSchematicDetailed";
 import RequestPathPodModel from "./RequestPathPodModel";
+import CacheTierModel from "./CacheTierModel";
 
 export interface StageDefinition {
   duration: number;
@@ -47,6 +48,9 @@ export function CampusSchematicModel({ id, title, isActive = true }: CampusSchem
   }
   if (id === "ra2") {
     return <RequestPathPodModel isActive={isActive} />;
+  }
+  if (id === "ra3") {
+    return <CacheTierModel isActive={isActive} />;
   }
 
   const stageList = STAGES[id] || STAGES.ra2;

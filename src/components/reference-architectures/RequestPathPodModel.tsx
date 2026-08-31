@@ -107,14 +107,14 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
 
         .frame {
           position: relative;
-          border: 1px solid rgba(74, 144, 255, 0.38);
-          border-radius: 20px;
+          border: 1px solid rgba(56, 189, 248, 0.4);
+          border-radius: 16px;
           background: linear-gradient(180deg, #080e1c 0%, #04070f 65%);
-          box-shadow: 0 0 0 1px rgba(74, 144, 255, 0.05),
-            0 24px 70px rgba(6, 20, 55, 0.6), 0 0 60px rgba(24, 66, 150, 0.16),
+          box-shadow: 0 0 24px rgba(56, 189, 248, 0.16),
+            0 16px 48px rgba(6, 20, 55, 0.5),
             inset 0 1px 0 rgba(140, 185, 255, 0.09);
           overflow: hidden;
-          padding: 24px 26px 22px;
+          padding: 16px 18px 14px;
         }
 
         .grid-layer {
@@ -144,16 +144,6 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           inset: 0;
           z-index: 0;
           pointer-events: none;
-          background: radial-gradient(
-              58% 42% at 50% -6%,
-              rgba(42, 96, 190, 0.28),
-              transparent 72%
-            ),
-            radial-gradient(
-              38% 30% at 86% 12%,
-              rgba(38, 92, 180, 0.14),
-              transparent 72%
-            );
         }
 
         .content {
@@ -168,26 +158,24 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          margin-bottom: 20px;
+          margin-bottom: 12px;
         }
         h2.title {
           margin: 0;
-          font-size: 19px;
+          font-size: 15px;
           font-weight: 700;
           letter-spacing: 0.045em;
           color: #e6effd;
-          text-shadow: 0 0 20px rgba(74, 144, 255, 0.28);
         }
         .sep {
           color: #79b4ff;
-          margin: 0 5px;
-          text-shadow: 0 0 12px rgba(74, 144, 255, 0.5);
+          margin: 0 4px;
         }
         .subtitle {
-          margin-top: 5px;
-          font-size: 10.5px;
+          margin-top: 3px;
+          font-size: 8.5px;
           font-weight: 500;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.18em;
           color: #7ba2dd;
         }
 
@@ -195,11 +183,10 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           text-align: right;
         }
         .stage-text {
-          font-size: 13px;
+          font-size: 11px;
           font-weight: 600;
-          letter-spacing: 0.14em;
+          letter-spacing: 0.12em;
           color: #79b4ff;
-          text-shadow: 0 0 10px rgba(74, 144, 255, 0.4);
         }
         .stage-text b {
           color: #ffffff;
@@ -211,9 +198,9 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           display: flex;
           justify-content: space-between;
           align-items: center;
-          width: 140px;
-          height: 12px;
-          margin: 8px 0 0 auto;
+          width: 110px;
+          height: 10px;
+          margin: 4px 0 0 auto;
         }
         .stage-nodes .track {
           position: absolute;
@@ -233,12 +220,11 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
         .tdot {
           position: absolute;
           top: 50%;
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           transform: translateY(-50%);
           background: #bcdcff;
-          box-shadow: 0 0 10px 2px rgba(74, 144, 255, 0.6);
           z-index: 2;
           animation: trackAnim 3.2s ease-in-out infinite;
         }
@@ -272,10 +258,54 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           box-shadow: 0 0 8px rgba(74, 144, 255, 0.5);
         }
 
+        /* Icon Circle & Badge */
+        .ico-circle {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at 40% 35%,
+            rgba(120, 180, 255, 0.25),
+            rgba(74, 144, 255, 0.15)
+          );
+          border: 1px solid rgba(74, 144, 255, 0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: #79b4ff;
+        }
+        .ico-circle svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        .ico-badge {
+          width: 28px;
+          height: 28px;
+          border-radius: 7px;
+          background: rgba(14, 34, 70, 0.6);
+          border: 1px solid rgba(74, 144, 255, 0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: #79b4ff;
+        }
+        .ico-badge svg {
+          width: 15px;
+          height: 15px;
+        }
+
         /* Request In Card */
+        .req-row {
+          display: grid;
+          grid-template-columns: 0.82fr 76px 1.18fr;
+          gap: 10px;
+          padding: 0;
+        }
         .req-stack {
-          align-self: flex-start;
-          margin-left: 24px;
+          grid-column: 1;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -283,46 +313,55 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           z-index: 3;
         }
         .request-card {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 12px;
-          width: 250px;
-          padding: 11px 16px;
-          border: 1px solid rgba(74, 144, 255, 0.38);
-          border-radius: 12px;
-          background: rgba(12, 24, 48, 0.55);
-          box-shadow: 0 0 20px rgba(30, 80, 175, 0.2);
-          transition: all 0.35s ease;
+          gap: 10px;
+          width: fit-content;
+          max-width: 100%;
+          padding: 6px 14px 6px 8px;
+          border: 1.2px solid rgba(56, 189, 248, 0.5);
+          border-radius: 8px;
+          background: rgba(12, 24, 48, 0.85);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(140, 185, 255, 0.08);
+          transition: all 0.25s ease;
         }
         .request-card.active {
-          border-color: #79b4ff;
-          box-shadow: 0 0 32px rgba(74, 144, 255, 0.6),
-            inset 0 1px 0 rgba(160, 200, 255, 0.2);
+          border-color: #38bdf8;
+          box-shadow: 0 0 22px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(140, 185, 255, 0.15);
           transform: translateY(-2px);
         }
+        .req-text {
+          display: flex;
+          flex-direction: column;
+          gap: 1px;
+          line-height: 1.18;
+        }
         .lbl {
-          font-size: 13px;
+          font-size: 10.5px;
           font-weight: 700;
           letter-spacing: 0.07em;
-          color: #e6effd;
+          color: #ffffff;
         }
         .lbl.b {
-          font-weight: 600;
-          color: #79b4ff;
+          font-size: 9.5px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: #38bdf8;
         }
 
         /* Vertical Connector */
         .vconn {
           width: 0;
           position: relative;
-          border-left: 2px dotted rgba(120, 175, 255, 0.55);
+          border-left: 2px dotted rgba(56, 189, 248, 0.65);
         }
         .vconn-req {
-          height: 34px;
-          margin-left: 124px;
+          height: 16px;
+          margin-left: 60px;
         }
         .vconn-tok {
-          height: 32px;
+          height: 16px;
+          margin-left: 60px;
         }
         .pulse-dot {
           position: absolute;
@@ -330,8 +369,8 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: #bcdcff;
-          box-shadow: 0 0 11px 2px rgba(74, 144, 255, 0.6);
+          background: #38bdf8;
+          box-shadow: 0 0 8px #38bdf8;
           animation: travelDown 2.2s ease-in-out infinite;
         }
         @keyframes travelDown {
@@ -355,95 +394,95 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
         .pod {
           position: relative;
           z-index: 1;
-          margin-top: -12px;
-          border: 1.5px dashed rgba(74, 144, 255, 0.38);
-          border-radius: 18px;
+          margin-top: -4px;
+          border: 1.5px dashed #38bdf8;
+          border-radius: 14px;
           background: linear-gradient(
             180deg,
             rgba(14, 26, 52, 0.4),
             rgba(8, 16, 34, 0.26)
           );
-          padding: 20px 22px 24px;
-          box-shadow: 0 0 30px rgba(22, 64, 150, 0.14),
-            inset 0 0 34px rgba(20, 52, 124, 0.08);
+          box-shadow: 0 0 20px rgba(56, 189, 248, 0.18), inset 0 0 16px rgba(56, 189, 248, 0.04);
+          padding: 11px 13px 13px;
         }
         .pod-head {
           display: flex;
           align-items: center;
-          gap: 11px;
-          margin-bottom: 18px;
+          gap: 8px;
+          margin-bottom: 10px;
         }
         .pod-title {
-          font-size: 15px;
+          font-size: 12.5px;
           font-weight: 700;
           letter-spacing: 0.06em;
-          color: #e6effd;
+          color: #ffffff;
         }
         .pod-sub {
           margin-top: 2px;
-          font-size: 9.5px;
+          font-size: 8px;
           font-weight: 500;
-          letter-spacing: 0.18em;
-          color: #7ba2dd;
+          letter-spacing: 0.16em;
+          color: #ffffff;
+          opacity: 0.9;
         }
 
         /* Card Grid */
         .card-grid {
           display: grid;
-          grid-template-columns: 1fr 110px 1fr;
-          gap: 16px;
+          grid-template-columns: 0.82fr 76px 1.18fr;
+          gap: 10px;
           align-items: stretch;
         }
         .role-card {
           position: relative;
           display: flex;
           flex-direction: column;
-          border: 1px solid rgba(74, 144, 255, 0.38);
-          border-radius: 14px;
-          background: rgba(9, 18, 38, 0.65);
-          padding: 16px 18px;
-          box-shadow: 0 0 22px rgba(22, 64, 155, 0.14);
-          transition: all 0.35s ease;
+          border: 1.5px solid rgba(56, 189, 248, 0.55);
+          border-radius: 10px;
+          background: rgba(9, 18, 38, 0.8);
+          padding: 10px 11px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 16px rgba(56, 189, 248, 0.14);
+          transition: all 0.25s ease;
         }
         .role-card.active {
-          border-color: #79b4ff;
-          box-shadow: 0 0 40px rgba(74, 144, 255, 0.5),
-            inset 0 1px 0 rgba(160, 200, 255, 0.15);
+          border-color: #38bdf8;
+          box-shadow: 0 0 26px rgba(56, 189, 248, 0.38), inset 0 0 12px rgba(56, 189, 248, 0.06);
           transform: translateY(-2px);
         }
         .card-head {
           display: flex;
           align-items: center;
-          gap: 10px;
-          margin-bottom: 14px;
+          gap: 8px;
+          margin-bottom: 8px;
         }
         .card-title {
-          font-size: 15px;
+          font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.04em;
-          color: #e6effd;
+          color: #ffffff;
         }
         .card-sub {
           margin-top: 2px;
-          font-size: 10px;
+          font-size: 8px;
           font-weight: 500;
-          letter-spacing: 0.1em;
-          color: #7ba2dd;
+          letter-spacing: 0.09em;
+          color: #ffffff;
+          opacity: 0.9;
         }
 
         .spec-lines {
           display: flex;
           flex-direction: column;
-          gap: 9px;
-          margin-bottom: 16px;
+          gap: 5px;
+          margin-bottom: 8px;
         }
         .spec-lines i {
-          height: 2px;
-          border-radius: 2px;
+          height: 1.5px;
+          border-radius: 1px;
           background: linear-gradient(
             90deg,
-            rgba(120, 180, 255, 0.55),
-            rgba(74, 144, 255, 0.1)
+            rgba(56, 189, 248, 0.65),
+            rgba(56, 189, 248, 0.1)
           );
         }
         .spec-lines i:nth-child(4) {
@@ -452,29 +491,31 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
 
         .load-panel {
           margin-top: auto;
-          border: 1px solid rgba(74, 144, 255, 0.16);
-          border-radius: 10px;
-          padding: 11px 14px;
-          background: rgba(7, 15, 32, 0.45);
+          border: 1px solid rgba(56, 189, 248, 0.35);
+          border-radius: 8px;
+          padding: 6px 8px;
+          background: rgba(7, 15, 32, 0.6);
+          box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.06);
         }
         .load-label {
-          font-size: 10.5px;
+          font-size: 8.5px;
           font-weight: 700;
-          letter-spacing: 0.15em;
-          color: #e6effd;
+          letter-spacing: 0.14em;
+          color: #ffffff;
         }
         .load-sub {
-          font-size: 9.5px;
+          font-size: 7.5px;
           font-weight: 500;
-          letter-spacing: 0.1em;
-          color: #7ba2dd;
-          margin: 3px 0 9px;
+          letter-spacing: 0.08em;
+          color: #ffffff;
+          opacity: 0.9;
+          margin: 2px 0 5px;
         }
 
         /* Prefill bar */
         .load-bar {
-          height: 12px;
-          border-radius: 6px;
+          height: 8px;
+          border-radius: 4px;
           border: 1px solid rgba(74, 144, 255, 0.38);
           background: rgba(10, 20, 42, 0.65);
           position: relative;
@@ -486,14 +527,13 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           left: 1px;
           height: calc(100% - 2px);
           width: 88%;
-          border-radius: 5px;
+          border-radius: 3px;
           background: repeating-linear-gradient(
             118deg,
             rgba(150, 200, 255, 0.95) 0 8px,
             rgba(64, 124, 225, 0.72) 8px 17px
           );
           background-size: 34px 100%;
-          box-shadow: 0 0 12px rgba(74, 144, 255, 0.6);
           animation: barberAnim 1.2s linear infinite;
         }
         @keyframes barberAnim {
@@ -504,7 +544,7 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
 
         /* Decode Waveform */
         .wave {
-          height: 52px;
+          height: 32px;
           position: relative;
           overflow: hidden;
         }
@@ -512,7 +552,6 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           width: 100%;
           height: 100%;
           display: block;
-          filter: drop-shadow(0 0 3px rgba(74, 144, 255, 0.5));
         }
 
         /* Middle Connector */
@@ -521,18 +560,17 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 12px;
+          gap: 6px;
           min-width: 0;
         }
         .mid.active .mid-label {
-          color: #bcdcff;
-          text-shadow: 0 0 12px rgba(74, 144, 255, 0.6);
+          color: #ffffff;
         }
         .mid-label {
-          font-size: 9.5px;
+          font-size: 7.5px;
           font-weight: 700;
-          letter-spacing: 0.13em;
-          color: #7ba2dd;
+          letter-spacing: 0.12em;
+          color: #ffffff;
           white-space: nowrap;
         }
         .hconn {
@@ -552,12 +590,11 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
         .node {
           position: absolute;
           top: 50%;
-          width: 7px;
-          height: 7px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
           transform: translate(-50%, -50%);
           background: radial-gradient(circle, #bcdcff, #4a90ff 70%);
-          box-shadow: 0 0 8px rgba(74, 144, 255, 0.6);
         }
         .node-l {
           left: 0;
@@ -569,12 +606,11 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
         .hdot {
           position: absolute;
           top: 50%;
-          width: 5px;
-          height: 5px;
+          width: 4px;
+          height: 4px;
           border-radius: 50%;
           transform: translateY(-50%);
           background: #bcdcff;
-          box-shadow: 0 0 10px 2px rgba(74, 144, 255, 0.6);
         }
         .hdot.d1 {
           animation: hrightAnim 2.8s ease-in-out infinite;
@@ -594,13 +630,13 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
             opacity: 1;
           }
           100% {
-            left: calc(100% - 5px);
+            left: calc(100% - 4px);
             opacity: 0;
           }
         }
         @keyframes hleftAnim {
           0% {
-            left: calc(100% - 5px);
+            left: calc(100% - 4px);
             opacity: 0;
           }
           10% {
@@ -618,57 +654,58 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
         /* Tokens Out */
         .tokens-row {
           display: grid;
-          grid-template-columns: 1fr 110px 1fr;
-          margin-top: 6px;
+          grid-template-columns: 0.82fr 76px 1.18fr;
+          gap: 10px;
+          padding: 0;
+          margin-top: -4px;
         }
         .tokens-cell {
           grid-column: 3;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
         }
         .tokens-card {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 12px;
-          width: 100%;
-          padding: 11px 16px;
-          border: 1px solid rgba(74, 144, 255, 0.38);
-          border-radius: 12px;
-          background: linear-gradient(
-            90deg,
-            rgba(20, 50, 112, 0.34),
-            rgba(12, 24, 48, 0.44)
-          );
-          box-shadow: 0 0 20px rgba(34, 88, 185, 0.22);
-          transition: all 0.35s ease;
+          gap: 10px;
+          width: fit-content;
+          max-width: 100%;
+          padding: 6px 14px 6px 8px;
+          border: 1.2px solid rgba(56, 189, 248, 0.5);
+          border-radius: 8px;
+          background: rgba(12, 24, 48, 0.85);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 14px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(140, 185, 255, 0.08);
+          transition: all 0.25s ease;
         }
         .tokens-card.active {
-          border-color: #79b4ff;
-          box-shadow: 0 0 36px rgba(74, 144, 255, 0.55);
+          border-color: #38bdf8;
+          box-shadow: 0 0 22px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(140, 185, 255, 0.15);
           transform: translateY(-2px);
         }
         .tok-title {
-          font-size: 13.5px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.05em;
-          color: #e6effd;
+          color: #ffffff;
         }
         .tok-sub {
-          font-size: 10.5px;
+          margin-top: 2px;
+          font-size: 8px;
           font-weight: 500;
-          letter-spacing: 0.12em;
-          color: #7ba2dd;
+          letter-spacing: 0.11em;
+          color: #ffffff;
+          opacity: 0.9;
         }
         .pips {
           display: flex;
-          gap: 4px;
+          gap: 3px;
           margin-left: auto;
         }
         .pips i {
-          width: 5px;
-          height: 5px;
-          border-radius: 2px;
+          width: 4px;
+          height: 4px;
+          border-radius: 1.5px;
           background: #4a90ff;
           opacity: 0.24;
           animation: pipAnim 2s linear infinite;
@@ -689,7 +726,6 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           0% {
             opacity: 1;
             background: #bcdcff;
-            box-shadow: 0 0 8px 1px rgba(74, 144, 255, 0.6);
           }
           18% {
             opacity: 1;
@@ -697,7 +733,6 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           30% {
             opacity: 0.24;
             background: #4a90ff;
-            box-shadow: none;
           }
           100% {
             opacity: 0.24;
@@ -709,19 +744,18 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           display: flex;
           align-items: center;
           border: 1px solid rgba(74, 144, 255, 0.38);
-          border-radius: 12px;
+          border-radius: 8px;
           background: rgba(12, 24, 48, 0.5);
-          padding: 10px 6px;
-          margin-top: 18px;
-          box-shadow: 0 0 20px rgba(22, 64, 155, 0.12);
+          padding: 6px 4px;
+          margin-top: 10px;
         }
         .info-module {
           flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          padding: 4px 10px;
+          gap: 6px;
+          padding: 3px 8px;
         }
         .info-module .ico {
           color: #79b4ff;
@@ -729,14 +763,14 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           place-items: center;
         }
         .info-module .t {
-          font-size: 11px;
+          font-size: 9px;
           font-weight: 600;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.07em;
           color: #7ba2dd;
         }
         .divider {
           width: 1px;
-          height: 22px;
+          height: 16px;
           background: linear-gradient(
             180deg,
             transparent,
@@ -749,7 +783,10 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
         .summary-bar {
           display: flex;
           align-items: center;
-          gap: 12px;
+          justify-content: space-between;
+          padding: 6px 10px;
+          margin-top: 10px;
+          font-size: 9px;
           border: 1px solid rgba(74, 144, 255, 0.38);
           border-radius: 12px;
           background: linear-gradient(
@@ -771,53 +808,44 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
 
         /* Icon Badges */
         .ico-circle {
-          width: 38px;
-          height: 38px;
+          width: 28px;
+          height: 28px;
           flex: none;
           border-radius: 50%;
           display: grid;
           place-items: center;
-          border: 1.5px solid rgba(74, 144, 255, 0.5);
+          border: 1.2px solid rgba(74, 144, 255, 0.5);
           color: #bcdcff;
-          background: radial-gradient(
-            circle at 50% 38%,
-            rgba(42, 96, 190, 0.4),
-            rgba(10, 20, 44, 0.2)
-          );
-          box-shadow: 0 0 14px rgba(42, 104, 205, 0.32);
+          background: rgba(42, 96, 190, 0.35);
         }
         .ico-circle svg {
-          width: 18px;
-          height: 18px;
+          width: 14px;
+          height: 14px;
         }
 
         .ico-badge {
-          width: 34px;
-          height: 34px;
+          width: 26px;
+          height: 26px;
           flex: none;
-          border-radius: 9px;
+          border-radius: 7px;
           display: grid;
           place-items: center;
-          border: 1.5px solid rgba(74, 144, 255, 0.5);
+          border: 1.2px solid rgba(74, 144, 255, 0.5);
           color: #bcdcff;
-          background: radial-gradient(
-            circle at 50% 38%,
-            rgba(42, 96, 190, 0.4),
-            rgba(10, 20, 44, 0.2)
-          );
+          background: rgba(42, 96, 190, 0.35);
         }
         .ico-badge svg {
-          width: 17px;
-          height: 17px;
+          width: 13px;
+          height: 13px;
         }
         .ico-badge.sm {
-          width: 28px;
-          height: 28px;
-          border-radius: 7px;
+          width: 22px;
+          height: 22px;
+          border-radius: 6px;
         }
         .ico-badge.sm svg {
-          width: 14px;
-          height: 14px;
+          width: 11px;
+          height: 11px;
         }
 
         /* Replay Button */
@@ -858,12 +886,17 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           .frame {
             padding: 16px 14px;
           }
+          .req-row {
+            grid-template-columns: 1fr;
+            padding: 0;
+          }
           .card-grid {
             grid-template-columns: 1fr;
             gap: 14px;
           }
           .tokens-row {
             grid-template-columns: 1fr;
+            padding: 0;
           }
           .tokens-cell {
             grid-column: 1;
@@ -929,29 +962,31 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
           </header>
 
           {/* REQUEST IN PROMPT */}
-          <div className="req-stack">
-            <div className={`request-card ${activeStep === 0 ? "active" : ""}`}>
-              <span className="ico-circle">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M4 5h16a1.6 1.6 0 0 1 1.6 1.6v7.8A1.6 1.6 0 0 1 20 16H9l-4 3v-3H4a1.6 1.6 0 0 1-1.6-1.6V6.6A1.6 1.6 0 0 1 4 5z" />
-                  <path d="M7.4 9.4l2.6 2.1-2.6 2.1" />
-                  <path d="M12.6 13.6h4.2" />
-                </svg>
-              </span>
-              <span>
-                <span className="lbl">REQUEST IN</span>{" "}
-                <span className="lbl b">PROMPT</span>
-              </span>
-            </div>
-            <div className="vconn vconn-req">
-              <span className="pulse-dot" />
+          <div className="req-row">
+            <div className="req-stack">
+              <div className={`request-card ${activeStep === 0 ? "active" : ""}`}>
+                <span className="ico-circle">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M4 5h16a1.6 1.6 0 0 1 1.6 1.6v7.8A1.6 1.6 0 0 1 20 16H9l-4 3v-3H4a1.6 1.6 0 0 1-1.6-1.6V6.6A1.6 1.6 0 0 1 4 5z" />
+                    <path d="M7.4 9.4l2.6 2.1-2.6 2.1" />
+                    <path d="M12.6 13.6h4.2" />
+                  </svg>
+                </span>
+                <span className="req-text">
+                  <span className="lbl">REQUEST IN</span>
+                  <span className="lbl b">PROMPT</span>
+                </span>
+              </div>
+              <div className="vconn vconn-req">
+                <span className="pulse-dot" />
+              </div>
             </div>
           </div>
 
@@ -1064,9 +1099,10 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
                       <g>
                         <path
                           fill="none"
-                          stroke="#a9d0ff"
-                          strokeWidth="2"
+                          stroke="#38bdf8"
+                          strokeWidth="2.4"
                           strokeLinejoin="miter"
+                          style={{ filter: "drop-shadow(0 0 6px rgba(56, 189, 248, 0.75))" }}
                           d={renderWaveform()}
                         >
                           <animateTransform
@@ -1079,6 +1115,15 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
                           />
                         </path>
                       </g>
+                      <circle
+                        cx="294"
+                        cy="58"
+                        r="4"
+                        fill="#ffffff"
+                        stroke="#38bdf8"
+                        strokeWidth="2"
+                        style={{ filter: "drop-shadow(0 0 8px #38bdf8)" }}
+                      />
                     </svg>
                   </div>
                 </div>

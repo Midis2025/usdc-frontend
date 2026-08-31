@@ -331,13 +331,13 @@ export default function WhatUsdcDeploysModel({ activeFlow }: WhatUsdcDeploysMode
         }
         :global(.what-usdc-deploys-root .card-border) {
           fill: none;
-          stroke: rgba(83, 125, 210, 0.28);
-          stroke-width: 1.3;
-          transition: stroke 0.5s ease, filter 0.5s ease;
+          stroke: #38bdf8;
+          stroke-width: 1.4;
+          transition: stroke 0.4s ease;
         }
         :global(.what-usdc-deploys-root .card-accent) {
-          fill: rgba(79, 139, 255, 0.35);
-          transition: fill 0.5s ease, filter 0.5s ease;
+          fill: #38bdf8;
+          transition: fill 0.4s ease;
         }
         :global(.what-usdc-deploys-root .card-title) {
           font-size: 23px;
@@ -359,16 +359,16 @@ export default function WhatUsdcDeploysModel({ activeFlow }: WhatUsdcDeploysMode
         /* icons */
         :global(.what-usdc-deploys-root .icon-chip) {
           fill: rgba(46, 84, 170, 0.12);
-          stroke: rgba(90, 140, 240, 0.4);
-          stroke-width: 1.2;
-          transition: stroke 0.5s, filter 0.5s;
+          stroke: #38bdf8;
+          stroke-width: 1.3;
+          transition: stroke 0.4s;
         }
         :global(.what-usdc-deploys-root .icon-chip.cool) {
-          stroke: rgba(47, 219, 230, 0.42);
+          stroke: rgba(47, 219, 230, 0.6);
         }
         :global(.what-usdc-deploys-root .ic-fill) {
           fill: #79a6ff;
-          transition: fill 0.5s, filter 0.5s;
+          transition: fill 0.4s;
         }
         :global(.what-usdc-deploys-root .ic-fill-cool) {
           fill: #4fe3ea;
@@ -399,15 +399,16 @@ export default function WhatUsdcDeploysModel({ activeFlow }: WhatUsdcDeploysMode
           stroke: #4fe3ea;
         }
         :global(.what-usdc-deploys-root .icon-glyph) {
-          transition: filter 0.5s ease;
+          transition: filter 0.4s ease;
         }
 
         /* pods */
         :global(.what-usdc-deploys-root .pod-bg) {
-          fill: rgba(17, 30, 60, 0.5);
+          fill: rgba(17, 30, 60, 0.65);
         }
         :global(.what-usdc-deploys-root .pod-border) {
-          stroke: rgba(95, 140, 235, 0.4);
+          stroke: #38bdf8;
+          stroke-width: 1.4;
         }
         :global(.what-usdc-deploys-root .pod-accent) {
           fill: #5b93ff;

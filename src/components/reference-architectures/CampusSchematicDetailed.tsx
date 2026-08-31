@@ -221,49 +221,49 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
         }
 
         :global(.cs-schematic-wrapper .card-bg) {
-          fill: rgba(16, 30, 52, 0.55);
-          stroke: var(--cs-panel-edge);
-          stroke-width: 1.3;
+          fill: rgba(16, 30, 52, 0.65);
+          stroke: #38bdf8;
+          stroke-width: 1.4;
+          transition: all 0.3s ease;
         }
         :global(.cs-schematic-wrapper .card-inner) {
           fill: none;
-          stroke: rgba(120, 170, 225, 0.12);
+          stroke: rgba(56, 189, 248, 0.25);
           stroke-width: 1;
         }
         :global(.cs-schematic-wrapper .icon-box) {
-          fill: rgba(10, 22, 40, 0.6);
+          fill: rgba(10, 22, 40, 0.75);
           stroke-width: 1.3;
         }
         :global(.cs-schematic-wrapper .icon-box.pw) {
-          stroke: rgba(63, 142, 252, 0.55);
+          stroke: #38bdf8;
         }
         :global(.cs-schematic-wrapper .icon-box.cl) {
-          stroke: rgba(33, 212, 238, 0.5);
+          stroke: #21d4ee;
         }
         :global(.cs-schematic-wrapper .icon-box.nt) {
-          stroke: rgba(167, 139, 250, 0.5);
+          stroke: #a78bfa;
         }
 
-        :global(.cs-schematic-wrapper .card.pw.is-on) {
-          filter: drop-shadow(0 6px 22px rgba(63, 142, 252, 0.12));
+        :global(.cs-schematic-wrapper .card.pw.is-on .card-bg) {
+          stroke: #38bdf8;
         }
-        :global(.cs-schematic-wrapper .card.cl.is-on) {
-          filter: drop-shadow(0 6px 22px rgba(33, 212, 238, 0.1));
+        :global(.cs-schematic-wrapper .card.cl.is-on .card-bg) {
+          stroke: #21d4ee;
         }
 
         :global(.cs-schematic-wrapper .pod-bg) {
-          fill: rgba(14, 28, 50, 0.62);
-          stroke: var(--cs-panel-edge);
-          stroke-width: 1.3;
-          transition: stroke 0.6s ease, filter 0.6s ease;
+          fill: rgba(14, 28, 50, 0.7);
+          stroke: #38bdf8;
+          stroke-width: 1.4;
+          transition: stroke 0.4s ease;
         }
         :global(.cs-schematic-wrapper .pod.is-on .pod-bg) {
-          stroke: rgba(90, 160, 250, 0.55);
-          filter: drop-shadow(0 0 26px rgba(63, 142, 252, 0.16));
+          stroke: #38bdf8;
         }
         :global(.cs-schematic-wrapper .pod-inner) {
           fill: none;
-          stroke: rgba(120, 170, 225, 0.13);
+          stroke: rgba(56, 189, 248, 0.25);
           stroke-width: 1;
         }
 
@@ -604,14 +604,14 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
             <rect
               id="perim"
               className={`perim ${stage >= 7 ? "emph" : ""}`}
-              x="88"
+              x="95"
               y="650"
-              width="1224"
+              width="1210"
               height="452"
               rx="16"
             />
-            <rect x="108" y="648" width="168" height="16" fill="#070f1c" />
-            <text className="t-perim" x="118" y="660">
+            <rect x="115" y="648" width="168" height="16" fill="#070f1c" />
+            <text className="t-perim" x="125" y="660">
               CAMPUS PERIMETER
             </text>
           </g>
@@ -619,152 +619,148 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
           {/* ================= CONDUCTORS ================= */}
           {/* power: utility -> substation */}
           <g className={`wire pw rv ${stage >= 2 ? "is-on" : ""}`}>
-            <path className="base" d="M255 302 V372" />
-            <path className="flow" pathLength="100" d="M255 302 V372" />
+            <path className="base" d="M301 302 V372" />
+            <path className="flow" pathLength="100" d="M301 302 V372" />
           </g>
           {/* power bus: substation -> bus -> spread */}
           <g className={`wire pw rv ${stage >= 2 ? "is-on" : ""}`}>
-            <path className="base" d="M255 484 V560 H1090" />
-            <path className="flow" pathLength="100" d="M255 484 V560 H1090" />
-            <path className="flow d2" pathLength="100" d="M255 484 V560 H1090" />
+            <path className="base" d="M301 484 V560 H1099" />
+            <path className="flow" pathLength="100" d="M301 484 V560 H1099" />
+            <path className="flow d2" pathLength="100" d="M301 484 V560 H1099" />
           </g>
           {/* cooling: cooling -> headers */}
           <g className={`wire cl rv ${stage >= 2 ? "is-on" : ""}`}>
-            <path className="base" d="M1147 302 V372" />
-            <path className="flow" pathLength="100" d="M1147 302 V372" />
+            <path className="base" d="M1099 302 V372" />
+            <path className="flow" pathLength="100" d="M1099 302 V372" />
           </g>
           {/* cooling header: headers -> header bus -> spread left */}
           <g className={`wire cl rv ${stage >= 2 ? "is-on" : ""}`}>
-            <path className="base" d="M1147 484 V605 H305" />
-            <path className="flow" pathLength="100" d="M1147 484 V605 H305" />
-            <path className="flow d2" pathLength="100" d="M1147 484 V605 H305" />
+            <path className="base" d="M1099 484 V605 H325" />
+            <path className="flow" pathLength="100" d="M1099 484 V605 H325" />
+            <path className="flow d2" pathLength="100" d="M1099 484 V605 H325" />
           </g>
 
           {/* pod power drops */}
           <g className={`wire pw rv ${stage >= 2 ? "is-on" : ""}`}>
-            <path className="base" d="M372 560 V690" />
-            <path className="flow" pathLength="100" d="M372 560 V690" />
+            <path className="base" d="M301 560 V690" />
+            <path className="flow" pathLength="100" d="M301 560 V690" />
           </g>
           <g className={`wire pw rv ${stage >= 3 ? "is-on" : ""}`}>
-            <path className="base" d="M771 560 V690" />
-            <path className="flow" pathLength="100" d="M771 560 V690" />
+            <path className="base" d="M700 560 V690" />
+            <path className="flow" pathLength="100" d="M700 560 V690" />
           </g>
           <g className={`wire pw rv ${stage >= 4 ? "is-on" : ""}`}>
-            <path className="base" d="M1080 560 V690" />
-            <path className="flow" pathLength="100" d="M1080 560 V690" />
+            <path className="base" d="M1099 560 V690" />
+            <path className="flow" pathLength="100" d="M1099 560 V690" />
           </g>
 
           {/* pod cooling drops */}
           <g className={`wire cl rv ${stage >= 2 ? "is-on" : ""}`}>
-            <path className="base" d="M305 605 V690" />
-            <path className="flow" pathLength="100" d="M305 605 V690" />
+            <path className="base" d="M325 605 V690" />
+            <path className="flow" pathLength="100" d="M325 605 V690" />
           </g>
           <g className={`wire cl rv ${stage >= 3 ? "is-on" : ""}`}>
-            <path className="base" d="M704 605 V690" />
-            <path className="flow" pathLength="100" d="M704 605 V690" />
+            <path className="base" d="M725 605 V690" />
+            <path className="flow" pathLength="100" d="M725 605 V690" />
           </g>
           <g className={`wire cl rv ${stage >= 4 ? "is-on" : ""}`}>
-            <path className="base" d="M1120 605 V690" />
-            <path className="flow" pathLength="100" d="M1120 605 V690" />
+            <path className="base" d="M1125 605 V690" />
+            <path className="flow" pathLength="100" d="M1125 605 V690" />
           </g>
 
           {/* network fabric (from stage 6) */}
           <g className={`wire nt rv ${stage >= 6 ? "is-on" : ""}`}>
-            <path className="base" d="M190 941 H1210" />
-            <path className="flow" pathLength="100" d="M190 941 H1210" />
-            <path className="flow d2" pathLength="100" d="M190 941 H1210" />
+            <path className="base" d="M147 942 H1253" />
+            <path className="flow" pathLength="100" d="M147 942 H1253" />
+            <path className="flow d2" pathLength="100" d="M147 942 H1253" />
           </g>
           <g className={`wire nt rv ${stage >= 6 ? "is-on" : ""}`}>
-            <path className="base" d="M301 882 V912" />
-            <path className="flow" pathLength="100" d="M301 882 V912" />
+            <path className="base" d="M301 882 V904" />
+            <path className="flow" pathLength="100" d="M301 882 V904" />
           </g>
           <g className={`wire nt rv ${stage >= 6 ? "is-on" : ""}`}>
-            <path className="base" d="M700 882 V912" />
-            <path className="flow" pathLength="100" d="M700 882 V912" />
+            <path className="base" d="M700 882 V904" />
+            <path className="flow" pathLength="100" d="M700 882 V904" />
           </g>
           <g className={`wire nt rv ${stage >= 6 ? "is-on" : ""}`}>
-            <path className="base" d="M1099 882 V912" />
-            <path className="flow" pathLength="100" d="M1099 882 V912" />
+            <path className="base" d="M1099 882 V904" />
+            <path className="flow" pathLength="100" d="M1099 882 V904" />
           </g>
 
           {/* bus labels */}
-          <text className={`t-buslabel rv ${stage >= 2 ? "is-on" : ""}`} x="288" y="542" fill="var(--cs-power)">
+          <text className={`t-buslabel rv ${stage >= 2 ? "is-on" : ""}`} x="340" y="542" fill="var(--cs-power)">
             POWER BUS
           </text>
-          <text className={`t-buslabel rv ${stage >= 2 ? "is-on" : ""}`} x="905" y="632" fill="var(--cs-cool)">
+          <text className={`t-buslabel rv ${stage >= 2 ? "is-on" : ""}`} x="860" y="632" fill="var(--cs-cool)">
             COOLING HEADER
           </text>
 
           {/* ================= JUNCTION NODES ================= */}
           {/* power bus nodes */}
-          <g className={`node pw rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(255px,560px)" }}>
+          <g className={`node pw rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(301px,560px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
-          <g className={`node pw rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(372px,560px)" }}>
+          <g className={`node pw rv ${stage >= 3 ? "is-on" : ""}`} style={{ transform: "translate(700px,560px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
-          <g className={`node pw rv ${stage >= 3 ? "is-on" : ""}`} style={{ transform: "translate(771px,560px)" }}>
-            <circle className="halo" r="8" />
-            <circle className="core" r="4.5" />
-          </g>
-          <g className={`node pw rv ${stage >= 4 ? "is-on" : ""}`} style={{ transform: "translate(1080px,560px)" }}>
+          <g className={`node pw rv ${stage >= 4 ? "is-on" : ""}`} style={{ transform: "translate(1099px,560px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
 
           {/* cooling header nodes */}
-          <g className={`node cl rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(1147px,605px)" }}>
+          <g className={`node cl rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(1099px,605px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
-          <g className={`node cl rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(305px,605px)" }}>
+          <g className={`node cl rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(325px,605px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
-          <g className={`node cl rv ${stage >= 3 ? "is-on" : ""}`} style={{ transform: "translate(704px,605px)" }}>
+          <g className={`node cl rv ${stage >= 3 ? "is-on" : ""}`} style={{ transform: "translate(725px,605px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
-          <g className={`node cl rv ${stage >= 4 ? "is-on" : ""}`} style={{ transform: "translate(1120px,605px)" }}>
+          <g className={`node cl rv ${stage >= 4 ? "is-on" : ""}`} style={{ transform: "translate(1125px,605px)" }}>
             <circle className="halo" r="8" />
             <circle className="core" r="4.5" />
           </g>
 
           {/* connector nodes */}
-          <g className={`node pw rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(255px,337px)" }}>
+          <g className={`node pw rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(301px,337px)" }}>
             <circle className="halo" r="7" />
             <circle className="core" r="4" />
           </g>
-          <g className={`node cl rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(1147px,337px)" }}>
+          <g className={`node cl rv ${stage >= 2 ? "is-on" : ""}`} style={{ transform: "translate(1099px,337px)" }}>
             <circle className="halo" r="7" />
             <circle className="core" r="4" />
           </g>
 
           {/* ================= TOP CARDS ================= */}
-          {/* UTILITY */}
+          {/* UTILITY (Col 1) */}
           <g className={`card pw rv lift ${stage >= 2 ? "is-on" : ""}`}>
-            <rect className="card-bg" x="95" y="190" width="315" height="112" rx="12" />
-            <rect className="card-inner" x="99" y="194" width="307" height="104" rx="9" />
-            <rect className="icon-box pw" x="117" y="223" width="46" height="46" rx="9" />
-            <path className="g-pw-fill" d="M143 231 L131 251 H140 L137 265 L150 244 H141 Z" />
-            <text className="t-cardtitle" x="179" y="240">
+            <rect className="card-bg" x="125" y="190" width="352" height="112" rx="12" />
+            <rect className="card-inner" x="129" y="194" width="344" height="104" rx="9" />
+            <rect className="icon-box pw" x="147" y="223" width="46" height="46" rx="9" />
+            <path className="g-pw-fill" d="M173 231 L161 251 H170 L167 265 L180 244 H171 Z" />
+            <text className="t-cardtitle" x="209" y="244">
               UTILITY
             </text>
-            <text className="t-cardsub" x="179" y="266">
+            <text className="t-cardsub" x="209" y="270">
               INTERCONNECT
             </text>
-            <rect x="332" y="228" width="48" height="4" rx="2" fill="var(--cs-power)" />
-            <rect x="332" y="240" width="48" height="4" rx="2" fill="var(--cs-power)" opacity="0.4" />
+            <rect x="398" y="228" width="48" height="4" rx="2" fill="var(--cs-power)" />
+            <rect x="398" y="240" width="48" height="4" rx="2" fill="var(--cs-power)" opacity="0.4" />
           </g>
 
-          {/* CONTROL PLANE */}
+          {/* CONTROL PLANE (Col 2) */}
           <g className={`card rv lift ${stage >= 2 ? "is-on" : ""}`}>
-            <rect className="card-bg" x="543" y="190" width="315" height="112" rx="12" />
-            <rect className="card-inner" x="547" y="194" width="307" height="104" rx="9" />
-            <rect className="icon-box pw" x="565" y="223" width="46" height="46" rx="9" />
-            <g transform="translate(565,223)">
+            <rect className="card-bg" x="524" y="190" width="352" height="112" rx="12" />
+            <rect className="card-inner" x="528" y="194" width="344" height="104" rx="9" />
+            <rect className="icon-box pw" x="546" y="223" width="46" height="46" rx="9" />
+            <g transform="translate(546,223)">
               <rect className="g-pw" x="12" y="12" width="22" height="6.5" rx="2" />
               <rect className="g-pw" x="12" y="22" width="22" height="6.5" rx="2" />
               <rect className="g-pw" x="12" y="32" width="22" height="6.5" rx="2" />
@@ -772,70 +768,70 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
               <circle className="g-pw-fill" cx="16" cy="25.2" r="1.5" />
               <circle className="g-pw-fill" cx="16" cy="35.2" r="1.5" />
             </g>
-            <text className="t-cardtitle" x="627" y="240">
+            <text className="t-cardtitle" x="608" y="244">
               CONTROL PLANE
             </text>
-            <text className="t-cardsub" x="627" y="266">
+            <text className="t-cardsub" x="608" y="270">
               ONE PER CAMPUS
             </text>
           </g>
 
-          {/* COOLING */}
+          {/* COOLING (Col 3) */}
           <g className={`card cl rv lift ${stage >= 2 ? "is-on" : ""}`}>
-            <rect className="card-bg" x="990" y="190" width="315" height="112" rx="12" />
-            <rect className="card-inner" x="994" y="194" width="307" height="104" rx="9" />
-            <rect className="icon-box cl" x="1012" y="223" width="46" height="46" rx="9" />
-            <g transform="translate(1012,223)">
+            <rect className="card-bg" x="923" y="190" width="352" height="112" rx="12" />
+            <rect className="card-inner" x="927" y="194" width="344" height="104" rx="9" />
+            <rect className="icon-box cl" x="945" y="223" width="46" height="46" rx="9" />
+            <g transform="translate(945,223)">
               <circle className="g-cl" cx="23" cy="23" r="14.5" />
               <circle className="g-cl" cx="23" cy="23" r="2.6" fill="var(--cs-cool)" />
               <path className="g-cl" d="M23 22 C18 22 15.5 17 18.5 12.8 C21.5 15 23 18 23 22 Z" transform="rotate(0 23 23)" />
               <path className="g-cl" d="M23 22 C18 22 15.5 17 18.5 12.8 C21.5 15 23 18 23 22 Z" transform="rotate(120 23 23)" />
               <path className="g-cl" d="M23 22 C18 22 15.5 17 18.5 12.8 C21.5 15 23 18 23 22 Z" transform="rotate(240 23 23)" />
             </g>
-            <text className="t-cardtitle" x="1074" y="240">
+            <text className="t-cardtitle" x="1007" y="244">
               COOLING
             </text>
-            <text className="t-cardsub" x="1074" y="266">
+            <text className="t-cardsub" x="1007" y="270">
               PLANT + HEADERS
             </text>
-            <rect x="1227" y="228" width="48" height="3" rx="1.5" fill="var(--cs-ink-mute)" opacity="0.7" />
-            <rect x="1227" y="238" width="48" height="3" rx="1.5" fill="var(--cs-ink-mute)" opacity="0.7" />
+            <rect x="1196" y="228" width="48" height="3" rx="1.5" fill="var(--cs-ink-mute)" opacity="0.7" />
+            <rect x="1196" y="238" width="48" height="3" rx="1.5" fill="var(--cs-ink-mute)" opacity="0.7" />
           </g>
 
           {/* ================= SECOND ROW CARDS ================= */}
-          {/* SUBSTATION */}
+          {/* SUBSTATION (Col 1) */}
           <g className={`card pw rv lift ${stage >= 2 ? "is-on" : ""}`}>
-            <rect className="card-bg" x="95" y="372" width="315" height="112" rx="12" />
-            <rect className="card-inner" x="99" y="376" width="307" height="104" rx="9" />
-            <rect className="icon-box pw" x="117" y="405" width="46" height="46" rx="9" />
-            <g transform="translate(117,405)">
+            <rect className="card-bg" x="125" y="372" width="352" height="112" rx="12" />
+            <rect className="card-inner" x="129" y="376" width="344" height="104" rx="9" />
+            <rect className="icon-box pw" x="147" y="405" width="46" height="46" rx="9" />
+            <g transform="translate(147,405)">
               <path className="g-pw" d="M13 40 L19 12 M33 40 L27 12 M19 12 H27" />
               <path className="g-pw" d="M15 33 H31 M17 25 H29 M19 17 H27" />
               <path className="g-pw" d="M17 25 L29 33 M29 25 L17 33" />
               <path className="g-pw" d="M20 12 L23 8 L26 12" />
             </g>
-            <text className="t-cardtitle" x="179" y="422">
+            <text className="t-cardtitle" x="209" y="426">
               SUBSTATION
             </text>
-            <text className="t-cardsub" x="179" y="448">
+            <text className="t-cardsub" x="209" y="452">
               SIZED FOR CAMPUS
             </text>
           </g>
 
-          {/* HEADERS */}
+          {/* HEADERS (Col 3) */}
           <g className={`card cl rv lift ${stage >= 2 ? "is-on" : ""}`}>
-            <rect className="card-bg" x="990" y="372" width="315" height="112" rx="12" />
-            <rect className="card-inner" x="994" y="376" width="307" height="104" rx="9" />
-            <rect className="icon-box cl" x="1012" y="405" width="46" height="46" rx="9" />
-            <g transform="translate(1012,405)">
+            <rect className="card-bg" x="923" y="372" width="352" height="112" rx="12" />
+            <rect className="card-inner" x="927" y="376" width="344" height="104" rx="9" />
+            <rect className="icon-box cl" x="945" y="405" width="46" height="46" rx="9" />
+            <g transform="translate(945,405)">
               <path className="g-cl" d="M11 18 Q16.5 12 22 18 T33 18" />
               <path className="g-cl" d="M11 24 Q16.5 18 22 24 T33 24" />
               <path className="g-cl" d="M11 30 Q16.5 24 22 30 T33 30" />
             </g>
-            <text className="t-cardtitle" x="1074" y="422">
+            <text className="t-cardtitle" x="1007" y="426">
               HEADERS
             </text>
-            <text className="t-cardsub" x="1074" y="448">
+            <text className="t-cardsub" x="1007" y="452">
               SUPPLY / RETURN
             </text>
           </g>
@@ -869,6 +865,24 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
             <line className="data-line" x1="237" y1="843" x2="392" y2="843" />
           </g>
 
+          {/* POD 02 GHOST (Stages 1-2) */}
+          <g className={`rv ${stage < 3 ? "is-on" : ""}`}>
+            <rect
+              x="524"
+              y="690"
+              width="352"
+              height="192"
+              rx="14"
+              fill="rgba(10, 20, 36, 0.35)"
+              stroke="rgba(80, 120, 180, 0.25)"
+              strokeWidth="1.2"
+              strokeDasharray="5 5"
+            />
+            <text className="t-ghost" x="700" y="792" textAnchor="middle">
+              POD 02 · PLANNED
+            </text>
+          </g>
+
           {/* POD 02 (from stage 3) */}
           <g className={`pod rv lift ${stage >= 3 ? "is-on" : ""}`}>
             <rect className="pod-bg" x="524" y="690" width="352" height="192" rx="14" />
@@ -895,6 +909,24 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
             <line className="data-line hi" x1="636" y1="807" x2="809" y2="807" />
             <line className="data-line" x1="636" y1="825" x2="844" y2="825" />
             <line className="data-line" x1="636" y1="843" x2="791" y2="843" />
+          </g>
+
+          {/* POD 03 GHOST (Stages 1-3) */}
+          <g className={`rv ${stage < 4 ? "is-on" : ""}`}>
+            <rect
+              x="923"
+              y="690"
+              width="352"
+              height="192"
+              rx="14"
+              fill="rgba(10, 20, 36, 0.35)"
+              stroke="rgba(80, 120, 180, 0.25)"
+              strokeWidth="1.2"
+              strokeDasharray="5 5"
+            />
+            <text className="t-ghost" x="1099" y="792" textAnchor="middle">
+              POD 03 · PLANNED
+            </text>
           </g>
 
           {/* POD 03 (from stage 4) */}
@@ -929,37 +961,39 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
           <g className={`rv lift ${stage >= 5 ? "is-on" : ""}`}>
             <rect
               className="card-bg"
-              x="170"
-              y="912"
-              width="1060"
-              height="58"
+              x="125"
+              y="904"
+              width="1150"
+              height="76"
               rx="12"
-              style={{ stroke: "rgba(167,139,250,.4)" }}
+              fill="#091424"
+              stroke="#38bdf8"
+              strokeWidth="1.4"
             />
-            <rect className="card-inner" x="174" y="916" width="1052" height="50" rx="9" />
-            <rect className="icon-box nt" x="192" y="921" width="40" height="40" rx="8" />
-            <g transform="translate(192,921)">
-              <circle className="g-nt-fill" cx="20" cy="20" r="3.6" />
-              <circle className="g-nt" cx="7" cy="7" r="2.4" />
-              <circle className="g-nt" cx="33" cy="7" r="2.4" />
-              <circle className="g-nt" cx="7" cy="33" r="2.4" />
-              <circle className="g-nt" cx="33" cy="33" r="2.4" />
-              <path className="g-nt" d="M9 9 L18 18 M31 9 L22 18 M9 31 L18 22 M31 31 L22 22" />
+            <rect className="card-inner" x="129" y="908" width="1142" height="68" rx="9" />
+            <rect className="icon-box nt" x="147" y="918" width="48" height="48" rx="9" />
+            <g transform="translate(147,918)">
+              <circle className="g-nt-fill" cx="24" cy="24" r="4" />
+              <circle className="g-nt" cx="9" cy="9" r="2.8" />
+              <circle className="g-nt" cx="39" cy="9" r="2.8" />
+              <circle className="g-nt" cx="9" cy="39" r="2.8" />
+              <circle className="g-nt" cx="39" cy="39" r="2.8" />
+              <path className="g-nt" d="M11 11 L22 22 M37 11 L26 22 M11 37 L22 26 M37 37 L26 26" />
             </g>
-            <text className="t-skidtitle" x="252" y="936">
+            <text className="t-skidtitle" x="211" y="939">
               NETWORK SKID
             </text>
-            <text className="t-skidsub" x="252" y="957">
+            <text className="t-skidsub" x="211" y="963">
               1 PER 5 IT PODS
             </text>
           </g>
           {/* skid "fabric active" overlay (from stage 6) */}
           <g className={`rv ${stage >= 6 ? "is-on" : ""}`}>
             <rect
-              x="170"
-              y="912"
-              width="1060"
-              height="58"
+              x="125"
+              y="904"
+              width="1150"
+              height="76"
               rx="12"
               fill="none"
               stroke="rgba(167,139,250,.7)"

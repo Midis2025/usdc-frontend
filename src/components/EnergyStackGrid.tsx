@@ -1417,7 +1417,7 @@ export default function EnergyStackGrid() {
       <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center">
 
         {/* Centered Pill Badge */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
           <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
           <span className="text-[10px] font-semibold text-white/90 tracking-[0.25em] uppercase font-sans">
             ENERGY STACK LAYERS
@@ -1449,7 +1449,7 @@ export default function EnergyStackGrid() {
                     setActiveIndex(activeIndex === i ? null : i);
                   }
                 }}
-                className={`relative group overflow-hidden h-[480px] flex flex-col justify-between border border-white/[0.08] hover:border-[#0091ff]/30 rounded-2xl bg-[#02050c]/25 backdrop-blur-md transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)] ${activeIndex === i ? 'shadow-[0_8px_40px_rgba(61,174,255,0.06)]' : ''}`}
+                className={`relative group overflow-hidden h-[480px] flex flex-col justify-between border border-white/[0.08] hover:border-[#0091ff]/30 rounded-2xl bg-[#02050c]/25 transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)] ${activeIndex === i ? 'shadow-[0_8px_40px_rgba(61,174,255,0.06)]' : ''}`}
               >
                 {/* Upper Half: Header & Image */}
                 <div className="flex flex-col justify-between h-[370px] w-full">
@@ -1485,7 +1485,7 @@ export default function EnergyStackGrid() {
                 </button>
 
                 {/* Sliding Drawer */}
-                <div className={`absolute inset-0 w-full h-full pt-5 ${activeIndex === i ? 'pb-20' : 'pb-8'} px-8 md:px-10 bg-[#02050c]/98 backdrop-blur-md border-t border-white/[0.08] transition-all duration-[4000ms] ease-out ${activeIndex === i ? 'translate-y-0' : 'translate-y-[calc(100%-110px)]'} group-hover:translate-y-0 z-20 flex flex-col justify-start`}>
+                <div className={`absolute inset-0 w-full h-full pt-5 ${activeIndex === i ? 'pb-20' : 'pb-8'} px-8 md:px-10 bg-[#02050c]/98 border-t border-white/[0.08] transition-all duration-[4000ms] ease-out ${activeIndex === i ? 'translate-y-0' : 'translate-y-[calc(100%-110px)]'} group-hover:translate-y-0 z-20 flex flex-col justify-start`}>
                   <div className={`absolute top-8 left-8 md:left-10 right-8 ${activeIndex === i ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} transition-opacity duration-[4000ms] ease-out`}>
                     <h3 className="text-lg md:text-xl font-bold tracking-tight text-[#0091ff]">{col.title}</h3>
                   </div>

@@ -10,7 +10,7 @@ export default function WhatDrivesUs() {
       {/* ── HEADER ── */}
       <div className="flex flex-col items-center mb-6 md:mb-16 space-y-6">
         {/* Pill Badge */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
           <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
           <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
             What Drives Us
@@ -33,7 +33,7 @@ export default function WhatDrivesUs() {
       </div>
 
       {/* ── THREE COLUMN CARD CONTAINER ── */}
-      <div className="relative w-full rounded-[24px] border border-white/[0.08] bg-[#050915]/40 backdrop-blur-md shadow-2xl overflow-hidden">
+      <div className="relative w-full rounded-[24px] border border-white/[0.08] bg-[#050915]/40 shadow-2xl overflow-hidden">
 
         {/* Ambient backing glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-blue-500/[0.015] blur-[80px] pointer-events-none" />

@@ -24,7 +24,7 @@ export default function WaterFreeCooling() {
           {/* LEFT: Content */}
           <div className="flex flex-col items-start text-left">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
               <span className="w-6 h-[1.5px] bg-[#3daeff] rounded-full" />
               <span className="text-[10px] font-semibold text-white/65 tracking-[0.22em] uppercase font-sans">
                 COOLING WITHOUT WATER CONSUMPTION
@@ -56,8 +56,8 @@ export default function WaterFreeCooling() {
               alt="USDC Closed-Loop Liquid Cooling System — High-density compute racks with closed loop recirculating coolant and zero water consumption"
               width={1200}
               height={800}
+              sizes="(max-width: 1200px) 100vw, 1140px"
               className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              priority={false}
             />
           </div>
 

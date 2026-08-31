@@ -107,7 +107,7 @@ export default function CareerWhy() {
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-20">
           <div>
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8" style={fadeUp(0)}>
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8" style={fadeUp(0)}>
               <span className="w-3.5 h-[1.5px] bg-[#3daeff] rounded-full" />
               <span className="text-[9px] font-bold text-white/60 tracking-[0.28em] uppercase">Why Join USDC</span>
             </div>

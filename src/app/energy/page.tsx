@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -46,7 +47,7 @@ export default function EnergyPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden">
+    <div className="relative min-h-dvh bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden max-w-full w-full">
       {/* Navigation Header */}
       <Navbar />
 
@@ -55,9 +56,14 @@ export default function EnergyPage() {
 
         {/* Ambient Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-50"
-            style={{ backgroundImage: "url('/Group 344 (1).webp')" }}
+          <Image
+            src="/Group 344 (1).webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center opacity-50"
           />
         </div>
 
@@ -68,7 +74,7 @@ export default function EnergyPage() {
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center text-center">
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.25em] uppercase font-sans">
               SUSTAINABLE POWER
@@ -185,7 +191,7 @@ export default function EnergyPage() {
 
             {/* Right Column: Interactive Visual Model */}
             <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
-              <div className="relative w-full aspect-square max-w-[480px] rounded-2xl overflow-hidden bg-[#02050c]/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex items-center justify-center">
+              <div className="relative w-full aspect-square max-w-[480px] rounded-2xl overflow-hidden bg-[#02050c]/30 shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex items-center justify-center">
                 <iframe
                   src="/magnetic-grid.html"
                   title="Core Grid Capabilities Visualization"

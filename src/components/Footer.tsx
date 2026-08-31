@@ -102,11 +102,16 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full relative overflow-hidden bg-[#04070f] border-t border-white/[0.05] pt-16 pb-10">
+    <footer
+      className="w-full relative overflow-hidden bg-[#04070f] border-t border-white/[0.05] pt-14 sm:pt-16 pb-10"
+      style={{
+        paddingBottom: "calc(2.5rem + env(safe-area-inset-bottom, 0px))",
+      }}
+    >
       {/* ── Ambient Glows ── */}
       <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-blue-500/[0.03] rounded-full blur-[110px] pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col gap-12">
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 flex flex-col gap-10 sm:gap-12">
 
         {/* ── Top Grid (Columns) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
@@ -120,7 +125,6 @@ export default function Footer() {
                 width={180}
                 height={60}
                 className="h-[52px] w-auto"
-                priority
               />
             </Link>
             <p className="text-[13.5px] text-white/45 max-w-[420px] leading-[1.8] mt-6 font-normal">
@@ -171,17 +175,17 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-5">
               {contactItems.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-4 group/footeritem">
+                <div key={idx} className="flex items-start gap-4 group/footeritem min-w-0 w-full">
                   {/* White Circular Icon Holder */}
                   <div className="w-8 h-8 rounded-full bg-blue-500/[0.08] border border-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover/footeritem:bg-[#3daeff]/20 group-hover/footeritem:border-[#3daeff]/40 transition-all duration-300">
                     {item.icon}
                   </div>
                   {/* Contact Text labels */}
-                  <div className="flex flex-col">
+                  <div className="flex flex-col min-w-0 flex-1">
                     <span className="text-[9.5px] font-black text-white/35 tracking-wider uppercase leading-none mb-1 group-hover/footeritem:text-white/55 transition-colors">
                       {item.label}
                     </span>
-                    <span className="text-[14px] font-black text-white/80 tracking-wide uppercase leading-tight group-hover/footeritem:text-[#3daeff] transition-colors">
+                    <span className="text-[13px] sm:text-[14px] font-black text-white/80 tracking-wide uppercase leading-tight group-hover/footeritem:text-[#3daeff] transition-colors break-words">
                       {item.value}
                     </span>
                   </div>

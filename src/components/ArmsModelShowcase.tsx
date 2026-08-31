@@ -132,7 +132,7 @@ export default function ArmsModelShowcase() {
   const enter = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(28px)",
-    transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   return (
@@ -152,7 +152,7 @@ export default function ArmsModelShowcase() {
         {/* ── Header ── */}
         <div className="text-center mb-16 md:mb-20" style={enter(0)}>
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
               Interactive 3D Model
@@ -222,7 +222,7 @@ export default function ArmsModelShowcase() {
               <ArmsDataCentreModel />
 
               {/* Interaction hint */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.06] backdrop-blur-md">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.06]">
                 <RotateCcw className="w-3 h-3 text-[#3daeff] animate-[spin_6s_linear_infinite]" />
                 <span className="text-[10px] text-white/40 tracking-widest uppercase font-mono">
                   Drag to rotate · Click panel to open

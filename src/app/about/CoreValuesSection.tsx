@@ -73,7 +73,7 @@ export default function CoreValuesSection() {
             return (
               <div
                 key={value.id}
-                className="group relative p-8 rounded-[16px] bg-gradient-to-br from-[#0a0e1a]/50 to-[#051620]/30 border border-[#3daeff]/20 backdrop-blur-xl hover:border-[#3daeff]/50 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_48px_rgba(61,174,255,0.1)]"
+                className="group relative p-8 rounded-[16px] bg-gradient-to-br from-[#0a0e1a]/50 to-[#051620]/30 border border-[#3daeff]/20 hover:border-[#3daeff]/50 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_48px_rgba(61,174,255,0.1)]"
               >
                 {/* Header (Icon + Title) */}
                 <div className="flex items-center gap-4 mb-5">

@@ -91,7 +91,7 @@ export default function GlobalPresence() {
       <div ref={ref} className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-14">
         {/* Heading */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="cx-reveal inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] backdrop-blur-md mb-5">
+          <div className="cx-reveal inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] mb-5">
             <span className="relative flex w-2 h-2">
               <span className="absolute inline-flex w-full h-full rounded-full bg-[#3daeff] opacity-70 cx-ping" />
               <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3daeff]" />
@@ -113,7 +113,7 @@ export default function GlobalPresence() {
         </div>
 
         {/* Map panel */}
-        <div className="cx-reveal relative rounded-[26px] bg-[#070b16]/70 backdrop-blur-2xl border border-white/[0.07] p-4 sm:p-8 shadow-[0_30px_80px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(255,255,255,0.04)] overflow-hidden" data-delay="150">
+        <div className="cx-reveal relative rounded-[26px] bg-[#070b16]/70 border border-white/[0.07] p-4 sm:p-8 shadow-[0_30px_80px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(255,255,255,0.04)] overflow-hidden" data-delay="150">
           {/* faint grid */}
           <div
             className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -247,7 +247,7 @@ export default function GlobalPresence() {
             {STATS.map((s, i) => (
               <div
                 key={i}
-                className="cx-reveal flex items-center gap-3.5 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] px-4 py-3.5 hover:border-[#3daeff]/30 hover:bg-white/[0.05] transition-all"
+                className="cx-reveal flex items-center gap-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] px-4 py-3.5 hover:border-[#3daeff]/30 hover:bg-white/[0.05] transition-all"
                 data-delay={200 + i * 70}
               >
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#3daeff]/25 to-transparent border border-[#3daeff]/30 text-[#7fc8ff] flex-shrink-0">

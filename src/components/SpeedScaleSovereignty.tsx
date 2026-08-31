@@ -279,7 +279,7 @@ export default function SpeedScaleSovereignty() {
         background: "linear-gradient(135deg, rgba(61,174,255,0.35) 0%, rgba(61,174,255,0.05) 25%, rgba(61,174,255,0.02) 50%, rgba(61,174,255,0.08) 75%, rgba(61,174,255,0.3) 100%)",
       }}>
         <div
-          className="w-full bg-[#03060d] rounded-[25px] overflow-hidden p-8 sm:p-10 md:p-12 lg:p-16 relative"
+          className="w-full bg-[#03060d] rounded-[25px] overflow-hidden p-5 sm:p-8 md:p-12 lg:p-16 relative"
           style={{
             boxShadow: "0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(61,174,255,0.08)",
           }}
@@ -298,19 +298,19 @@ export default function SpeedScaleSovereignty() {
             <div className="flex flex-col justify-between min-h-[280px] lg:min-h-[320px]">
               <div>
                 {/* Tab-specific Heading */}
-                <h2 className="text-[32px] sm:text-[36px] md:text-[38px] lg:text-[40px] font-extrabold tracking-[-0.02em] leading-[1.1] text-white">
+                <h2 className="text-[28px] sm:text-[36px] md:text-[38px] lg:text-[40px] font-extrabold tracking-[-0.02em] leading-[1.1] text-white">
                   {tabData[activeTab].heading}
                 </h2>
 
                 {/* Tab Trigger Buttons */}
-                <div className="flex items-center gap-6 mt-8 mb-6 border-b border-white/[0.08] pb-3">
+                <div className="flex items-center gap-3 sm:gap-6 mt-6 sm:mt-8 mb-6 border-b border-white/[0.08] pb-3 overflow-x-auto scrollbar-none">
                   {(["speed", "scale", "sovereignty"] as TabType[]).map((tab) => {
                     const isActive = activeTab === tab;
                     return (
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`relative text-[14px] sm:text-[15px] font-bold tracking-[0.06em] uppercase transition-all duration-300 pb-3 cursor-pointer ${isActive ? "text-white" : "text-white/35 hover:text-white/60"
+                        className={`relative text-[12px] sm:text-[15px] font-bold tracking-[0.06em] uppercase transition-all duration-300 pb-3 cursor-pointer whitespace-nowrap ${isActive ? "text-white" : "text-white/35 hover:text-white/60"
                           }`}
                       >
                         {tab}
@@ -429,7 +429,7 @@ export default function SpeedScaleSovereignty() {
                       />
 
                       {/* Tick Mark Labels */}
-                      <div className="flex justify-between text-[11px] sm:text-[12px] font-bold text-white/40 tracking-wider mt-3.5 uppercase">
+                      <div className="flex justify-between text-[9.5px] sm:text-[12px] font-bold text-white/40 tracking-wider mt-3.5 uppercase">
                         <span>1.8 MW</span>
                         <span>10 MW</span>
                         <span>55 MW</span>

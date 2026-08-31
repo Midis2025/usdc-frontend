@@ -46,7 +46,7 @@ export default function PartnerSection() {
 
           {/* ══════ RIGHT COLUMN: Glassmorphic Details Card ══════ */}
           <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
-            <div className="w-full max-w-[520px] rounded-[24px] border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-6 sm:p-10 lg:p-8 xl:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+            <div className="w-full max-w-[520px] rounded-[24px] border border-white/[0.08] bg-white/[0.02] p-6 sm:p-10 lg:p-8 xl:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
 
               {/* Header inside card */}
               <div className="border-b border-[#3daeff]/30 pb-6 mb-6">

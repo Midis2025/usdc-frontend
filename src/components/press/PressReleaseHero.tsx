@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import React, { useEffect, useRef, useState } from "react";
 
 /* ═══════════════════════════ Press Release Hero ═══════════════════════════
@@ -18,7 +20,7 @@ export default function PressReleaseHero() {
   const enter = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(32px)",
-    transition: `all 1.3s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   return (
@@ -29,10 +31,15 @@ export default function PressReleaseHero() {
     >
       {/* Ambient Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/USDC%20website/Group%20336.webp')" }}
-        />
+        <Image
+            src="/USDC website/Group 336.webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
       </div>
       {/* ── Custom keyframes ── */}
       <style
@@ -65,7 +72,7 @@ export default function PressReleaseHero() {
         {/* Pill Badge */}
         <div
           style={enter(100)}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
         >
           <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
           <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { slugify } from "@/utils/slugify";
 import {
   Calendar,
@@ -294,7 +293,7 @@ export default function PressReleaseGrid() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(26px)",
-    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   /* Renders a single card — featured variant is taller with more prominent layout */
@@ -471,7 +470,7 @@ export default function PressReleaseGrid() {
         <div className="flex flex-col items-center text-center mb-6 md:mb-14">
           <div
             style={fadeUp(0)}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
           >
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
@@ -516,26 +515,13 @@ export default function PressReleaseGrid() {
           <div className="h-px flex-grow bg-gradient-to-r from-[#3daeff]/15 to-transparent" />
         </div>
 
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-        >
-          <AnimatePresence mode="popLayout">
-            {regular.map((pr, idx) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                key={pr.id}
-                className="h-full"
-              >
-                {renderCard(pr, idx + 2, false)}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {regular.map((pr, idx) => (
+            <div key={pr.id} className="h-full">
+              {renderCard(pr, idx + 2, false)}
+            </div>
+          ))}
+        </div>
 
         {/* ── Load More ── */}
         {visibleCount < filtered.length && (
@@ -566,7 +552,7 @@ export default function PressReleaseGrid() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-fade-in">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/75 backdrop-blur-xl transition-opacity duration-300"
+            className="absolute inset-0 bg-black/75 transition-opacity duration-300"
             onClick={() => setSelectedArticle(null)}
           />
 

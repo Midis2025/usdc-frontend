@@ -65,7 +65,6 @@ export default function RedefiningData() {
           fill
           className="object-cover object-center"
           sizes="100vw"
-          priority
         />
         {/* Subtle dark tint to integrate with page styling */}
         <div className="absolute inset-0 bg-[#04070f]/20" />
@@ -80,7 +79,7 @@ export default function RedefiningData() {
           transform: inView ? "translateY(0px)" : "translateY(50px)",
         }}
       >
-        <div className="relative w-full overflow-hidden border border-[#0091ff]/25 rounded-[28px] md:rounded-[40px] shadow-[0_24_70px_rgba(0,145,255,0.08)] bg-white/45 backdrop-blur-md p-6 sm:p-10 md:p-12 lg:p-14">
+        <div className="relative w-full overflow-hidden border border-[#0091ff]/25 rounded-[28px] md:rounded-[40px] shadow-[0_24_70px_rgba(0,145,255,0.08)] bg-white/45 p-6 sm:p-10 md:p-12 lg:p-14">
 
           {/* Content Wrapper Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-16">

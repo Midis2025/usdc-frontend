@@ -28,7 +28,6 @@ export default function BuildingFutureSection() {
                 width={460}
                 height={460}
                 className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(61,174,255,0.15)]"
-                priority
               />
             </div>
           </div>

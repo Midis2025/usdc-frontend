@@ -93,7 +93,7 @@ export default function AboutContent() {
             <div className="relative w-full max-w-[500px] p-[1.5px] rounded-[24px] bg-gradient-to-br from-white/[0.08] via-transparent to-white/[0.04] shadow-[0_24px_50px_rgba(0,0,0,0.5)] overflow-hidden group">
 
               {/* Internal Glass Card body */}
-              <div className="relative z-10 w-full h-full bg-[#02050c]/85 rounded-[22.5px] p-8 md:p-10 backdrop-blur-xl">
+              <div className="relative z-10 w-full h-full bg-[#02050c]/85 rounded-[22.5px] p-8 md:p-10">
                 {/* HUD Header */}
                 <div className="flex items-center justify-between border-b border-white/[0.05] pb-6 mb-8">
                   <div className="flex items-center gap-3">
@@ -177,7 +177,7 @@ export default function AboutContent() {
                   }}
                 />
 
-                <div className="relative z-10 w-full h-full bg-[#03060d]/85 rounded-[19px] p-8 flex flex-col items-start backdrop-blur-xl">
+                <div className="relative z-10 w-full h-full bg-[#03060d]/85 rounded-[19px] p-8 flex flex-col items-start">
                   {/* Icon Wrapper */}
                   <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center mb-6">
                     {pillar.icon}
@@ -226,7 +226,7 @@ export default function AboutContent() {
 
         {/* ── Section 4: Premium Call-to-Action ── */}
         <div className="relative w-full rounded-[24px] overflow-hidden p-[1px] bg-gradient-to-r from-blue-500/20 via-transparent to-blue-500/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
-          <div className="relative z-10 w-full bg-[#02050c]/85 rounded-[23px] px-8 py-12 md:py-16 md:px-12 text-center flex flex-col items-center justify-center backdrop-blur-xl">
+          <div className="relative z-10 w-full bg-[#02050c]/85 rounded-[23px] px-8 py-12 md:py-16 md:px-12 text-center flex flex-col items-center justify-center">
 
             {/* Background pattern inside CTA */}
             <div className="absolute inset-0 bg-[radial-gradient(#3daeff04_1.5px,transparent_1.5px)] bg-[size:24px_24px] pointer-events-none opacity-50 z-0" />

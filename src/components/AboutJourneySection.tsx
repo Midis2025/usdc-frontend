@@ -147,13 +147,13 @@ export default function AboutJourneySection() {
       <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-blue-600/[0.02] rounded-full blur-[130px] pointer-events-none z-0" />
       <div className="absolute bottom-[20%] left-[-10%] w-[600px] h-[600px] bg-sky-500/[0.02] rounded-full blur-[140px] pointer-events-none z-0" />
 
-      <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+      <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8">
 
         {/* LEFT COLUMN: Sticky heading & description */}
-        <div className="lg:col-span-5 lg:sticky lg:top-36 lg:h-[fit-content] flex flex-col items-start pr-0 lg:pr-8 mb-8 lg:mb-0">
+        <div className="lg:col-span-5 lg:sticky lg:top-36 lg:h-[fit-content] flex flex-col items-start pr-0 lg:pr-8 mb-4 lg:mb-0">
 
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.25em] uppercase font-sans">
               OUR JOURNEY
@@ -161,7 +161,7 @@ export default function AboutJourneySection() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-bold tracking-tight leading-[1.1] text-white mb-6 font-sans">
+          <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-bold tracking-tight leading-[1.1] text-white mb-6 font-sans">
             From Energy Assets To <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58c4ff] to-[#0091ff] drop-shadow-[0_4px_18px_rgba(61,174,255,0.25)] select-none">
               AI Infrastructure
@@ -169,29 +169,29 @@ export default function AboutJourneySection() {
           </h2>
 
           {/* Description */}
-          <p className="text-[14.5px] md:text-[15.5px] text-white/60 leading-[1.75] max-w-[480px] font-sans font-normal">
+          <p className="text-[14px] sm:text-[14.5px] md:text-[15.5px] text-white/60 leading-[1.75] max-w-[480px] font-sans font-normal">
             USDC identifies and transforms underutilized energy assets into enterprise-grade AI infrastructure. By combining power, cooling, networking and compute, we accelerate deployment timelines from years to months.
           </p>
         </div>
 
         {/* RIGHT COLUMN: Interactive scrolling timeline */}
-        <div className="lg:col-span-7 relative pl-8 sm:pl-10 md:pl-12 lg:pl-10">
+        <div className="lg:col-span-7 relative pl-6 sm:pl-10 md:pl-12 lg:pl-10">
 
           {/* Background dashed timeline line (only visible up to the maximum revealed card segment) */}
           <div
-            className="absolute left-4 sm:left-6 md:left-8 lg:left-6 top-4 w-[2px] border-l-2 border-dashed border-white/10 pointer-events-none z-0 transition-all duration-700 ease-out"
+            className="absolute left-2 sm:left-6 md:left-8 lg:left-6 top-4 w-[2px] border-l-2 border-dashed border-white/10 pointer-events-none z-0 transition-all duration-700 ease-out"
             style={{ height: currentBgLineHeight }}
           />
 
           {/* Active solid glowing scroll progress line (grows smoothly with scroll progress) */}
-          <div className="absolute left-4 sm:left-6 md:left-8 lg:left-6 top-4 bottom-4 w-[2px] pointer-events-none z-0">
+          <div className="absolute left-2 sm:left-6 md:left-8 lg:left-6 top-4 bottom-4 w-[2px] pointer-events-none z-0">
             <div
               className="absolute top-0 -left-[2px] w-[2px] bg-gradient-to-b from-[#3daeff] via-[#0091ff] to-blue-500 rounded-full transition-all duration-300 shadow-[0_0_8px_#3daeff]"
               style={{ height: `${Math.max(7, scrollProgress * 100)}%` }}
             />
           </div>
 
-          <div className="flex flex-col gap-6 md:gap-12 relative z-10">
+          <div className="flex flex-col gap-5 sm:gap-6 md:gap-12 relative z-10">
             {timelineData.map((item, idx) => {
 
               // Only active card is highlighted
@@ -207,13 +207,13 @@ export default function AboutJourneySection() {
               return (
                 <div
                   key={idx}
-                  className={`flex items-center gap-4 sm:gap-6 md:gap-8 transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12 pointer-events-none"
+                  className={`flex items-center gap-3 sm:gap-6 md:gap-8 transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12 pointer-events-none"
                     }`}
                 >
                   {/* Left Side: Year */}
-                  <div className="w-12 sm:w-14 md:w-16 lg:w-14 text-left flex-shrink-0 relative">
+                  <div className="w-10 sm:w-14 md:w-16 lg:w-14 text-left flex-shrink-0 relative">
                     <span
-                      className={`text-sm md:text-base font-extrabold tracking-tight font-sans transition-colors duration-500 ${isActive ? "text-[#3daeff] drop-shadow-[0_0_6px_rgba(61,174,255,0.4)]" : "text-white/35"
+                      className={`text-xs sm:text-sm md:text-base font-extrabold tracking-tight font-sans transition-colors duration-500 ${isActive ? "text-[#3daeff] drop-shadow-[0_0_6px_rgba(61,174,255,0.4)]" : "text-white/35"
                         }`}
                     >
                       {item.year}
@@ -221,7 +221,7 @@ export default function AboutJourneySection() {
 
                     {/* Timeline Dot on top of the vertical line */}
                     <div
-                      className={`absolute -left-[22px] top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full border bg-[#02050c] transition-all duration-500 z-20 ${isActive
+                      className={`absolute -left-[19px] sm:-left-[22px] top-1/2 -translate-y-1/2 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full border bg-[#02050c] transition-all duration-500 z-20 ${isActive
                           ? "border-[#3daeff] scale-125 shadow-[0_0_12px_#3daeff]"
                           : "border-white/20"
                         }`}
@@ -235,7 +235,7 @@ export default function AboutJourneySection() {
 
                   {/* Right Side: Premium Milestone Card */}
                   <div
-                    className={`flex-1 flex flex-col sm:flex-row items-center gap-6 p-6 rounded-2xl border bg-[#02050c]/25 backdrop-blur-md transition-all duration-700 hover:-translate-y-1 relative overflow-hidden ${isActive
+                    className={`flex-1 min-w-0 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl border bg-[#02050c]/25 transition-all duration-700 hover:-translate-y-1 relative overflow-hidden ${isActive
                         ? "border-[#0091ff]/35 shadow-[0_6px_30px_rgba(0,145,255,0.08)] bg-[#02050c]/40 scale-[1.01]"
                         : "border-white/[0.06] hover:border-white/20"
                       }`}

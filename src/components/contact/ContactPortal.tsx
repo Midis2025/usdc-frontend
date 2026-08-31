@@ -67,7 +67,7 @@ function Field({
       <div
         onFocus={onFocus}
         onBlur={onBlur}
-        className={`relative rounded-xl border bg-white/[0.025] backdrop-blur-md transition-all duration-300 ${isFocused
+        className={`relative rounded-xl border bg-white/[0.025] transition-all duration-300 ${isFocused
             ? "border-[#3daeff]/60 shadow-[0_0_0_1px_rgba(61,174,255,0.35),0_8px_30px_rgba(61,174,255,0.18)]"
             : "border-white/[0.08] hover:border-white/[0.16]"
           }`}
@@ -243,7 +243,7 @@ export default function ContactPortal() {
           </div>
  
           {/* Panel body */}
-          <div className="relative rounded-[25px] bg-[#070b16]/80 backdrop-blur-2xl border border-white/[0.08] p-6 sm:p-9 shadow-[0_30px_80px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.05)]">
+          <div className="relative rounded-[25px] bg-[#070b16]/80 border border-white/[0.08] p-6 sm:p-9 shadow-[0_30px_80px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.05)]">
             {/* corner accents */}
             <span className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#3daeff]/40 rounded-tl-lg" />
             <span className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[#3daeff]/40 rounded-tr-lg" />

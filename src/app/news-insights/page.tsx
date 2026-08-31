@@ -119,7 +119,7 @@ export default function NewsInsightsPage() {
   const featuredStory = sortedArticles[0];
 
   return (
-    <div className="relative min-h-screen bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden select-none">
+    <div className="relative min-h-dvh bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden max-w-full w-full select-none">
       {/* Navbar Integration */}
       <Navbar />
 
@@ -144,16 +144,21 @@ export default function NewsInsightsPage() {
       <section className="relative w-full min-h-[60vh] md:min-h-screen flex flex-col items-center justify-center pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden border-b border-white/5 animate-fade-in select-none">
         {/* Ambient Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/USDC%20website/Group%20335.webp')" }}
+          <Image
+            src="/USDC website/Group 335.webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
           />
         </div>
 
         {/* Content Wrapper */}
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center">
           {/* Animated telemetric badge */}
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-blue-500/20 bg-white/[0.02] backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(61,174,255,0.06)] animate-[fadeIn_1s_ease-out]">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-blue-500/20 bg-white/[0.02] mb-6 shadow-[0_0_15px_rgba(61,174,255,0.06)] animate-[fadeIn_1s_ease-out]">
             <div className="w-6 h-0.5 rounded-full bg-[#3daeff]" />
             <span className="text-[10px] font-bold text-white/70 tracking-[0.25em] uppercase font-mono">
               USDC Intelligence Hub
@@ -179,7 +184,7 @@ export default function NewsInsightsPage() {
           </p>
 
           {/* Glassmorphism Search & Filters Block */}
-          <div className="w-full max-w-full p-1.5 rounded-[22px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0px_rgba(255,255,255,0.05)] flex flex-col gap-4">
+          <div className="w-full max-w-full p-1.5 rounded-[22px] bg-white/[0.02] border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0px_rgba(255,255,255,0.05)] flex flex-col gap-4">
 
             {/* Futuristic Search bar input */}
             <div className="relative flex items-center w-full min-w-0 px-5 py-3.5 rounded-[16px] bg-black/40 border border-white/5 focus-within:border-[#3daeff]/40 transition-colors duration-300 group">
@@ -356,7 +361,7 @@ export default function NewsInsightsPage() {
                   />
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="px-2.5 py-1 rounded bg-[#04070f]/80 text-[#3daeff] border border-[#3daeff]/20 text-[9px] font-bold uppercase tracking-wider backdrop-blur-md">
+                    <span className="px-2.5 py-1 rounded bg-[#04070f]/80 text-[#3daeff] border border-[#3daeff]/20 text-[9px] font-bold uppercase tracking-wider">
                       {article.category}
                     </span>
                   </div>

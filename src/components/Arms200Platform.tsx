@@ -27,7 +27,7 @@ export default function Arms200Platform() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(18px)",
-    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const stats = [

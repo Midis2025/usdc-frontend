@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import HeroVideo from "@/components/HeroVideo";
 import Footer from "@/components/Footer";
 import { Server, Thermometer, Shield, Columns } from "lucide-react";
 import DataCenterArchitecture from "@/components/DataCenterArchitecture";
@@ -52,23 +53,19 @@ export default function DataCenterPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden">
+    <div className="relative min-h-dvh bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden max-w-full w-full">
       {/* Navigation Header */}
       <Navbar />
 
       {/* ── HERO SECTION ── */}
       <section className="relative w-full min-h-[60vh] md:min-h-screen flex items-center pt-24 pb-12 md:pt-40 md:pb-16 overflow-hidden select-none">
         {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <HeroVideo
+          src="/data-center-tour.mp4"
+          poster="/data-center-tour-poster.webp"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{ filter: "brightness(0.4)" }}
-        >
-          <source src="/0703(1).mp4" type="video/mp4" />
-        </video>
+        />
 
         {/* Ambient Blue Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-blue-600/[0.08] rounded-full blur-[140px] pointer-events-none z-[2]" />
@@ -103,7 +100,7 @@ export default function DataCenterPage() {
       {/* ── METRICS BANNER SECTION ── */}
       <section className="w-full bg-[#04070f] pt-10 md:pt-16 pb-10 md:pb-14 select-none relative z-10">
         <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16">
-          <div className="w-full rounded-2xl border border-white/[0.08] bg-white/[0.01] backdrop-blur-sm py-4 px-4 md:py-6 md:px-10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          <div className="w-full rounded-2xl border border-white/[0.08] bg-white/[0.01] py-4 px-4 md:py-6 md:px-10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
             <div className="grid grid-cols-2 md:flex md:flex-row items-center justify-center text-center gap-3 md:gap-2">
 
               {/* Metric 1 */}
@@ -163,7 +160,7 @@ export default function DataCenterPage() {
       <section id="facilities" className="w-full relative bg-[#04070f] border-t border-white/[0.03] pt-6 md:pt-12 pb-6 md:pb-20">
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16">
           <div className="text-center max-w-[900px] mx-auto mb-16">
-            <h2 className="text-[38px] sm:text-[46px] md:text-[52px] lg:text-[52px] font-bold tracking-tight text-white mb-6 font-sans uppercase sm:whitespace-nowrap">
+            <h2 className="text-[38px] sm:text-[46px] md:text-[52px] lg:text-[52px] font-bold tracking-tight text-white mb-6 font-sans uppercase lg:whitespace-nowrap">
               Designed for <span className="text-[#3daeff]">Dense Compute</span>
             </h2>
             <p className="text-sm text-white/40 leading-relaxed font-sans">

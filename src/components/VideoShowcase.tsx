@@ -71,7 +71,7 @@ export default function VideoShowcase() {
 
       <div className="relative z-10 w-full max-w-[1360px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
         {/* ── Main Outer Card Container ── */}
-        <div className="w-full rounded-[24px] sm:rounded-[32px] border border-white/[0.08] bg-gradient-to-br from-[#070c1a]/90 via-[#050914]/95 to-[#02050c]/90 backdrop-blur-2xl p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 shadow-[0_30px_90px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.05)] grid grid-cols-1 lg:grid-cols-[0.85fr_1.35fr] gap-8 md:gap-10 lg:gap-12 xl:gap-14 items-center">
+        <div className="w-full rounded-[24px] sm:rounded-[32px] border border-white/[0.08] bg-gradient-to-br from-[#070c1a]/90 via-[#050914]/95 to-[#02050c]/90 p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 shadow-[0_30px_90px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.05)] grid grid-cols-1 lg:grid-cols-[0.85fr_1.35fr] gap-8 md:gap-10 lg:gap-12 xl:gap-14 items-center">
 
           {/* ── Left Column: Text + Badges + Info ── */}
           <div className="flex flex-col items-start text-left">
@@ -130,7 +130,7 @@ export default function VideoShowcase() {
               {/* Sound ON/OFF Toggle Button */}
               <button
                 onClick={toggleSound}
-                className="absolute bottom-4 right-4 z-30 px-3 py-2 rounded-full bg-black/75 hover:bg-[#3daeff] backdrop-blur-md border border-white/20 hover:border-[#3daeff] text-white transition-all duration-300 cursor-pointer shadow-[0_4px_16px_rgba(0,0,0,0.6)] flex items-center gap-2 group/btn"
+                className="absolute bottom-4 right-4 z-30 px-3 py-2 rounded-full bg-black/75 hover:bg-[#3daeff] border border-white/20 hover:border-[#3daeff] text-white transition-all duration-300 cursor-pointer shadow-[0_4px_16px_rgba(0,0,0,0.6)] flex items-center gap-2 group/btn"
                 aria-label={isMuted ? "Turn Sound ON" : "Turn Sound OFF"}
                 title={isMuted ? "Turn Sound ON" : "Turn Sound OFF"}
               >

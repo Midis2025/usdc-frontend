@@ -95,11 +95,11 @@ export default function InfrastructureStack() {
         </svg>
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6">
         {/* Badge & Headers */}
         <div className="flex flex-col items-start text-left mb-8 md:mb-10">
           {/* Pill Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
             <span className="w-3.5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/80 tracking-[0.2em] uppercase font-sans">
               AI INFRASTRUCTURE STACK
@@ -107,7 +107,7 @@ export default function InfrastructureStack() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl sm:text-5xl md:text-[52px] font-bold text-white tracking-tight leading-none mb-6">
+          <h2 className="text-3xl sm:text-5xl md:text-[52px] font-bold text-white tracking-tight leading-none mb-6">
             From Power to <span className="text-[#0091ff]">AI Compute</span>
           </h2>
 
@@ -196,7 +196,7 @@ export default function InfrastructureStack() {
           >
             {/* Ambient blue light behind 3D stack */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-blue-500/[0.06] rounded-full blur-[80px] pointer-events-none" />
-            <div className="relative w-full max-w-2xl h-[450px] sm:h-[520px] md:h-[580px] lg:h-[640px] overflow-hidden z-10">
+            <div className="relative w-full max-w-2xl h-[340px] sm:h-[420px] md:h-[580px] lg:h-[640px] overflow-hidden z-10">
               <ThreeDStack activePlate={activePlate} onPlateChange={setActivePlate} />
             </div>
           </div>

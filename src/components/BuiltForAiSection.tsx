@@ -74,7 +74,7 @@ export default function BuiltForAiSection() {
         </div>
 
         {/* ── 3-COLUMN LAYER GRID ── */}
-        <div className="w-full rounded-[20px] border border-white/[0.08] bg-[#050b18]/25 backdrop-blur-sm overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+        <div className="w-full rounded-[20px] border border-white/[0.08] bg-[#050b18]/25 overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
           <div className="grid grid-cols-1 md:grid-cols-3">
             
             {/* ══════ COLUMN 1: LAYER 1 — GPU-DENSE ROW ARCHITECTURE ══════ */}
@@ -223,7 +223,7 @@ export default function BuiltForAiSection() {
               </div>
 
               {/* Slide-Up Overlay View (Full height & width text overlay) */}
-              <div className="absolute inset-0 bg-[#050b18]/98 backdrop-blur-md p-5 sm:p-8 md:p-10 flex flex-col justify-between items-start transition-all duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0 border border-[#3daeff]/30 shadow-[inset_0_0_30px_rgba(61,174,255,0.06)]">
+              <div className="absolute inset-0 bg-[#050b18]/98 p-5 sm:p-8 md:p-10 flex flex-col justify-between items-start transition-all duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0 border border-[#3daeff]/30 shadow-[inset_0_0_30px_rgba(61,174,255,0.06)]">
                 <div className="w-full flex flex-col items-start">
                   <span className="text-[9px] font-black text-white/40 tracking-[0.18em] uppercase">LAYER 1</span>
                   <span className="text-[14px] font-bold text-white tracking-wider uppercase mt-1">GPU-DENSE ROW ARCHITECTURE</span>
@@ -318,7 +318,7 @@ export default function BuiltForAiSection() {
               </div>
 
               {/* Slide-Up Overlay View (Full height & width text overlay) */}
-              <div className="absolute inset-0 bg-[#050b18]/98 backdrop-blur-md p-5 sm:p-8 md:p-10 flex flex-col justify-between items-start transition-all duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0 border border-[#3daeff]/30 shadow-[inset_0_0_30px_rgba(61,174,255,0.06)]">
+              <div className="absolute inset-0 bg-[#050b18]/98 p-5 sm:p-8 md:p-10 flex flex-col justify-between items-start transition-all duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0 border border-[#3daeff]/30 shadow-[inset_0_0_30px_rgba(61,174,255,0.06)]">
                 <div className="w-full flex flex-col items-start">
                   <span className="text-[9px] font-black text-white/40 tracking-[0.18em] uppercase">LAYER 2</span>
                   <span className="text-[14px] font-bold text-white tracking-wider uppercase mt-1">COOLING READY</span>
@@ -484,7 +484,7 @@ export default function BuiltForAiSection() {
               </div>
 
               {/* Slide-Up Overlay View (Full height & width text overlay) */}
-              <div className="absolute inset-0 bg-[#050b18]/98 backdrop-blur-md p-5 sm:p-8 md:p-10 flex flex-col justify-between items-start transition-all duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0 border border-[#3daeff]/30 shadow-[inset_0_0_30px_rgba(61,174,255,0.06)]">
+              <div className="absolute inset-0 bg-[#050b18]/98 p-5 sm:p-8 md:p-10 flex flex-col justify-between items-start transition-all duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0 border border-[#3daeff]/30 shadow-[inset_0_0_30px_rgba(61,174,255,0.06)]">
                 <div className="w-full flex flex-col items-start">
                   <span className="text-[9px] font-black text-white/40 tracking-[0.18em] uppercase">LAYER 3</span>
                   <span className="text-[14px] font-bold text-white tracking-wider uppercase mt-1">GPU READY</span>

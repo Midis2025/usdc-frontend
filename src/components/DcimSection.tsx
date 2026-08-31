@@ -29,7 +29,7 @@ export default function DcimSection() {
   const fadeUp = (delay: number): React.CSSProperties => ({
     opacity: inView ? 1 : 0,
     transform: inView ? "translateY(0)" : "translateY(24px)",
-    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+    transition: `all 0.45s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
 
   const tabContent = {
@@ -74,7 +74,7 @@ export default function DcimSection() {
         <div className="flex flex-col items-center text-center max-w-[800px] mx-auto mb-8 md:mb-16">
           {/* Pill Badge */}
           <div
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
             style={fadeUp(0)}
           >
             <span className="w-3.5 h-[1.5px] bg-[#3daeff] rounded-full" />
@@ -128,7 +128,7 @@ export default function DcimSection() {
           className="relative rounded-2xl p-[1px] bg-gradient-to-b from-[#3daeff]/35 via-white/[0.05] to-[#3daeff]/5 shadow-[0_0_60px_rgba(61,174,255,0.05)] w-full overflow-hidden"
           style={fadeUp(280)}
         >
-          <div className="w-full bg-[#02050c]/90 backdrop-blur-xl rounded-2xl p-6 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="w-full bg-[#02050c]/90 rounded-2xl p-6 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
             {/* Left Column: Visual Dashboard Screenshot */}
             <div className="lg:col-span-8 relative w-full aspect-[3/2] sm:aspect-[2.75/1] min-h-[280px] rounded-xl overflow-hidden border border-white/[0.08] bg-[#04070f] group">
@@ -142,7 +142,7 @@ export default function DcimSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none" />
 
               {/* Floating Status Indicator */}
-              <div className="absolute top-4 right-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full border border-green-500/30 bg-green-500/5 backdrop-blur-md">
+              <div className="absolute top-4 right-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full border border-green-500/30 bg-green-500/5">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <span className="text-[9px] font-mono tracking-widest text-green-400 font-bold uppercase">
                   LIVE TELEMETRY

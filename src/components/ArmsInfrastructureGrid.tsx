@@ -712,7 +712,7 @@ export default function ArmsInfrastructureGrid() {
             return (
               <div
                 key={col.title}
-                className="relative group overflow-hidden h-[540px] md:h-[480px] flex flex-col justify-between border border-white/[0.08] hover:border-[#0091ff]/30 rounded-2xl bg-[#02050c]/25 backdrop-blur-md transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)]"
+                className="relative group overflow-hidden h-[540px] md:h-[480px] flex flex-col justify-between border border-white/[0.08] hover:border-[#0091ff]/30 rounded-2xl bg-[#02050c]/25 transition-all duration-500 hover:shadow-[0_4px_30px_rgba(0,145,255,0.06)]"
               >
                 {/* Upper Half: Header & Canvas */}
                 <div className="flex flex-col justify-between h-[370px] w-full">
@@ -757,7 +757,7 @@ export default function ArmsInfrastructureGrid() {
                 </div>
 
                 {/* Sliding Drawer Overlay Panel (Covers full card on hover with dark blue background matching page/panels) */}
-                <div className="absolute inset-0 w-full h-full pt-5 pb-8 px-8 md:px-10 bg-[#02050c]/98 backdrop-blur-md border-t border-white/[0.08] transition-all duration-[850ms] ease-out translate-y-[calc(100%-90px)] group-hover:translate-y-0 z-20 flex flex-col justify-start">
+                <div className="absolute inset-0 w-full h-full pt-5 pb-8 px-8 md:px-10 bg-[#02050c]/98 border-t border-white/[0.08] transition-all duration-[850ms] ease-out translate-y-[calc(100%-90px)] group-hover:translate-y-0 z-20 flex flex-col justify-start">
 
                   {/* Floating top header inside drawer (visible only on hover) */}
                   <div className="absolute top-8 left-8 md:left-10 right-8 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-[850ms] ease-out">

@@ -212,18 +212,18 @@ export default function ArmsTechnicalSpecs() {
             <div className="w-12 h-[2px] bg-[#3daeff]/80 mt-2.5 mb-8" />
 
             {/* List Container Card */}
-            <div className="w-full border border-white/[0.08] rounded-2xl bg-[#02050c]/25 p-6 md:p-8 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.5)]">
+            <div className="w-full border border-white/[0.08] rounded-2xl bg-[#02050c]/25 p-5 sm:p-6 md:p-8 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.5)]">
               <div className="flex flex-col">
                 {specsList.map((item) => {
                   const Icon = item.Icon;
                   return (
                     <div
                       key={item.name}
-                      className="grid grid-cols-12 items-center py-4.5 border-b border-white/[0.05] last:border-0 last:pb-0 first:pt-0"
+                      className="flex flex-col sm:grid sm:grid-cols-12 gap-1.5 sm:gap-0 items-start sm:items-center py-3.5 sm:py-4.5 border-b border-white/[0.05] last:border-0 last:pb-0 first:pt-0 w-full"
                     >
                       {/* Left: Icon & Label */}
                       <div className="col-span-5 flex items-center gap-3">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/[0.06] border border-blue-400/[0.1]">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/[0.06] border border-blue-400/[0.1] flex-shrink-0">
                           <Icon className="w-4 h-4 text-[#3daeff]" />
                         </div>
                         <span className="text-xs md:text-sm font-semibold text-white/85 tracking-wide">
@@ -232,12 +232,12 @@ export default function ArmsTechnicalSpecs() {
                       </div>
 
                       {/* Center: Vertical Divider */}
-                      <div className="col-span-1 flex justify-center text-white/10 font-light">
+                      <div className="col-span-1 hidden sm:flex justify-center text-white/10 font-light">
                         |
                       </div>
 
                       {/* Right: Spec Value */}
-                      <div className="col-span-6 text-xs md:text-sm font-semibold text-[#3daeff] tracking-wide text-left pl-2">
+                      <div className="col-span-6 text-xs md:text-sm font-semibold text-[#3daeff] tracking-wide text-left pl-11 sm:pl-2">
                         {item.value}
                       </div>
                     </div>
@@ -282,10 +282,11 @@ export default function ArmsTechnicalSpecs() {
               </div>
               {/* Graphic */}
               <div className="flex-shrink-0 relative w-[100px] h-[100px] md:w-[120px] md:h-[120px] transition-all duration-300">
-                <img
+                <Image
                   src="/Arms 300.webp"
                   alt="ARMS 300 Model"
-                  loading="lazy"
+                  width={200}
+                  height={200}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160px] h-[160px] md:w-[200px] md:h-[200px] max-w-none object-contain transition-transform duration-500 group-hover:scale-[1.08]"
                 />
               </div>

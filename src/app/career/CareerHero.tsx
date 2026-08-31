@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 /* ═══════════════════════ Career Hero ═══════════════════════ */
@@ -42,12 +43,19 @@ export default function CareerHero() {
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-12 lg:px-16 pt-28 pb-20 overflow-hidden bg-[#04070f] select-none"
-      style={{
-        backgroundImage: "url('/Group 346.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
     >
+      {/* ── Hero background (LCP image) ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <Image
+          src="/Group 346.webp"
+          alt=""
+          fill
+          preload
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
 
       {/* ── Deep layered glows ── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -86,7 +94,7 @@ export default function CareerHero() {
 
         {/* Badge */}
         <div style={fade(0)}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-10 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-10 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
           <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
           <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
             We&apos;re Hiring · Join the AI Infrastructure Revolution
@@ -112,7 +120,7 @@ export default function CareerHero() {
         {/* Animated role ticker */}
         <div className="flex items-center gap-3 mb-10 min-h-10 flex-wrap justify-center" style={fade(160)}>
           <span className="text-[15px] md:text-[17px] text-white/45 font-medium">Hiring</span>
-          <div className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg border border-[#3daeff]/40 bg-[#3daeff]/[0.08] backdrop-blur-md shadow-[0_0_18px_rgba(61,174,255,0.18),inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden h-9 w-[190px] md:w-[240px]">
+          <div className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg border border-[#3daeff]/40 bg-[#3daeff]/[0.08] shadow-[0_0_18px_rgba(61,174,255,0.18),inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden h-9 w-[190px] md:w-[240px]">
             <span
               className="text-[14px] md:text-[16px] font-bold text-[#3daeff] block w-full text-center"
               style={{

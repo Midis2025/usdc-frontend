@@ -81,7 +81,7 @@ export default function SmartContactCards() {
       <div ref={ref} className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-14">
         {/* Heading */}
         <div className="text-center mb-14 max-w-2xl mx-auto">
-          <div className="cx-reveal inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-5 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="cx-reveal inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-5 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
               Direct Channels
@@ -154,7 +154,7 @@ function SmartCard({ def, delay }: { def: CardDef; delay: number }) {
       />
 
       {/* Card body */}
-      <div className="relative h-full rounded-[21px] bg-[#080d18]/90 backdrop-blur-xl border border-white/[0.06] p-7 overflow-hidden transition-shadow duration-500">
+      <div className="relative h-full rounded-[21px] bg-[#080d18]/90 border border-white/[0.06] p-7 overflow-hidden transition-shadow duration-500">
         {/* Pointer-follow glow */}
         <span
           className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"

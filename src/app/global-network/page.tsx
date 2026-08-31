@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function GlobalNetworkPage() {
   return (
-    <div className="relative min-h-screen bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden">
+    <div className="relative min-h-dvh bg-[#04070f] text-white flex flex-col font-sans overflow-x-hidden max-w-full w-full">
       {/* ── Navbar ── */}
       <Navbar />
 
@@ -28,7 +28,8 @@ export default function GlobalNetworkPage() {
             src="/global-hero-globe.avif"
             alt="Global Network Hero Background"
             fill
-            priority
+            preload
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center opacity-50"
           />
@@ -46,7 +47,7 @@ export default function GlobalNetworkPage() {
         <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-sky-500/[0.02] rounded-full blur-[120px] pointer-events-none z-0" />
 
         <div className="flex-1 relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col items-center text-center lg:pt-12 py-2 md:py-10 animate-fade-in">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 backdrop-blur-md mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/70 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
             <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
             <span className="text-[10px] font-semibold text-white/90 tracking-[0.2em] uppercase font-sans">
               Live Network · US Footprint
@@ -344,7 +345,7 @@ export default function GlobalNetworkPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-2xl overflow-hidden bg-[#070c1a]/40 backdrop-blur-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-2xl overflow-hidden bg-[#070c1a]/40">
             {/* Sites */}
             <div className="p-10 md:p-14 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors group">
               <div className="text-[#3daeff] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Sites</div>

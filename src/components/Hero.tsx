@@ -7,7 +7,9 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <main className="flex-1 flex flex-col items-center justify-center text-center px-6 md:px-12 lg:px-16 pt-24 md:pt-28 pb-16 relative min-h-screen select-none overflow-hidden">
+    <main className="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-12 lg:px-16 pt-24 sm:pt-28 pb-12 sm:pb-16 relative min-h-[100dvh] select-none overflow-hidden max-w-full w-full">
+      {/* LCP: poster is preloaded at high priority; React hoists this into <head> */}
+      <link rel="preload" as="image" href="/usdc-hero-poster.webp" fetchPriority="high" />
 
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
@@ -16,9 +18,11 @@ export default function Hero() {
           muted
           loop
           playsInline
+          preload="auto"
+          poster="/usdc-hero-poster.webp"
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         >
-          <source src="/USDC%20changes.mp4" type="video/mp4" />
+          <source src="/usdc-hero.mp4" type="video/mp4" />
         </video>
         {/* Black gradient fade — top & bottom (increased contrast in the middle for maximum text & button readability) */}
         <div className="absolute inset-x-0 top-0 h-[60%] bg-gradient-to-b from-[#04070f]/85 via-[#04070f]/50 to-transparent" />
@@ -26,7 +30,7 @@ export default function Hero() {
       </div>
 
       {/* Decorative Badge */}
-      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 backdrop-blur-md mb-8 animate-fade-in shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),0_0_15px_rgba(61,174,255,0.06)] relative z-10">
+      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#02050c]/80 mb-8 animate-fade-in shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),0_0_15px_rgba(61,174,255,0.06)] relative z-10">
         <span className="w-5 h-[1.5px] bg-[#3daeff] rounded-full" />
         <span className="text-[10px] font-semibold text-white/85 tracking-[0.2em] uppercase font-sans">
           Premium Data Center Solutions
@@ -121,15 +125,15 @@ export default function Hero() {
       }} />
 
       {/* Metrics Capsule Dashboard */}
-      <div className="w-full max-w-5xl mx-auto bg-[#010409]/75 backdrop-blur-xl border border-white/[0.10] rounded-[24px] py-4 px-4 md:py-6 md:px-10 grid grid-cols-2 md:flex md:flex-row items-center justify-center text-center gap-3 md:gap-2 relative z-10 shadow-[0_20px_55px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.03)] animate-slide-up [animation-delay:350ms] hero-capsule-glow">
+      <div className="w-full max-w-5xl mx-auto bg-[#010409]/75 border border-white/[0.10] rounded-[20px] sm:rounded-[24px] py-3 px-3 sm:py-4 sm:px-4 md:py-6 md:px-10 grid grid-cols-2 md:flex md:flex-row items-center justify-center text-center gap-2 sm:gap-3 md:gap-2 relative z-10 shadow-[0_20px_55px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.03)] animate-slide-up [animation-delay:350ms] hero-capsule-glow">
 
         {/* Metric 1 */}
-        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group">
-          <Zap className="w-6 h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
-          <span className="text-lg sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value">
+        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-1.5 sm:p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group min-w-0">
+          <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
+          <span className="text-base sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value truncate w-full">
             1-50MW+
           </span>
-          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
+          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.15em] sm:tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
             Power Capacity
           </span>
         </div>
@@ -138,12 +142,12 @@ export default function Hero() {
         <div className="hidden md:block w-[1px] h-10 bg-gradient-to-b from-[#3daeff]/30 via-[#3daeff]/55 to-[#3daeff]/30 shadow-[0_0_12px_rgba(61,174,255,0.18)] flex-shrink-0" />
 
         {/* Metric 2 */}
-        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group">
-          <Clock className="w-6 h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
-          <span className="text-lg sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value">
+        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-1.5 sm:p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group min-w-0">
+          <Clock className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
+          <span className="text-base sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value truncate w-full">
             4 Months
           </span>
-          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
+          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.15em] sm:tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
             Deployment Timeline
           </span>
         </div>
@@ -152,12 +156,12 @@ export default function Hero() {
         <div className="hidden md:block w-[1px] h-10 bg-gradient-to-b from-[#3daeff]/30 via-[#3daeff]/55 to-[#3daeff]/30 shadow-[0_0_12px_rgba(61,174,255,0.18)] flex-shrink-0" />
 
         {/* Metric 3 */}
-        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group">
-          <Shield className="w-6 h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
-          <span className="text-lg sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value">
+        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-1.5 sm:p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group min-w-0">
+          <Shield className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
+          <span className="text-base sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value truncate w-full">
             TIER III
           </span>
-          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
+          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.15em] sm:tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
             Design Standard
           </span>
         </div>
@@ -166,12 +170,12 @@ export default function Hero() {
         <div className="hidden md:block w-[1px] h-10 bg-gradient-to-b from-[#3daeff]/30 via-[#3daeff]/55 to-[#3daeff]/30 shadow-[0_0_12px_rgba(61,174,255,0.18)] flex-shrink-0" />
 
         {/* Metric 4 */}
-        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group">
-          <Cpu className="w-6 h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
-          <span className="text-lg sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value">
+        <div className="flex-1 flex flex-col items-center gap-1 md:gap-2 text-center w-full metric-card-hover p-1.5 sm:p-2 md:p-4 rounded-xl md:rounded-2xl hover:bg-white/[0.02] cursor-default group min-w-0">
+          <Cpu className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#3daeff] opacity-90 metric-icon" />
+          <span className="text-base sm:text-xl md:text-[28px] font-bold text-white/90 tracking-tight leading-none metric-value truncate w-full">
             100%
           </span>
-          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
+          <span className="text-[8px] md:text-[9px] font-semibold text-white/40 tracking-[0.15em] sm:tracking-[0.2em] uppercase mt-0.5 group-hover:text-white/60 transition-colors duration-300">
             AI Ready
           </span>
         </div>

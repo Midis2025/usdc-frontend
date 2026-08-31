@@ -33,7 +33,7 @@ export function Ra2EngineeringConstraintSection() {
               For short prompts it can cost more than it saves.
             </p>
             <p>
-              Production stacks handle this by deciding per request whether to disaggregate, and the pod supports both modes.
+              Production stacks handle this by deciding per request whether to disaggregate and the pod supports both modes.
             </p>
           </div>
 

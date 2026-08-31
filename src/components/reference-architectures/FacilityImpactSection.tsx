@@ -390,7 +390,7 @@ export function Ra2FacilitySection() {
     {
       number: "02",
       title: "Refresh per role",
-      desc: "Prefill silicon can be replaced on a different schedule than decode silicon, and only the sidecar is opened. The decode floor keeps running.",
+      desc: "Prefill silicon can be replaced on a different schedule than decode silicon and only the sidecar is opened. The decode floor keeps running.",
       tag: "Two cycles",
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -505,7 +505,7 @@ export function Ra3FacilitySection() {
       index="06 / 07"
       eyebrow="What This Means for the Facility"
       title="Fiber adjacency becomes a siting requirement."
-      lead="A shared cache tier is only useful if the sites holding it are close in network terms. That turns fiber adjacency into a siting requirement rather than a convenience, and it is the strongest available argument for how USDC selects land."
+      lead="A shared cache tier is only useful if the sites holding it are close in network terms. That turns fiber adjacency into a siting requirement rather than a convenience and it is the strongest available argument for how USDC selects land."
       cards={cards}
     />
   );

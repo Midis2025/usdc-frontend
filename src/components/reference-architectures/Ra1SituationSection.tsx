@@ -219,7 +219,7 @@ export function Ra1SituationSection() {
                 <span className="ra1-reality-tag">THE REALITY</span>
               </div>
               <p className="ra1-reality-text">
-                The company signs for what it can defend today, but the facility it signed into was designed once—around one power topology, one cooling loop, and one rack density.
+                The company signs for what it can defend today, but the facility it signed into was designed once—around one power topology, one cooling loop and one rack density.
               </p>
             </div>
           </div>

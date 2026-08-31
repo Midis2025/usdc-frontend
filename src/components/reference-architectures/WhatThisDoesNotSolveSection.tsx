@@ -28,7 +28,7 @@ export function WhatThisDoesNotSolveSection() {
           <div className="limits-divider" aria-hidden="true" />
 
           <p className="limits-prose">
-            The shared elements have to be sized for the end state on day one. Substation capacity, water, land, and the utility interconnect are not modular, and interconnect queues are measured in quarters or years depending on the ISO. Pod modularity removes the compute commitment risk. It does not remove the interconnect lead time.
+            The shared elements have to be sized for the end state on day one. Substation capacity, water, land and the utility interconnect are not modular and interconnect queues are measured in quarters or years depending on the ISO. Pod modularity removes the compute commitment risk. It does not remove the interconnect lead time.
           </p>
 
           <div className="limits-callout-box">
@@ -119,7 +119,7 @@ export function WhatThisDoesNotSolveSection() {
             <div className="limits-row">
               <span className="limits-cell-key">COMPUTE</span>
               <span className="limits-cell-desc">
-                Pods are added in increments.<br />Commitment risk is removed here,<br />and only here.
+                Pods are added in increments.<br />Commitment risk is removed here<br />and only here.
               </span>
               <div className="limits-badge-wrap">
                 <span className="limits-badge type-modular">MODULAR</span>

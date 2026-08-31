@@ -114,7 +114,7 @@ export default function RequestPathPodModel({ isActive = true }: RequestPathPodM
             0 16px 48px rgba(6, 20, 55, 0.5),
             inset 0 1px 0 rgba(140, 185, 255, 0.09);
           overflow: hidden;
-          padding: 16px 18px 14px;
+          padding: 16px 18px;
         }
 
         .grid-layer {

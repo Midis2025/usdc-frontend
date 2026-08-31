@@ -30,7 +30,7 @@ export function Ra3EngineeringConstraintSection() {
               Cross site reuse works for prefix reuse and for moving a session to where capacity exists. It does not work for a tight prefill and decode loop split across two cities.
             </p>
             <p>
-              Within a site, cache moves at fabric speed. Between sites it moves at backbone speed, and the workload has to tolerate that difference.
+              Within a site, cache moves at fabric speed. Between sites it moves at backbone speed and the workload has to tolerate that difference.
             </p>
           </div>
 

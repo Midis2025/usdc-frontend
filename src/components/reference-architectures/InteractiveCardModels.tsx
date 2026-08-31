@@ -164,9 +164,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
             <div className="l">Illustrative 10–15 MW campus</div>
           </div>
         </div>
-        <span className="link">
-          Read the architecture <span className="arrow" aria-hidden="true">→</span>
-        </span>
+        <div className="card-btn">
+          <span>Read the architecture</span>
+          <span className="arrow" aria-hidden="true">→</span>
+        </div>
       </a>
 
       {/* ═══ Card 02: Prefill Sidecar & Decode Floor ═══ */}
@@ -288,9 +289,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
             <div className="v q">Decode: bandwidth-bound, bursty</div>
           </div>
         </div>
-        <span className="link">
-          Read the architecture <span className="arrow" aria-hidden="true">→</span>
-        </span>
+        <div className="card-btn">
+          <span>Read the architecture</span>
+          <span className="arrow" aria-hidden="true">→</span>
+        </div>
       </a>
 
       {/* ═══ Card 03: KV Cache Network Backbone ═══ */}
@@ -305,7 +307,7 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         </div>
         <h2>KV cache becomes a network service across the USDC footprint.</h2>
         <p className="sum">
-          Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage, and it only works if the sites sit on good fiber.
+          Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage and it only works if the sites sit on good fiber.
         </p>
 
         <div className="viz" aria-hidden="true">
@@ -405,9 +407,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
             <div className="l">Inter-site round-trip target, three diverse paths</div>
           </div>
         </div>
-        <span className="link">
-          Read the architecture <span className="arrow" aria-hidden="true">→</span>
-        </span>
+        <div className="card-btn">
+          <span>Read the architecture</span>
+          <span className="arrow" aria-hidden="true">→</span>
+        </div>
       </a>
     </div>
   );
@@ -616,7 +619,7 @@ const STEP_DATA = {
     steps: [
       { num: "01", heading: "Mooncake Store · pool", text: "Runs a cluster wide distributed KV cache pool, with a master server holding metadata and clients on each GPU node." },
       { num: "02", heading: "GPUDirect RDMA · transfer", text: "Moves cache without consuming GPU streaming multiprocessors and without a CPU staging buffer, on dedicated background threads so GPU kernel launches are not blocked." },
-      { num: "03", heading: "LMCache · tiers and reuse", text: "Does the same job across GPU memory, CPU memory, local SSD, and remote backends, and reuses cache across requests, sessions, and engine instances." },
+      { num: "03", heading: "LMCache · tiers and reuse", text: "Does the same job across GPU memory, CPU memory, local SSD and remote backends and reuses cache across requests, sessions and engine instances." },
     ],
     notes: {
       1: { title: "Step 01 · Pool", note: "<strong>Step 01.</strong> Mooncake Store keeps a cluster-wide pool: one master server for metadata, a client on every GPU node." },

@@ -31,7 +31,7 @@ export function Ra3SituationSection() {
               Agentic and long context workloads resend the same prompt prefix on every turn. Each repeat that lands on a node without the cache pays the full prefill cost again.
             </p>
             <p className="ra3-sit-lead" style={{ marginTop: "14px" }}>
-              The user sees it as time to first token, and the operator sees it as GPU hours spent recomputing something that was already computed an hour ago.
+              The user sees it as time to first token and the operator sees it as GPU hours spent recomputing something that was already computed an hour ago.
             </p>
           </div>
         </div>

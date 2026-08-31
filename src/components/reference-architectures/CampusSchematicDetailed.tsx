@@ -106,9 +106,13 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
           background: radial-gradient(1200px 700px at 50% -10%, #0d1a2e 0%, transparent 60%), #050b14;
           border: 1px solid var(--cs-panel-edge);
           border-radius: 20px;
-          padding: 16px 16px 20px;
+          padding: clamp(16px, 2vw, 20px);
           box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
           outline: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
 
         .cs-frame {
@@ -116,6 +120,9 @@ export default function CampusSchematicDetailed({ isActive = true }: CampusSchem
           border-radius: 16px;
           overflow: hidden;
           width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .cs-frame svg {

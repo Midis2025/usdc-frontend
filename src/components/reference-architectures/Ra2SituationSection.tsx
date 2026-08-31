@@ -35,7 +35,7 @@ export function Ra2SituationSection() {
 
           <div className="ra2-sit-head-right">
             <p className="ra2-sit-lead">
-              The obvious answer is to serve inference on it. The less obvious problem is that inference is not one workload, and a pod configured as a uniform block of identical GPUs is the wrong shape for it.
+              The obvious answer is to serve inference on it. The less obvious problem is that inference is not one workload and a pod configured as a uniform block of identical GPUs is the wrong shape for it.
             </p>
           </div>
         </div>

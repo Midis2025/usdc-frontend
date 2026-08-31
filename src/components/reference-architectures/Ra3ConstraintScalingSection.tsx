@@ -26,7 +26,7 @@ export function Ra3ConstraintScalingSection() {
 
           <div className="ra3-scaling-head-right">
             <p className="ra3-scaling-lead">
-              Cache held in GPU memory is local, small, and lost when the instance moves. Once a deployment grows past a single node the hit rate falls, because the router cannot reliably send a request back to the machine that holds its prefix.
+              Cache held in GPU memory is local, small and lost when the instance moves. Once a deployment grows past a single node the hit rate falls, because the router cannot reliably send a request back to the machine that holds its prefix.
             </p>
           </div>
         </div>

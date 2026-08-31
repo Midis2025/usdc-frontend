@@ -415,7 +415,7 @@ export function Ra2InsightPhasesSection() {
 
           <div>
             <p className="lead">
-              A homogeneous fleet sized correctly for one of those phases is sized incorrectly for the other. That is true of the silicon, and it is equally true of the power and cooling design wrapped around it.
+              A homogeneous fleet sized correctly for one of those phases is sized incorrectly for the other. That is true of the silicon and it is equally true of the power and cooling design wrapped around it.
             </p>
           </div>
         </div>

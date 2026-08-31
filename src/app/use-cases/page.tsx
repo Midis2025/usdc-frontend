@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CampusSchematicModel from "@/components/reference-architectures/CampusSchematicModel";
@@ -31,6 +32,73 @@ import {
   Ra3FacilitySection,
 } from "@/components/reference-architectures/FacilityImpactSection";
 import { Ra3EngineeringConstraintSection } from "@/components/reference-architectures/Ra3EngineeringConstraintSection";
+
+interface ArchitectureSwitcherProps {
+  currentRoute: string;
+  onNavigate: (route: string) => void;
+}
+
+function ArchitectureSwitcher({ currentRoute, onNavigate }: ArchitectureSwitcherProps) {
+  const options = [
+    {
+      route: "/ra-01",
+      num: "01",
+      name: "Arch 01",
+      desc: "One Pod to Cluster",
+    },
+    {
+      route: "/ra-02",
+      num: "02",
+      name: "Arch 02",
+      desc: "Prefill & Decode",
+    },
+    {
+      route: "/ra-03",
+      num: "03",
+      name: "Arch 03",
+      desc: "KV Cache Fabric",
+    },
+  ];
+
+  return (
+    <div className="ra-arch-switcher-wrap">
+      <div className="container">
+        <div className="ra-arch-switcher-bar">
+          <button
+            type="button"
+            className="ra-arch-overview-btn"
+            onClick={() => onNavigate("/")}
+            title="Back to Reference Architectures Overview"
+          >
+            <span className="ra-arch-arrow" aria-hidden="true">←</span>
+            <span className="ra-arch-overview-text">All Architectures</span>
+          </button>
+
+          <div className="ra-arch-tabs" role="tablist" aria-label="Reference Architecture Selection">
+            {options.map((opt) => {
+              const isActive = currentRoute === opt.route;
+              return (
+                <button
+                  key={opt.route}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`ra-arch-tab ${isActive ? "is-active" : ""}`}
+                  onClick={() => onNavigate(opt.route)}
+                >
+                  <span className="ra-arch-pill-num">{opt.num}</span>
+                  <span className="ra-arch-pill-name">{opt.name}</span>
+                  <span className="ra-arch-pill-desc">· {opt.desc}</span>
+                  {isActive && <span className="ra-arch-pill-dot" aria-hidden="true" />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function UseCasesPage() {
   const [currentRoute, setCurrentRoute] = useState<string>("/");
@@ -118,35 +186,49 @@ export default function UseCasesPage() {
             VIEW: INDEX
             ===================================================================== */}
         <section className={`view ${currentRoute === "/" ? "is-active" : ""}`} id="view-index" data-route="/">
-          <div className="container index-hero">
-            <p className="eyebrow">Use cases · Reference architectures</p>
-            <h1 id="index-title" className="h-display">
-              Three architectures, one way of thinking about a deployment.
-            </h1>
-            <p className="lead">
-              USDC plans deployments in a repeatable way. Each reference architecture runs the same seven blocks in the same order, states only sourced figures, and closes with what it does not solve.
-            </p>
-            <div className="template-row" aria-label="Seven-block template">
-              <div>
-                <b>01</b>Hero
-              </div>
-              <div>
-                <b>02</b>Situation
-              </div>
-              <div>
-                <b>03</b>Constraint
-              </div>
-              <div>
-                <b>04</b>What USDC deploys
-              </div>
-              <div>
-                <b>05</b>How it works
-              </div>
-              <div>
-                <b>06</b>For the facility
-              </div>
-              <div className="last">
-                <b>07</b>Does not solve
+          <div className="index-hero-wrapper">
+            {/* Hero Background Visual as-is */}
+            <div className="index-hero-bg" aria-hidden="true">
+              <Image
+                src="/ai_up4x_hL4ZHhZG.webp"
+                alt="Use Cases AI Infrastructure"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
+
+            <div className="container index-hero">
+              <p className="eyebrow">Use cases · Reference architectures</p>
+              <h1 id="index-title" className="h-display">
+                Three architectures,<br className="hidden sm:block" /> one way of thinking about a deployment.
+              </h1>
+              <p className="lead">
+                USDC plans deployments in a repeatable way. Each reference architecture runs the same seven blocks in the same order, states only sourced figures and closes with what it does not solve.
+              </p>
+              <div className="template-row" aria-label="Seven-block template">
+                <div>
+                  <b>01</b>Hero
+                </div>
+                <div>
+                  <b>02</b>Situation
+                </div>
+                <div>
+                  <b>03</b>Constraint
+                </div>
+                <div>
+                  <b>04</b>What USDC deploys
+                </div>
+                <div>
+                  <b>05</b>How it works
+                </div>
+                <div>
+                  <b>06</b>For the facility
+                </div>
+                <div className="last">
+                  <b>07</b>Does not solve
+                </div>
               </div>
             </div>
           </div>
@@ -162,7 +244,7 @@ export default function UseCasesPage() {
             VIEW: RA-01 — One pod to cluster
             ===================================================================== */}
         <section className={`view ${currentRoute === "/ra-01" ? "is-active" : ""}`} id="view-ra-01" data-route="/ra-01" aria-labelledby="ra1-title">
-
+          <ArchitectureSwitcher currentRoute={currentRoute} onNavigate={navigateTo} />
 
           {/* Hero */}
           <div className="hero">
@@ -220,7 +302,7 @@ export default function UseCasesPage() {
                   </h2>
                 </div>
                 <p className="lead">
-                  Modularity is usually sold as a speed argument. Speed is real, but it is not the important part. A modular pod makes the engineering decision repeatable: if the pod is the unit of design, the tenth pod is the same engineering as the first, and adding capacity stops being a redesign.
+                  Modularity is usually sold as a speed argument. Speed is real, but it is not the important part. A modular pod makes the engineering decision repeatable: if the pod is the unit of design, the tenth pod is the same engineering as the first and adding capacity stops being a redesign.
                 </p>
               </div>
               <div className="grid-2">
@@ -355,7 +437,7 @@ export default function UseCasesPage() {
             VIEW: RA-02 — Prefill sidecar and decode floor
             ===================================================================== */}
         <section className={`view ${currentRoute === "/ra-02" ? "is-active" : ""}`} id="view-ra-02" data-route="/ra-02" aria-labelledby="ra2-title">
-
+          <ArchitectureSwitcher currentRoute={currentRoute} onNavigate={navigateTo} />
 
           <div className="hero">
             <div className="container hero-grid">
@@ -365,7 +447,7 @@ export default function UseCasesPage() {
                     A pod is two machines, a prefill sidecar and a decode floor.
                   </h1>
                   <p className="lead">
-                    Serving a model has two phases with opposite hardware appetites. Splitting them inside one pod lets each phase run on the silicon it actually needs, and lets power and cooling be provisioned per role.
+                    Serving a model has two phases with opposite hardware appetites. Splitting them inside one pod lets each phase run on the silicon it actually needs and lets power and cooling be provisioned per role.
                   </p>
                   <div className="hero-actions">
                     <a className="btn btn-primary" href="#cta" onClick={handleCta} data-cta>
@@ -521,7 +603,7 @@ export default function UseCasesPage() {
                   <h2 id="ra2-how" className="h-section">A production pattern, not a research idea.</h2>
                 </div>
                 <p className="lead">
-                  The serving stack routes an incoming request to a prefill worker, which computes the KV cache, and then transfers that cache to a decode worker which produces the output tokens.
+                  The serving stack routes an incoming request to a prefill worker, which computes the KV cache and then transfers that cache to a decode worker which produces the output tokens.
                 </p>
               </div>
               <StepsSwitcher id="ra2" />
@@ -551,7 +633,7 @@ export default function UseCasesPage() {
             VIEW: RA-03 — KV cache as a network service
             ===================================================================== */}
         <section className={`view ${currentRoute === "/ra-03" ? "is-active" : ""}`} id="view-ra-03" data-route="/ra-03" aria-labelledby="ra3-title">
-
+          <ArchitectureSwitcher currentRoute={currentRoute} onNavigate={navigateTo} />
 
           <div className="hero">
             <div className="container hero-grid">
@@ -561,7 +643,7 @@ export default function UseCasesPage() {
                     KV cache becomes a network service across the USDC footprint.
                   </h1>
                   <p className="lead">
-                    Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage, and it only works if the sites sit on good fiber.
+                    Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage and it only works if the sites sit on good fiber.
                   </p>
                   <div className="hero-actions">
                     <a className="btn btn-primary" href="#cta" onClick={handleCta} data-cta>
@@ -914,9 +996,9 @@ export default function UseCasesPage() {
         }
 
         .ra-page-root .h-display {
-          font-size: clamp(34px, 4.4vw, 56px);
-          line-height: 1.06;
-          letter-spacing: -0.03em;
+          font-size: clamp(28px, 3.4vw, 44px);
+          line-height: 1.15;
+          letter-spacing: -0.025em;
           font-weight: 600;
           background: linear-gradient(135deg, #ffffff 40%, #c4d7fe 100%);
           -webkit-background-clip: text;
@@ -1101,6 +1183,150 @@ export default function UseCasesPage() {
           height: 1px;
           background: var(--line-strong);
         }
+        /* Architecture Switcher Bar */
+        .ra-page-root .ra-arch-switcher-wrap {
+          padding: 20px 0 4px;
+          position: relative;
+          z-index: 10;
+        }
+        .ra-page-root .ra-arch-switcher-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+          padding: 8px 12px;
+          background: rgba(6, 13, 26, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(56, 189, 248, 0.2);
+          border-radius: 14px;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        .ra-page-root .ra-arch-overview-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 14px;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.03);
+          color: #94a3b8;
+          font-family: var(--font-mono, monospace);
+          font-size: 12.5px;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        }
+        .ra-page-root .ra-arch-overview-btn:hover {
+          color: #ffffff;
+          background: rgba(56, 189, 248, 0.1);
+          border-color: rgba(56, 189, 248, 0.4);
+        }
+        .ra-page-root .ra-arch-arrow {
+          color: #38bdf8;
+          font-size: 14px;
+          transition: transform 0.2s ease;
+        }
+        .ra-page-root .ra-arch-overview-btn:hover .ra-arch-arrow {
+          transform: translateX(-3px);
+        }
+        .ra-page-root .ra-arch-tabs {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .ra-page-root .ra-arch-tab {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 9px;
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(10, 20, 38, 0.5);
+          color: #94a3b8;
+          font-family: inherit;
+          font-size: 13.5px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.22s ease;
+          white-space: nowrap;
+        }
+        .ra-page-root .ra-arch-tab:hover {
+          color: #ffffff;
+          background: rgba(56, 189, 248, 0.08);
+          border-color: rgba(56, 189, 248, 0.3);
+          transform: translateY(-1px);
+        }
+        .ra-page-root .ra-arch-tab.is-active {
+          background: rgba(14, 38, 74, 0.95);
+          border-color: #38bdf8;
+          color: #ffffff;
+          font-weight: 600;
+          box-shadow: 0 0 16px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .ra-page-root .ra-arch-pill-num {
+          font-family: var(--font-mono, monospace);
+          font-size: 11px;
+          font-weight: 700;
+          color: #38bdf8;
+          background: rgba(56, 189, 248, 0.14);
+          border: 1px solid rgba(56, 189, 248, 0.25);
+          border-radius: 5px;
+          padding: 2px 6px;
+          letter-spacing: 0.05em;
+        }
+        .ra-page-root .ra-arch-tab.is-active .ra-arch-pill-num {
+          background: #38bdf8;
+          color: #030712;
+          font-weight: 800;
+          border-color: #38bdf8;
+        }
+        .ra-page-root .ra-arch-pill-name {
+          font-weight: 600;
+          color: #f1f5f9;
+        }
+        .ra-page-root .ra-arch-pill-desc {
+          font-size: 12px;
+          color: #64748b;
+          margin-left: 2px;
+        }
+        .ra-page-root .ra-arch-tab.is-active .ra-arch-pill-desc {
+          color: #93c5fd;
+        }
+        .ra-page-root .ra-arch-pill-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #38bdf8;
+          box-shadow: 0 0 8px #38bdf8;
+          margin-left: 4px;
+        }
+        @media (max-width: 820px) {
+          .ra-page-root .ra-arch-switcher-bar {
+            justify-content: center;
+          }
+          .ra-page-root .ra-arch-overview-btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .ra-page-root .ra-arch-tabs {
+            width: 100%;
+            justify-content: center;
+          }
+          .ra-page-root .ra-arch-tab {
+            flex: 1;
+            justify-content: center;
+            padding: 8px 10px;
+          }
+          .ra-page-root .ra-arch-pill-desc {
+            display: none;
+          }
+        }
+
         .ra-page-root .ra-switch {
           display: flex;
           gap: 8px;
@@ -1132,9 +1358,56 @@ export default function UseCasesPage() {
           box-shadow: 0 0 16px rgba(79, 139, 255, 0.35);
         }
 
+        /* Index Hero Wrapper & Background Image */
+        .ra-page-root .index-hero-wrapper {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          border-bottom: 1px solid var(--line);
+        }
+        .ra-page-root .index-hero-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        .ra-page-root .index-hero-bg :global(img) {
+          opacity: 1;
+        }
+
+        /* Index Hero */
+        .ra-page-root .index-hero {
+          padding: clamp(48px, 5.5vw, 84px) 0 clamp(36px, 4vw, 56px);
+          position: relative;
+          z-index: 1;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .ra-page-root .index-hero .eyebrow {
+          margin-bottom: 14px;
+        }
+        .ra-page-root .index-hero h1 {
+          max-width: 32ch;
+          margin: 0 auto 18px;
+          line-height: 1.18;
+          text-align: center;
+        }
+        .ra-page-root .index-hero .lead {
+          max-width: 65ch;
+          margin: 0 auto 32px;
+          line-height: 1.65;
+          text-align: center;
+        }
+        .ra-page-root .index-hero .template-row {
+          width: 100%;
+        }
+
         /* Hero */
         .ra-page-root .hero {
-          padding: clamp(24px, 3vw, 44px) 0 clamp(28px, 3.5vw, 48px);
+          padding: clamp(32px, 3.5vw, 52px) 0;
           position: relative;
           overflow: hidden;
         }
@@ -1142,14 +1415,14 @@ export default function UseCasesPage() {
           display: grid;
           grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
           gap: clamp(28px, 4vw, 52px);
-          align-items: stretch;
+          align-items: center;
           position: relative;
           z-index: 1;
         }
         .ra-page-root .hero-copy {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: center;
           height: 100%;
         }
         .ra-page-root .hero-copy-main {
@@ -1161,8 +1434,8 @@ export default function UseCasesPage() {
         }
         .ra-page-root .hero-copy h1 {
           margin-bottom: 16px;
-          max-width: 20ch;
-          line-height: 1.12;
+          max-width: 24ch;
+          line-height: 1.16;
         }
         .ra-page-root .hero-copy .lead {
           margin-bottom: 22px;
@@ -2741,18 +3014,12 @@ export default function UseCasesPage() {
           flex-wrap: wrap;
         }
 
-        /* Index */
-        .ra-page-root .index-hero {
-          padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 4vw, 56px);
-        }
-        .ra-page-root .index-hero h1 {
-          max-width: 20ch;
-          margin: 20px 0 20px;
-        }
+        /* Index View Cards */
         .ra-page-root .cards {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 24px;
+          margin-top: clamp(48px, 5.5vw, 76px);
           padding-bottom: clamp(72px, 8vw, 120px);
         }
         .ra-page-root .card {
@@ -2852,17 +3119,40 @@ export default function UseCasesPage() {
           line-height: 1.4;
           margin-top: 4px;
         }
+        .ra-page-root .card .card-btn,
         .ra-page-root .card .link {
-          font-size: 14px;
-          color: var(--accent);
           display: inline-flex;
-          gap: 8px;
           align-items: center;
-          font-weight: 600;
+          justify-content: center;
+          gap: 10px;
+          padding: 10px 22px;
+          background: linear-gradient(135deg, rgba(56, 189, 248, 0.16) 0%, rgba(37, 99, 235, 0.28) 100%);
+          border: 1.5px solid rgba(56, 189, 248, 0.45);
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.03em;
+          color: #ffffff;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          transition: all 0.25s ease;
+          width: fit-content;
+          text-decoration: none;
+          margin-top: 4px;
         }
+        .ra-page-root .card .card-btn .arrow,
         .ra-page-root .card .link .arrow {
-          transition: transform 0.25s var(--ease);
+          color: #38bdf8;
+          font-size: 15px;
+          transition: transform 0.25s ease;
         }
+        .ra-page-root .card:hover .card-btn,
+        .ra-page-root .card:hover .link {
+          background: linear-gradient(135deg, rgba(56, 189, 248, 0.32) 0%, rgba(37, 99, 235, 0.5) 100%);
+          border-color: #38bdf8;
+          box-shadow: 0 0 24px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          transform: translateY(-1px);
+        }
+        .ra-page-root .card:hover .card-btn .arrow,
         .ra-page-root .card:hover .link .arrow {
           transform: translateX(4px);
         }

@@ -58,7 +58,6 @@ export default function WaterFreeCooling() {
               height={800}
               sizes="(max-width: 1200px) 100vw, 1140px"
               className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              priority={false}
             />
           </div>
 

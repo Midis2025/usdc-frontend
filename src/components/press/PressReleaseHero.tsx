@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import React, { useEffect, useRef, useState } from "react";
 
 /* ═══════════════════════════ Press Release Hero ═══════════════════════════
@@ -29,10 +31,15 @@ export default function PressReleaseHero() {
     >
       {/* Ambient Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/USDC%20website/Group%20336.webp')" }}
-        />
+        <Image
+            src="/USDC website/Group 336.webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
       </div>
       {/* ── Custom keyframes ── */}
       <style

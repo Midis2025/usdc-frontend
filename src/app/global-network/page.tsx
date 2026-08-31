@@ -28,7 +28,8 @@ export default function GlobalNetworkPage() {
             src="/global-hero-globe.avif"
             alt="Global Network Hero Background"
             fill
-            priority
+            preload
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center opacity-50"
           />

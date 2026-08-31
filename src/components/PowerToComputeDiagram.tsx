@@ -49,7 +49,6 @@ export default function PowerToComputeDiagram() {
             width={1920}
             height={1080}
             className="w-full h-auto object-contain filter drop-shadow-[0_0_40px_rgba(61,174,255,0.15)]"
-            priority
           />
         </div>
       </div>

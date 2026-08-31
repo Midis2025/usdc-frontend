@@ -125,7 +125,6 @@ export default function Footer() {
                 width={180}
                 height={60}
                 className="h-[52px] w-auto"
-                priority
               />
             </Link>
             <p className="text-[13.5px] text-white/45 max-w-[420px] leading-[1.8] mt-6 font-normal">

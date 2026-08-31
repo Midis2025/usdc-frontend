@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -55,9 +56,14 @@ export default function EnergyPage() {
 
         {/* Ambient Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-50"
-            style={{ backgroundImage: "url('/Group 344 (1).webp')" }}
+          <Image
+            src="/Group 344 (1).webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center opacity-50"
           />
         </div>
 

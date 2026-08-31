@@ -8,6 +8,8 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <main className="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-12 lg:px-16 pt-24 sm:pt-28 pb-12 sm:pb-16 relative min-h-[100dvh] select-none overflow-hidden max-w-full w-full">
+      {/* LCP: poster is preloaded at high priority; React hoists this into <head> */}
+      <link rel="preload" as="image" href="/usdc-hero-poster.webp" fetchPriority="high" />
 
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
@@ -17,6 +19,7 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
+          poster="/usdc-hero-poster.webp"
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         >
           <source src="/usdc-hero.mp4" type="video/mp4" />

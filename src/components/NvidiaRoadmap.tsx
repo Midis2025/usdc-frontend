@@ -375,7 +375,6 @@ export default function NvidiaRoadmap() {
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
-                    priority={i === 0}
                   />
                 </div>
               ))}

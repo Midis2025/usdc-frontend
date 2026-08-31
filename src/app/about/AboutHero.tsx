@@ -14,7 +14,8 @@ export default function AboutHero() {
           src="/About hero bg.webp"
           alt="About Hero Background"
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover object-center"
         />

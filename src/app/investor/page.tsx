@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -270,10 +272,15 @@ export default function InvestorPage() {
         >
           {/* Ambient Background Image */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/USDC%20website/Group%20334.webp')" }}
-            />
+            <Image
+            src="/USDC website/Group 334.webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
           </div>
 
           <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center text-center">

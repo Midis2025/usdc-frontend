@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 /* ═══════════════════════ Career Hero ═══════════════════════ */
@@ -42,12 +43,19 @@ export default function CareerHero() {
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-12 lg:px-16 pt-28 pb-20 overflow-hidden bg-[#04070f] select-none"
-      style={{
-        backgroundImage: "url('/Group 346.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
     >
+      {/* ── Hero background (LCP image) ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <Image
+          src="/Group 346.webp"
+          alt=""
+          fill
+          preload
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
 
       {/* ── Deep layered glows ── */}
       <div className="absolute inset-0 pointer-events-none">

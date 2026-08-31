@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import HeroVideo from "@/components/HeroVideo";
 import Footer from "@/components/Footer";
 import { Server, Thermometer, Shield, Columns } from "lucide-react";
 import DataCenterArchitecture from "@/components/DataCenterArchitecture";
@@ -59,16 +60,12 @@ export default function DataCenterPage() {
       {/* ── HERO SECTION ── */}
       <section className="relative w-full min-h-[60vh] md:min-h-screen flex items-center pt-24 pb-12 md:pt-40 md:pb-16 overflow-hidden select-none">
         {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <HeroVideo
+          src="/data-center-tour.mp4"
+          poster="/data-center-tour-poster.webp"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{ filter: "brightness(0.4)" }}
-        >
-          <source src="/data-center-tour.mp4" type="video/mp4" />
-        </video>
+        />
 
         {/* Ambient Blue Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-blue-600/[0.08] rounded-full blur-[140px] pointer-events-none z-[2]" />

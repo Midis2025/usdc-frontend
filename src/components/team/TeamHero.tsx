@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import React, { useEffect, useState } from "react";
 
 export default function TeamHero() {
@@ -22,10 +24,15 @@ export default function TeamHero() {
     >
       {/* Ambient Background Image with gradient overlays */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-70"
-          style={{ backgroundImage: "url('/USDC%20website/Group%20339.webp')" }}
-        />
+        <Image
+            src="/USDC website/Group 339.webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center opacity-70"
+          />
         {/* Vignette gradients to blend into the layout */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#030810_75%)]" />
         <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-[#030810] to-transparent" />

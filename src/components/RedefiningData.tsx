@@ -65,7 +65,6 @@ export default function RedefiningData() {
           fill
           className="object-cover object-center"
           sizes="100vw"
-          priority
         />
         {/* Subtle dark tint to integrate with page styling */}
         <div className="absolute inset-0 bg-[#04070f]/20" />

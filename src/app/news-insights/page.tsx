@@ -144,9 +144,14 @@ export default function NewsInsightsPage() {
       <section className="relative w-full min-h-[60vh] md:min-h-screen flex flex-col items-center justify-center pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden border-b border-white/5 animate-fade-in select-none">
         {/* Ambient Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/USDC%20website/Group%20335.webp')" }}
+          <Image
+            src="/USDC website/Group 335.webp"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-center"
           />
         </div>
 

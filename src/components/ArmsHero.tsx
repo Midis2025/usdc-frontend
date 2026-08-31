@@ -15,7 +15,8 @@ export default function ArmsHero() {
           src="/Group 341.avif"
           alt="ARMS Hero Background"
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover object-center"
         />

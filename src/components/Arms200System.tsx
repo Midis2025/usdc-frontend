@@ -325,7 +325,6 @@ export default function Arms200System() {
                 width={350}
                 height={480}
                 className="relative z-10 w-full h-auto object-contain rounded-xl"
-                priority
               />
             </div>
           </div>

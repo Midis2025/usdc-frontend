@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PartnerSection from "@/components/PartnerSection";
 import CampusSchematicModel from "@/components/reference-architectures/CampusSchematicModel";
 import WhatUsdcDeploysModel from "@/components/reference-architectures/WhatUsdcDeploysModel";
 import PodReferenceCards from "@/components/reference-architectures/PodReferenceCards";
@@ -165,20 +166,6 @@ export default function UseCasesPage() {
 
   return (
     <div className="ra-page-root" ref={containerRef}>
-      {/* Zero-flash route resolver for direct URL / refresh */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `(function(){
-            try {
-              var h = (window.location.hash || '').replace(/^#\\/?/, '');
-              if (h === 'ra-01' || h === 'ra-02' || h === 'ra-03') {
-                document.documentElement.classList.add('route-' + h);
-              }
-            } catch(e){}
-          })();`,
-        }}
-      />
-
       <Navbar />
 
       <main className="pt-[85px] md:pt-[95px]">
@@ -906,6 +893,8 @@ export default function UseCasesPage() {
           </div>
         </section>
       </main>
+
+      <PartnerSection />
 
       <Footer />
 

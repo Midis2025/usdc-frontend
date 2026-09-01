@@ -38,7 +38,7 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         <p className="sum">
           Most buyers need two to three megawatts now and cannot commit to twenty. The pod is the unit of purchase, so the second and sixth pod land on the same design as the first.
         </p>
-        
+
         <div className="viz" aria-hidden="true">
           <svg className="dg mini interactive-mini" viewBox="0 0 300 150">
             <defs>
@@ -164,9 +164,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
             <div className="l">Illustrative 10–15 MW campus</div>
           </div>
         </div>
-        <span className="link">
-          Read the architecture <span className="arrow" aria-hidden="true">→</span>
-        </span>
+        <div className="card-btn">
+          <span>Read the architecture</span>
+          <span className="arrow" aria-hidden="true">→</span>
+        </div>
       </a>
 
       {/* ═══ Card 02: Prefill Sidecar & Decode Floor ═══ */}
@@ -183,7 +184,7 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         <p className="sum">
           Serving a model has two phases with opposite hardware appetites. Splitting them inside one pod lets each phase run on the silicon it actually needs.
         </p>
-        
+
         <div className="viz" aria-hidden="true">
           <svg className="dg mini interactive-mini" viewBox="0 0 300 150">
             <defs>
@@ -288,9 +289,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
             <div className="v q">Decode: bandwidth-bound, bursty</div>
           </div>
         </div>
-        <span className="link">
-          Read the architecture <span className="arrow" aria-hidden="true">→</span>
-        </span>
+        <div className="card-btn">
+          <span>Read the architecture</span>
+          <span className="arrow" aria-hidden="true">→</span>
+        </div>
       </a>
 
       {/* ═══ Card 03: KV Cache Network Backbone ═══ */}
@@ -305,9 +307,9 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
         </div>
         <h2>KV cache becomes a network service across the USDC footprint.</h2>
         <p className="sum">
-          Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage, and it only works if the sites sit on good fiber.
+          Agentic workloads send the same long context back to the model over and over. A shared cache tier turns that repetition from a cost into an advantage and it only works if the sites sit on good fiber.
         </p>
-        
+
         <div className="viz" aria-hidden="true">
           <svg className="dg mini interactive-mini" viewBox="0 0 300 150">
             <defs>
@@ -405,9 +407,10 @@ export function IndexCards({ onNavigate }: IndexCardsProps) {
             <div className="l">Inter-site round-trip target, three diverse paths</div>
           </div>
         </div>
-        <span className="link">
-          Read the architecture <span className="arrow" aria-hidden="true">→</span>
-        </span>
+        <div className="card-btn">
+          <span>Read the architecture</span>
+          <span className="arrow" aria-hidden="true">→</span>
+        </div>
       </a>
     </div>
   );
@@ -463,17 +466,17 @@ export function FlowToggle({ id, activeFlow, onFlowChange }: FlowToggleProps) {
   const labels =
     id === "ra1"
       ? [
-          { flow: "power", label: "Power", swStyle: {} },
-          { flow: "cooling", label: "Cooling", swStyle: {} },
-          { flow: "network", label: "Network", swStyle: {} },
-        ]
+        { flow: "power", label: "Power", swStyle: {} },
+        { flow: "cooling", label: "Cooling", swStyle: {} },
+        { flow: "network", label: "Network", swStyle: {} },
+      ]
       : id === "ra2"
-      ? [
+        ? [
           { flow: "power", label: "Prefill", swStyle: { background: "var(--warm)" } },
           { flow: "cooling", label: "Decode", swStyle: { background: "var(--accent)" } },
           { flow: "network", label: "Fabric", swStyle: {} },
         ]
-      : [
+        : [
           { flow: "power", label: "Node", swStyle: {} },
           { flow: "cooling", label: "Site", swStyle: { background: "var(--accent)" } },
           { flow: "network", label: "Footprint", swStyle: {} },
@@ -616,7 +619,7 @@ const STEP_DATA = {
     steps: [
       { num: "01", heading: "Mooncake Store · pool", text: "Runs a cluster wide distributed KV cache pool, with a master server holding metadata and clients on each GPU node." },
       { num: "02", heading: "GPUDirect RDMA · transfer", text: "Moves cache without consuming GPU streaming multiprocessors and without a CPU staging buffer, on dedicated background threads so GPU kernel launches are not blocked." },
-      { num: "03", heading: "LMCache · tiers and reuse", text: "Does the same job across GPU memory, CPU memory, local SSD, and remote backends, and reuses cache across requests, sessions, and engine instances." },
+      { num: "03", heading: "LMCache · tiers and reuse", text: "Does the same job across GPU memory, CPU memory, local SSD and remote backends and reuses cache across requests, sessions and engine instances." },
     ],
     notes: {
       1: { title: "Step 01 · Pool", note: "<strong>Step 01.</strong> Mooncake Store keeps a cluster-wide pool: one master server for metadata, a client on every GPU node." },
@@ -672,67 +675,130 @@ export function StepsSwitcher({ id }: StepsSwitcherProps) {
               <span className="micro">Software layer</span>
             </div>
 
-        {id === "ra3" && (
-          <svg className="dg" data-step-svg viewBox="0 0 600 300" aria-hidden="true">
-            <g transform="translate(220,20)">
-              <rect className="box" width="160" height="40" rx="3" />
-              <text x="10" y="17" className="t2">Master server</text>
-              <text x="10" y="32" className="sec">Metadata</text>
-            </g>
-            <g transform="translate(20,110)">
-              <rect className="box" width="160" height="70" rx="3" />
-              <text x="10" y="20" className="t2">GPU node A</text>
-              <text x="10" y="36" className="sec">Client</text>
-              <rect className={`cold fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="44" width="140" height="18" rx="2" />
-              <text x="16" y="57" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2">KV block</text>
-            </g>
-            <g transform="translate(220,110)">
-              <rect className="box" width="160" height="70" rx="3" />
-              <text x="10" y="20" className="t2">GPU node B</text>
-              <text x="10" y="36" className="sec">Client</text>
-              <rect className={`cold fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="44" width="140" height="18" rx="2" />
-              <text x="16" y="57" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2">KV block</text>
-            </g>
-            <g transform="translate(420,110)">
-              <rect className="box" width="160" height="70" rx="3" />
-              <text x="10" y="20" className="t2">GPU node C</text>
-              <text x="10" y="36" className="sec">Client</text>
-              <rect className={`cold fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="44" width="140" height="18" rx="2" />
-              <text x="16" y="57" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2">KV block</text>
-            </g>
-            <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M300 60 V85 H100 V110" />
-            <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M300 85 V110" />
-            <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M300 85 H500 V110" />
-            <path className={`wire power draw ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" d="M180 163 H220" />
-            <path className={`wire power draw ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" d="M380 163 H420" />
-            <text x="20" y="210" className={`sec fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2">
-              GPUDirect RDMA · no SM time · no CPU staging · background threads
-            </text>
-            <g className={`fade ${currentStep >= 3 ? "on" : ""}`} data-step-on="3">
-              <rect x="20" y="228" width="560" height="52" rx="3" fill="none" stroke="var(--line-strong)" strokeDasharray="3 3" />
-              <text x="32" y="248" className="t2">LMCache tiers</text>
-              <text x="32" y="266" className="sec">GPU · CPU · local SSD · remote backends — reused across requests, sessions, engines</text>
-            </g>
+            {id === "ra3" && (
+              <svg className="dg" data-step-svg viewBox="0 0 620 340" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ra3sCardG" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(16,30,56,0.85)" />
+                    <stop offset="100%" stopColor="rgba(8,16,36,0.7)" />
+                  </linearGradient>
+                  <linearGradient id="ra3sMasterG" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(6,182,212,0.28)" />
+                    <stop offset="100%" stopColor="rgba(3,105,161,0.35)" />
+                  </linearGradient>
+                  <linearGradient id="ra3sRdmaG" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(56,189,248,0.3)" />
+                    <stop offset="100%" stopColor="rgba(37,99,235,0.4)" />
+                  </linearGradient>
+                  <linearGradient id="ra3sTierG" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(88,28,135,0.28)" />
+                    <stop offset="100%" stopColor="rgba(30,10,60,0.22)" />
+                  </linearGradient>
+                </defs>
 
-            <path data-pulse="net" data-step="1" data-dur="2.2" data-n="1" d="M300 60 V85 H100 V110" className={currentStep === 1 ? "on" : ""} />
-            <path data-pulse="net" data-step="1" data-dur="2.2" data-n="1" d="M300 60 V85 H500 V110" className={currentStep === 1 ? "on" : ""} />
-            <path data-pulse="power" data-step="2" data-dur="1.4" data-n="2" d="M180 163 H220" className={currentStep === 2 ? "on" : ""} />
-            <path data-pulse="power" data-step="2" data-dur="1.4" data-n="2" d="M380 163 H420" className={currentStep === 2 ? "on" : ""} />
-            <path data-pulse="net" data-step="3" data-dur="4" data-n="3" d="M32 280 H570" className={currentStep === 3 ? "on" : ""} />
-          </svg>
-        )}
+                {/* ===== MASTER SERVER ===== */}
+                <g transform="translate(200,14)">
+                  <rect className="box" width="220" height="52" rx="8" fill="url(#ra3sMasterG)" stroke="#06b6d4" strokeWidth="1.2" />
+                  <circle cx="18" cy="20" r="6" fill="#06b6d4" />
+                  <text x="30" y="24" className="t2" style={{ fontSize: "13px", fontWeight: 800, letterSpacing: "0.8px", fill: "#e6effd" }}>Master Server</text>
+                  <text x="30" y="40" className="sec" style={{ fontSize: "8.5px", fill: "#67e8f9", letterSpacing: "0.4px" }}>Metadata Registry · Cluster-Wide</text>
+                  <rect x="172" y="12" width="38" height="16" rx="3" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="0.8" />
+                  <text x="191" y="23" textAnchor="middle" style={{ fontSize: "7.5px", fontWeight: 700, fill: "#22d3ee", letterSpacing: "0.6px" }}>LIVE</text>
+                </g>
 
-        {id === "ra3" && (
-          <>
-            <p className="phase-note" data-step-note dangerouslySetInnerHTML={{ __html: stepInfo.note }} />
-            {data.source && (
-              <p className="source" style={{ marginTop: 16 }}>
-                <b>Source.</b> {data.source}
-              </p>
+                {/* ===== GPU NODE A ===== */}
+                <g transform="translate(16,120)">
+                  <rect className="box" width="184" height="86" rx="8" fill="url(#ra3sCardG)" stroke="rgba(56,189,248,0.45)" strokeWidth="1.1" />
+                  <circle cx="16" cy="20" r="5.5" fill="#38bdf8" />
+                  <text x="28" y="24" className="t2" style={{ fontSize: "12px", fontWeight: 800, letterSpacing: "0.6px", fill: "#e6effd" }}>GPU Node A</text>
+                  <text x="28" y="38" className="sec" style={{ fontSize: "8.5px", fill: "#7ba2dd", letterSpacing: "0.4px" }}>Mooncake Client</text>
+                  <rect className={`cold fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="50" width="164" height="26" rx="5" />
+                  <text x="18" y="67" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" style={{ fontSize: "10px", fontWeight: 700, fill: "#e6effd", letterSpacing: "0.5px" }}>KV Cache Block</text>
+                  <circle cx="160" cy="63" r="4" fill="#38bdf8" className={`fade ${currentStep >= 2 ? "on" : ""}`} />
+                </g>
+
+                {/* ===== GPU NODE B ===== */}
+                <g transform="translate(218,120)">
+                  <rect className="box" width="184" height="86" rx="8" fill="url(#ra3sCardG)" stroke="rgba(56,189,248,0.45)" strokeWidth="1.1" />
+                  <circle cx="16" cy="20" r="5.5" fill="#38bdf8" />
+                  <text x="28" y="24" className="t2" style={{ fontSize: "12px", fontWeight: 800, letterSpacing: "0.6px", fill: "#e6effd" }}>GPU Node B</text>
+                  <text x="28" y="38" className="sec" style={{ fontSize: "8.5px", fill: "#7ba2dd", letterSpacing: "0.4px" }}>Mooncake Client</text>
+                  <rect className={`cold fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="50" width="164" height="26" rx="5" />
+                  <text x="18" y="67" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" style={{ fontSize: "10px", fontWeight: 700, fill: "#e6effd", letterSpacing: "0.5px" }}>KV Cache Block</text>
+                  <circle cx="160" cy="63" r="4" fill="#38bdf8" className={`fade ${currentStep >= 2 ? "on" : ""}`} />
+                </g>
+
+                {/* ===== GPU NODE C ===== */}
+                <g transform="translate(420,120)">
+                  <rect className="box" width="184" height="86" rx="8" fill="url(#ra3sCardG)" stroke="rgba(56,189,248,0.45)" strokeWidth="1.1" />
+                  <circle cx="16" cy="20" r="5.5" fill="#38bdf8" />
+                  <text x="28" y="24" className="t2" style={{ fontSize: "12px", fontWeight: 800, letterSpacing: "0.6px", fill: "#e6effd" }}>GPU Node C</text>
+                  <text x="28" y="38" className="sec" style={{ fontSize: "8.5px", fill: "#7ba2dd", letterSpacing: "0.4px" }}>Mooncake Client</text>
+                  <rect className={`cold fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" x="10" y="50" width="164" height="26" rx="5" />
+                  <text x="18" y="67" className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" style={{ fontSize: "10px", fontWeight: 700, fill: "#e6effd", letterSpacing: "0.5px" }}>KV Cache Block</text>
+                  <circle cx="160" cy="63" r="4" fill="#38bdf8" className={`fade ${currentStep >= 2 ? "on" : ""}`} />
+                </g>
+
+                {/* ===== MASTER → NODE WIRES ===== */}
+                <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M310 66 V90 H108 V120" />
+                <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M310 90 V120" />
+                <path className={`wire net draw ${currentStep >= 1 ? "on" : ""}`} data-step-on="1" d="M310 90 H512 V120" />
+
+                {/* ===== RDMA TRANSFER ARROWS ===== */}
+                <path className={`wire power draw ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" d="M200 173 H218" />
+                <path className={`wire power draw ${currentStep >= 2 ? "on" : ""}`} data-step-on="2" d="M402 173 H420" />
+
+                {/* RDMA Label */}
+                <g className={`fade ${currentStep >= 2 ? "on" : ""}`} data-step-on="2">
+                  <rect x="16" y="222" width="588" height="28" rx="6" fill="url(#ra3sRdmaG)" stroke="rgba(56,189,248,0.35)" strokeWidth="0.9" />
+                  <circle cx="30" cy="236" r="4.5" fill="#38bdf8" />
+                  <text x="42" y="240" className="sec" style={{ fontSize: "9.5px", fill: "#93c5fd", fontWeight: 600, letterSpacing: "0.3px" }}>
+                    GPUDirect RDMA · No SM Time · No CPU Staging · Background Threads
+                  </text>
+                </g>
+
+                {/* ===== LMCACHE TIERS (STEP 3) ===== */}
+                <g className={`fade ${currentStep >= 3 ? "on" : ""}`} data-step-on="3">
+                  <rect x="16" y="260" width="588" height="64" rx="8" fill="url(#ra3sTierG)" stroke="rgba(168,85,247,0.45)" strokeWidth="1.1" strokeDasharray="4 3" />
+                  <circle cx="32" cy="280" r="5.5" fill="#c084fc" />
+                  <text x="44" y="284" className="t2" style={{ fontSize: "12px", fontWeight: 800, letterSpacing: "0.8px", fill: "#e6effd" }}>LMCache Tiers</text>
+
+                  {/* Tier chips */}
+                  <rect x="44" y="296" width="44" height="16" rx="3" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" strokeWidth="0.7" />
+                  <text x="66" y="307" textAnchor="middle" style={{ fontSize: "7.5px", fontWeight: 700, fill: "#38bdf8", letterSpacing: "0.5px" }}>GPU</text>
+
+                  <rect x="96" y="296" width="44" height="16" rx="3" fill="rgba(96,165,250,0.18)" stroke="#60a5fa" strokeWidth="0.7" />
+                  <text x="118" y="307" textAnchor="middle" style={{ fontSize: "7.5px", fontWeight: 700, fill: "#60a5fa", letterSpacing: "0.5px" }}>CPU</text>
+
+                  <rect x="148" y="296" width="44" height="16" rx="3" fill="rgba(129,140,248,0.18)" stroke="#818cf8" strokeWidth="0.7" />
+                  <text x="170" y="307" textAnchor="middle" style={{ fontSize: "7.5px", fontWeight: 700, fill: "#818cf8", letterSpacing: "0.5px" }}>SSD</text>
+
+                  <rect x="200" y="296" width="62" height="16" rx="3" fill="rgba(168,85,247,0.18)" stroke="#a855f7" strokeWidth="0.7" />
+                  <text x="231" y="307" textAnchor="middle" style={{ fontSize: "7.5px", fontWeight: 700, fill: "#c084fc", letterSpacing: "0.5px" }}>REMOTE</text>
+
+                  <text x="280" y="308" style={{ fontSize: "8px", fontWeight: 600, fill: "#93a5c4", letterSpacing: "0.3px" }}>Reused across requests, sessions, engines</text>
+                </g>
+
+                {/* ===== PULSE PATHS ===== */}
+                <path data-pulse="net" data-step="1" data-dur="2.2" data-n="1" d="M310 66 V90 H108 V120" className={currentStep === 1 ? "on" : ""} />
+                <path data-pulse="net" data-step="1" data-dur="2.2" data-n="1" d="M310 66 V90 H512 V120" className={currentStep === 1 ? "on" : ""} />
+                <path data-pulse="power" data-step="2" data-dur="1.4" data-n="2" d="M200 173 H218" className={currentStep === 2 ? "on" : ""} />
+                <path data-pulse="power" data-step="2" data-dur="1.4" data-n="2" d="M402 173 H420" className={currentStep === 2 ? "on" : ""} />
+                <path data-pulse="net" data-step="3" data-dur="4" data-n="3" d="M32 324 H596" className={currentStep === 3 ? "on" : ""} />
+              </svg>
+            )}
+
+            {id === "ra3" && (
+              <>
+                <p className="phase-note" data-step-note dangerouslySetInnerHTML={{ __html: stepInfo.note }} />
+                {data.source && (
+                  <p className="source" style={{ marginTop: 16 }}>
+                    <b>Source.</b> {data.source}
+                  </p>
+                )}
+              </>
             )}
           </>
-        )}
-        </>
         )}
       </div>
     </div>

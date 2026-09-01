@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pod Envelope · Power + Cooling Feed</title>
+<style>
+  /* ============================================================
+     POD ENVELOPE — Blue AI-infrastructure HUD
+     Single file · zero dependencies · Canvas 2D connector fabric
+     Tunable constants live in the CONFIG block near the top of the script.
+     ============================================================ */
+
+  :root{
+    --bg-0:#02060e;
+    --bg-1:#050b18;
+
+    --edge:#3b9dff;        /* primary electric blue          */
+    --edge-2:#2a6bc0;      /* deeper blue                    */
+    --cyan:#8cc6ff;        /* bright highlight               */
+    --title:#e9f2ff;       /* near-white, blue-tinted        */
+    --sub:#5a9bef;         /* medium electric subtitle       */
+    --meta:#adbfd9;        /* light grey-blue metadata       */
+    --dim:#41618c;         /* muted conceptual labels        */
+
+    --card-bd:rgba(59,157,255,.50);
+    --card-bd-strong:rgba(59,157,255,.62);
+    --rule:rgba(95,150,225,.15);
+    --grid:rgba(56,120,205,.055);
+    --grid-major:rgba(70,140,230,.075);
+
+    --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{height:100%}
+  body{
+    background:
+      radial-gradient(120% 90% at 50% -10%, #0a1730 0%, var(--bg-1) 42%, var(--bg-0) 100%);
+    color:var(--title);
+    font-family:var(--font);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100%;
+    padding:clamp(10px,2.4vw,34px);
+  }
+
+  /* ---------------- Stage ---------------- */
+  .viz{
+    position:relative;
+    width:min(1300px,100%);
+    isolation:isolate;
+  }
+
+  /* subtle animated technical grid */
+  .grid{
+    position:absolute; inset:0; z-index:0; border-radius:16px; overflow:hidden;
+    background:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px),
+      linear-gradient(var(--grid-major) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-major) 1px,transparent 1px);
+    background-size:26px 26px,26px 26px,130px 130px,130px 130px;
+    background-position:0 0,0 0,0 0,0 0;
+    animation:gridDrift 34s linear infinite;
+    -webkit-mask-image:radial-gradient(130% 120% at 50% 40%,#000 55%,transparent 100%);
+            mask-image:radial-gradient(130% 120% at 50% 40%,#000 55%,transparent 100%);
+    opacity:.9;
+  }
+  @keyframes gridDrift{ to{ background-position:26px 26px,26px 26px,130px 130px,130px 130px } }
+
+  /* a few faint fixed glow points in the environment */
+  .points{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .points i{
+    position:absolute;width:2px;height:2px;border-radius:50%;
+    background:var(--edge);opacity:.5;
+    box-shadow:0 0 6px 1px rgba(59,157,255,.5);
+    animation:twinkle 5.5s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.18}50%{opacity:.6}}
+
+  /* outer chrome frame + corner brackets */
+  .frame{
+    position:relative; z-index:2;
+    border:1px solid rgba(59,157,255,.28);
+    border-radius:16px;
+    box-shadow:
+      0 0 0 1px rgba(59,157,255,.04),
+      0 0 60px rgba(20,70,150,.16),
+      inset 0 0 90px rgba(12,40,90,.14);
+    padding:clamp(14px,2vw,26px);
+  }
+  .br{position:absolute;width:26px;height:26px;pointer-events:none;opacity:.85}
+  .br.tl{top:-1px;left:-1px;border-top:2px solid var(--edge);border-left:2px solid var(--edge);border-top-left-radius:16px}
+  .br.tr{top:-1px;right:-1px;border-top:2px solid var(--edge);border-right:2px solid var(--edge);border-top-right-radius:16px}
+  .br.bl{bottom:-1px;left:-1px;border-bottom:2px solid var(--edge);border-left:2px solid var(--edge);border-bottom-left-radius:16px}
+  .br.brr{bottom:-1px;right:-1px;border-bottom:2px solid var(--edge);border-right:2px solid var(--edge);border-bottom-right-radius:16px}
+
+  /* ---------------- Pod Envelope (dashed containment) ---------------- */
+  .envelope{
+    position:relative;
+    border:1px dashed rgba(59,157,255,.34);
+    border-radius:12px;
+    padding:clamp(16px,2.3vw,30px) clamp(16px,2.4vw,32px) clamp(14px,2vw,26px);
+    display:flex;
+    flex-direction:column;
+    gap:clamp(30px,4vw,52px);
+  }
+  .tick{position:absolute;width:13px;height:13px;pointer-events:none;opacity:.8}
+  .tick.tl{top:-1px;left:-1px;border-top:1px solid var(--edge);border-left:1px solid var(--edge)}
+  .tick.tr{top:-1px;right:-1px;border-top:1px solid var(--edge);border-right:1px solid var(--edge)}
+  .tick.bl{bottom:-1px;left:-1px;border-bottom:1px solid var(--edge);border-left:1px solid var(--edge)}
+  .tick.brr{bottom:-1px;right:-1px;border-bottom:1px solid var(--edge);border-right:1px solid var(--edge)}
+
+  .hdr{
+    position:absolute; top:0; left:clamp(16px,2.4vw,32px);
+    transform:translateY(-52%);
+    background:linear-gradient(180deg,var(--bg-1),#050d1c);
+    padding:2px 12px 2px 4px;
+    font-size:clamp(11px,1.05vw,14px);
+    font-weight:600; letter-spacing:.16em; color:var(--title);
+    display:flex; align-items:center; gap:8px; white-space:nowrap;
+  }
+  .hdr .sep{color:var(--edge);opacity:.85}
+  .hdr .hdr-2{color:var(--sub);font-weight:500;letter-spacing:.16em}
+
+  /* ---------------- Generic card ---------------- */
+  .card{
+    position:relative;
+    border:1px solid var(--card-bd);
+    border-radius:14px;
+    background:
+      linear-gradient(180deg,rgba(15,32,60,.55),rgba(8,18,38,.5));
+    box-shadow:
+      0 0 24px rgba(59,157,255,.10),
+      inset 0 0 44px rgba(20,60,120,.10);
+    padding:clamp(16px,1.9vw,26px) clamp(18px,2.1vw,30px);
+    transition:border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+    outline:none;
+  }
+  .card::before{ /* faint internal grid */
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:
+      linear-gradient(rgba(90,150,230,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(90,150,230,.05) 1px,transparent 1px);
+    background-size:22px 22px;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+            mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+    opacity:.6;
+  }
+  .card.is-active,
+  .card:focus-visible{
+    border-color:var(--edge);
+    box-shadow:
+      0 0 34px rgba(59,157,255,.26),
+      0 0 2px rgba(59,157,255,.5),
+      inset 0 0 52px rgba(30,90,170,.16);
+    transform:translateY(-1px);
+  }
+
+  .icon{
+    flex:0 0 auto; color:var(--edge);
+    filter:drop-shadow(0 0 6px rgba(59,157,255,.55));
+    display:block;
+  }
+  .head{display:flex;align-items:flex-start;gap:clamp(12px,1.4vw,18px)}
+
+  .t-title{
+    font-weight:700; color:var(--title);
+    font-size:clamp(18px,1.85vw,26px);
+    letter-spacing:.005em; line-height:1.05;
+  }
+  .t-sub{
+    margin-top:6px; color:var(--sub); font-weight:600;
+    font-size:clamp(11px,1.02vw,14px);
+    letter-spacing:.055em; line-height:1.55;
+  }
+
+  /* ---------------- Feed (primary top module) ---------------- */
+  .feed{
+    border-color:var(--card-bd-strong);
+    box-shadow:0 0 30px rgba(59,157,255,.14),inset 0 0 46px rgba(20,60,120,.12);
+    overflow:hidden;
+  }
+  .feed .head{align-items:center}
+  .feed::after{ /* slow energy sheen */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(100deg,transparent 30%,rgba(90,170,255,.07) 50%,transparent 70%);
+    transform:translateX(-40%);
+    animation:sheen 7.5s ease-in-out infinite;
+  }
+  @keyframes sheen{0%,100%{transform:translateX(-45%)}50%{transform:translateX(45%)}}
+
+  /* ---------------- Roles ---------------- */
+  .roles{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(26px,3.4vw,58px);
+  }
+  .role{display:flex;flex-direction:column;min-width:0}
+  .role .rules{margin:clamp(20px,2.4vw,32px) 0 clamp(16px,2vw,26px);display:flex;flex-direction:column;gap:clamp(11px,1.3vw,17px)}
+  .role .rules span{height:1px;background:var(--rule);border-radius:1px}
+  .role .rules span:nth-child(1){width:100%}
+  .role .rules span:nth-child(2){width:100%}
+  .role .rules span:nth-child(3){width:100%}
+
+  .inner{
+    margin-top:auto;
+    border:1px solid rgba(95,150,225,.24);
+    border-radius:10px;
+    background:linear-gradient(180deg,rgba(9,22,44,.55),rgba(7,16,34,.5));
+    padding:clamp(13px,1.5vw,20px) clamp(14px,1.6vw,22px);
+    display:flex; align-items:center; gap:clamp(12px,1.4vw,18px);
+    transition:border-color .35s ease, box-shadow .35s ease;
+  }
+  .card.is-active .inner,
+  .card:focus-visible .inner{
+    border-color:rgba(59,157,255,.5);
+    box-shadow:0 0 20px rgba(59,157,255,.12) inset;
+  }
+  .inner .in-body{min-width:0;flex:1}
+  .in-title{
+    display:flex; align-items:center; gap:8px;
+    color:var(--edge); font-weight:700;
+    font-size:clamp(12px,1.15vw,15.5px); letter-spacing:.04em;
+  }
+  .stat-dot{
+    width:6px;height:6px;border-radius:50%;background:var(--edge);flex:0 0 auto;
+    box-shadow:0 0 7px 1px rgba(59,157,255,.7);
+    animation:blink 2.4s ease-in-out infinite;
+  }
+  @keyframes blink{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+  .in-line{
+    margin-top:5px; color:var(--meta); font-weight:600;
+    font-size:clamp(10.5px,1vw,13px); letter-spacing:.05em; line-height:1.55;
+  }
+
+  /* inner activity visualisations (blue only, restrained) */
+  .activity{flex:0 0 auto;display:flex;align-items:flex-end;gap:5px;height:34px}
+
+  /* sustained-TDP: near-full steady bar with a slow shimmer */
+  .util{width:clamp(66px,7vw,104px);align-self:center}
+  .util .track{
+    position:relative;height:7px;border-radius:4px;overflow:hidden;
+    background:rgba(30,70,130,.35);
+    box-shadow:inset 0 0 0 1px rgba(59,157,255,.2);
+  }
+  .util .fill{
+    position:absolute; inset:0 12% 0 0; border-radius:4px;
+    background:linear-gradient(90deg,rgba(42,107,192,.85),var(--edge));
+    box-shadow:0 0 10px rgba(59,157,255,.5);
+    animation:breathe 4.2s ease-in-out infinite;
+  }
+  .util .fill::after{
+    content:""; position:absolute; top:0; bottom:0; width:38%;
+    background:linear-gradient(90deg,transparent,rgba(180,220,255,.6),transparent);
+    animation:sweep 3.4s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{right:13%}50%{right:9%}}
+  @keyframes sweep{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+  .util .ticks{display:flex;justify-content:space-between;margin-top:6px}
+  .util .ticks i{width:1px;height:5px;background:rgba(95,150,225,.3)}
+  .card.is-active .util .fill::after{animation-duration:1.9s}
+
+  /* bursty: equaliser bars with organic staggered motion */
+  .eq{height:34px}
+  .eq b{
+    width:clamp(4px,.5vw,6px); border-radius:2px 2px 1px 1px;
+    background:linear-gradient(180deg,var(--edge),rgba(42,107,192,.7));
+    box-shadow:0 0 8px rgba(59,157,255,.4);
+    height:30%;
+    animation:burst 1.5s ease-in-out infinite;
+    transform-origin:bottom;
+  }
+  .eq b:nth-child(1){animation-duration:1.35s;animation-delay:-.2s}
+  .eq b:nth-child(2){animation-duration:1.85s;animation-delay:-.9s}
+  .eq b:nth-child(3){animation-duration:1.15s;animation-delay:-.4s}
+  .eq b:nth-child(4){animation-duration:2.05s;animation-delay:-1.2s}
+  .eq b:nth-child(5){animation-duration:1.55s;animation-delay:-.7s}
+  @keyframes burst{
+    0%,100%{height:22%}
+    20%{height:88%}
+    35%{height:36%}
+    55%{height:100%}
+    72%{height:28%}
+    88%{height:66%}
+  }
+  .card.is-active .eq b{animation-duration:.9s}
+
+  /* ---------------- Fabric (transport layer) ---------------- */
+  .fabric{
+    border-color:var(--card-bd-strong);
+    box-shadow:0 0 30px rgba(59,157,255,.14),inset 0 0 46px rgba(20,60,120,.12);
+    display:flex; align-items:center; gap:clamp(14px,1.6vw,22px);
+  }
+  .fabric .head{flex:0 0 auto;align-items:center}
+  .lane{
+    position:relative; flex:1; height:44px; min-width:120px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  }
+  .lane .rail{
+    position:absolute; left:0; right:0; top:50%; height:1px;
+    background:linear-gradient(90deg,rgba(59,157,255,.12),rgba(59,157,255,.4),rgba(59,157,255,.12));
+  }
+  .lane .lnode{
+    position:absolute; top:50%; width:5px;height:5px;border-radius:50%;
+    transform:translate(-50%,-50%);
+    background:var(--cyan);
+    box-shadow:0 0 8px 1px rgba(59,157,255,.7);
+    animation:lpulse 2.6s ease-in-out infinite;
+  }
+  .lane .lnode:nth-child(2){left:20%;animation-delay:0s}
+  .lane .lnode:nth-child(3){left:50%;animation-delay:.5s}
+  .lane .lnode:nth-child(4){left:80%;animation-delay:1s}
+  @keyframes lpulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(.8)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+  .lane .pkt{
+    position:absolute; top:50%; width:16px;height:2px;border-radius:2px;
+    transform:translateY(-50%);
+    background:linear-gradient(90deg,transparent,var(--cyan),#eaf5ff);
+    box-shadow:0 0 10px rgba(120,190,255,.8);
+    animation:travel 3.1s linear infinite;
+    opacity:0;
+  }
+  .lane .pkt:nth-child(5){animation-delay:0s}
+  .lane .pkt:nth-child(6){animation-delay:-1.03s}
+  .lane .pkt:nth-child(7){animation-delay:-2.06s}
+  @keyframes travel{
+    0%{left:-6%;opacity:0}
+    12%{opacity:1}
+    88%{opacity:1}
+    100%{left:104%;opacity:0}
+  }
+  .fabric.is-active .pkt{animation-duration:1.7s}
+  .fabric.is-active .lnode{animation-duration:1.5s}
+
+  /* ---------------- Foot labels ---------------- */
+  .foot{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:clamp(4px,1vw,10px) clamp(4px,1vw,12px) 0;
+    gap:14px; flex-wrap:wrap;
+  }
+  .foot span{
+    color:var(--dim); font-weight:600; letter-spacing:.19em;
+    font-size:clamp(10.5px,1.05vw,14px);
+  }
+
+  /* ---------------- Connector canvas (top layer) ---------------- */
+  #net{position:absolute;inset:0;z-index:5;pointer-events:none}
+
+  /* ---------------- Entrance ---------------- */
+  .card{opacity:0;transform:translateY(10px)}
+  .viz.ready .card{opacity:1;transform:translateY(0);
+    transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1),
+               border-color .35s ease, box-shadow .35s ease}
+  .viz.ready .feed{transition-delay:.05s}
+  .viz.ready .prefill{transition-delay:.18s}
+  .viz.ready .decode{transition-delay:.26s}
+  .viz.ready .fabric{transition-delay:.4s}
+
+  /* ---------------- Responsive ---------------- */
+  @media (max-width:720px){
+    .roles{grid-template-columns:1fr;gap:clamp(30px,10vw,46px)}
+    .fabric{flex-direction:column;align-items:stretch;gap:14px}
+    .fabric .head{align-items:center}
+    .lane{width:100%}
+    .foot{justify-content:center;gap:10px;text-align:center}
+    .foot span{letter-spacing:.14em}
+    .hdr{font-size:11px;letter-spacing:.12em}
+    .activity{display:none} /* keep small cards clean; canvas + eq of decode still convey motion */
+    .decode .activity{display:flex}
+  }
+  @media (max-width:420px){
+    .decode .activity{display:none}
+    .in-title{font-size:12.5px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important}
+    .viz .card{opacity:1;transform:none;transition:border-color .3s ease,box-shadow .3s ease}
+    .grid{animation:none}
+  }
+</style>
+</head>
+<body>
+  <div class="viz" id="viz" aria-label="Pod envelope power and cooling feed architecture">
+    <div class="grid"></div>
+    <div class="points">
+      <i style="left:8%;top:20%"></i>
+      <i style="left:22%;top:70%;animation-delay:1.4s"></i>
+      <i style="left:63%;top:16%;animation-delay:.8s"></i>
+      <i style="left:88%;top:60%;animation-delay:2.1s"></i>
+      <i style="left:47%;top:88%;animation-delay:1.1s"></i>
+    </div>
+
+    <div class="frame">
+      <span class="br tl"></span><span class="br tr"></span>
+      <span class="br bl"></span><span class="br brr"></span>
+
+      <div class="envelope">
+        <span class="tick tl"></span><span class="tick tr"></span>
+        <span class="tick bl"></span><span class="tick brr"></span>
+
+        <div class="hdr">
+          POD ENVELOPE <span class="sep">·</span>
+          <span class="hdr-2">ONE UNIT TO THE CUSTOMER</span>
+        </div>
+
+        <!-- POWER + COOLING FEED -->
+        <div class="card feed" id="feed" data-hover="feed" tabindex="0"
+             aria-label="Pod power and cooling feed, metered and cooled per role, not as one averaged load">
+          <div class="head">
+            <svg class="icon" width="42" height="42" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.4 21 7.2 12 12 3 7.2Z"/>
+              <path d="M3 7.2v9.6L12 21.6M21 7.2v9.6L12 21.6M12 12v9.6"/>
+              <path d="M7.5 4.8 16.5 9.6M16.5 4.8 7.5 9.6" opacity=".45"/>
+            </svg>
+            <div>
+              <div class="t-title">POD POWER + COOLING FEED</div>
+              <div class="t-sub">METERED AND COOLED PER ROLE, NOT AS ONE AVERAGED LOAD</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROLES -->
+        <div class="roles">
+
+          <!-- PREFILL SIDECAR -->
+          <div class="card role prefill" id="prefill" data-hover="prefill" tabindex="0"
+               aria-label="Prefill sidecar, smaller number of accelerators chosen for raw compute">
+            <div class="head">
+              <svg class="icon" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6.5" y="6.5" width="11" height="11" rx="2"/>
+                <rect x="9.5" y="9.5" width="5" height="5" rx="1"/>
+                <path d="M9.5 3v3M12 3v3M14.5 3v3M9.5 18v3M12 18v3M14.5 18v3M3 9.5h3M3 12h3M3 14.5h3M18 9.5h3M18 12h3M18 14.5h3"/>
+              </svg>
+              <div>
+                <div class="t-title">PREFILL SIDECAR</div>
+                <div class="t-sub">SMALLER NUMBER OF ACCELERATORS<br>CHOSEN FOR RAW COMPUTE</div>
+              </div>
+            </div>
+
+            <div class="rules"><span></span><span></span><span></span></div>
+
+            <div class="inner">
+              <svg class="icon" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h4l2-6 3.5 12 3-9 1.8 3H22"/>
+              </svg>
+              <div class="in-body">
+                <div class="in-title"><span class="stat-dot"></span>NEAR SUSTAINED TDP</div>
+                <div class="in-line">OWN REFRESH CYCLE</div>
+                <div class="in-line">OWN VENDOR</div>
+              </div>
+              <div class="activity util">
+                <div class="track"><div class="fill"></div></div>
+                <div class="ticks"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DECODE FLOOR -->
+          <div class="card role decode" id="decode" data-hover="decode" tabindex="0"
+               aria-label="Decode floor, bulk of the pod chosen for bandwidth and concurrency">
+            <div class="head">
+              <svg class="icon" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 21 8l-9 5-9-5Z"/>
+                <path d="M3 12l9 5 9-5"/>
+                <path d="M3 16l9 5 9-5"/>
+              </svg>
+              <div>
+                <div class="t-title">DECODE FLOOR</div>
+                <div class="t-sub">BULK OF THE POD<br>CHOSEN FOR BANDWIDTH AND CONCURRENCY</div>
+              </div>
+            </div>
+
+            <div class="rules"><span></span><span></span><span></span></div>
+
+            <div class="inner">
+              <svg class="icon" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 20V13"/><path d="M12 20V7"/><path d="M19 20V4"/>
+              </svg>
+              <div class="in-body">
+                <div class="in-title"><span class="stat-dot"></span>BURSTY</div>
+                <div class="in-line">KEEPS RUNNING WHILE THE SIDECAR IS OPENED</div>
+                <div class="in-line">OWN VENDOR</div>
+              </div>
+              <div class="activity eq">
+                <b></b><b></b><b></b><b></b><b></b>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- POD FABRIC -->
+        <div class="card fabric" id="fabric" data-hover="fabric" tabindex="0"
+             aria-label="Pod fabric, joins the two roles, KV cache moves sidecar to floor">
+          <div class="head">
+            <svg class="icon" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 12 4.5 6.5M12 12 20 7.5M12 12 6.5 19.5M12 12 19 18" opacity=".7"/>
+              <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="4.5" cy="6.5" r="1.7"/>
+              <circle cx="20" cy="7.5" r="1.7"/>
+              <circle cx="6.5" cy="19.5" r="1.7"/>
+              <circle cx="19" cy="18" r="1.7"/>
+            </svg>
+            <div>
+              <div class="t-title">POD FABRIC</div>
+              <div class="t-sub">JOINS THE TWO ROLES · KV CACHE MOVES SIDECAR&nbsp;→&nbsp;FLOOR</div>
+            </div>
+          </div>
+          <div class="lane" aria-hidden="true">
+            <div class="rail"></div>
+            <span class="lnode"></span><span class="lnode"></span><span class="lnode"></span>
+            <span class="pkt"></span><span class="pkt"></span><span class="pkt"></span>
+          </div>
+        </div>
+
+        <!-- FOOT -->
+        <div class="foot">
+          <span>SIDECAR · COMPUTE · SUSTAINED</span>
+          <span>FLOOR · BANDWIDTH · BURSTY</span>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="net" aria-hidden="true"></canvas>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===========================================================
+     CONFIG — dial the whole system up or down from here.
+     =========================================================== */
+  const CONFIG = {
+    speed:        46,    // base particle speed (px / second)
+    powerCount:   3,     // particles per power feed line
+    kvCount:      3,     // particles per KV cache line
+    linkCount:    2,     // particles on the sidecar<->floor link
+    pulseGap:     6.0,   // seconds between bright energy pulses
+    hoverBoost:   1.8,   // line-brightness multiplier on hover/focus
+    hoverSpeed:   1.6,   // particle-speed multiplier on hover/focus
+    lineAlpha:    0.5,   // base connector line alpha
+    glow:         1.0    // global glow multiplier
+  };
+
+  const viz    = document.getElementById('viz');
+  const canvas = document.getElementById('net');
+  const ctx    = canvas.getContext('2d');
+  const els = {
+    feed:    document.getElementById('feed'),
+    prefill: document.getElementById('prefill'),
+    decode:  document.getElementById('decode'),
+    fabric:  document.getElementById('fabric')
+  };
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const state = { hover:null, w:0, h:0, dpr:1 };
+  let edges = [], nodes = [], raf = 0, last = 0;
+
+  /* ---------- soft glow sprites (fast, no shadowBlur) ---------- */
+  function sprite(size, stops){
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const g = c.getContext('2d');
+    const r = size/2;
+    const grd = g.createRadialGradient(r,r,0,r,r,r);
+    stops.forEach(s => grd.addColorStop(s[0], s[1]));
+    g.fillStyle = grd; g.fillRect(0,0,size,size);
+    return c;
+  }
+  const glowSprite = sprite(64,[[0,'rgba(90,175,255,0.95)'],[0.35,'rgba(60,145,255,0.35)'],[1,'rgba(60,140,255,0)']]);
+  const coreSprite = sprite(48,[[0,'rgba(234,246,255,1)'],[0.5,'rgba(198,228,255,0.7)'],[1,'rgba(198,228,255,0)']]);
+
+  /* ---------- geometry ---------- */
+  function rectOf(el){
+    const v = viz.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return {
+      l:r.left-v.left, t:r.top-v.top, r:r.right-v.left, b:r.bottom-v.top,
+      w:r.width, h:r.height,
+      cx:(r.left+r.right)/2 - v.left, cy:(r.top+r.bottom)/2 - v.top
+    };
+  }
+  function len(pts){ let d=0; for(let i=0;i<pts.length-1;i++) d+=Math.hypot(pts[i+1].x-pts[i].x, pts[i+1].y-pts[i].y); return d; }
+  function posAt(pts,total,t){
+    let d = t*total;
+    for(let i=0;i<pts.length-1;i++){
+      const a=pts[i], b=pts[i+1], seg=Math.hypot(b.x-a.x,b.y-a.y);
+      if(d<=seg || i===pts.length-2){ const u = seg? d/seg : 0; return {x:a.x+(b.x-a.x)*u, y:a.y+(b.y-a.y)*u}; }
+      d-=seg;
+    }
+    return pts[pts.length-1];
+  }
+
+  function makeEdge(id,pts,hover,kind,o){
+    o=o||{};
+    const e = {
+      id, pts, hover, kind,
+      count: o.count!=null?o.count:CONFIG.powerCount,
+      speed: o.speed!=null?o.speed:CONFIG.speed,
+      pulse: o.pulse!==false,
+      len: len(pts),
+      parts: [],
+      pulseActive:false, pulseP:0,
+      pulseTimer: Math.random()*CONFIG.pulseGap
+    };
+    for(let i=0;i<e.count;i++) e.parts.push(i/e.count);
+    return e;
+  }
+  function N(x,y,r,hover){ nodes.push({x,y,r:r||3,phase:Math.random()*6.28,hover:hover||[]}); }
+
+  function build(){
+    edges = []; nodes = [];
+    const f=rectOf(els.feed), p=rectOf(els.prefill), d=rectOf(els.decode), fab=rectOf(els.fabric);
+    const stacked = d.t > p.b - 4;
+
+    if(!stacked){
+      const midY = p.t + p.h*0.46;
+      edges.push(makeEdge('powerL',[{x:p.cx,y:f.b},{x:p.cx,y:p.t}],['feed','prefill'],'power'));
+      edges.push(makeEdge('powerR',[{x:d.cx,y:f.b},{x:d.cx,y:d.t}],['feed','decode'],'power'));
+      edges.push(makeEdge('link',  [{x:p.r,y:midY},{x:d.l,y:midY}],['prefill','decode'],'link',{count:CONFIG.linkCount,speed:CONFIG.speed*0.8,pulse:false}));
+      edges.push(makeEdge('kvDown',[{x:p.cx,y:p.b},{x:p.cx,y:fab.t}],['prefill','fabric'],'kv',{count:CONFIG.kvCount}));
+      edges.push(makeEdge('kvUp',  [{x:d.cx,y:fab.t},{x:d.cx,y:d.b}],['decode','fabric'],'kv',{count:CONFIG.kvCount}));
+
+      // link centre pair
+      const mx=(p.r+d.l)/2;
+      N(mx-5,midY,2.6,['prefill','decode']); N(mx+5,midY,2.6,['prefill','decode']);
+      // mid junction nodes on the power drops
+      N(p.cx, f.b+(p.t-f.b)*0.45, 2.6, ['feed','prefill']);
+      N(d.cx, f.b+(d.t-f.b)*0.45, 2.6, ['feed','decode']);
+    } else {
+      edges.push(makeEdge('power',[{x:p.cx,y:f.b},{x:p.cx,y:p.t}],['feed','prefill'],'power'));
+      edges.push(makeEdge('kv1',  [{x:p.cx,y:p.b},{x:d.cx,y:d.t}],['prefill','decode','fabric'],'kv',{count:CONFIG.kvCount}));
+      edges.push(makeEdge('kv2',  [{x:d.cx,y:d.b},{x:fab.cx,y:fab.t}],['decode','fabric'],'kv',{count:CONFIG.kvCount}));
+    }
+
+    // endpoint nodes for every edge
+    edges.forEach(e=>{
+      const a=e.pts[0], b=e.pts[e.pts.length-1];
+      N(a.x,a.y,3.1,e.hover); N(b.x,b.y,3.1,e.hover);
+    });
+  }
+
+  /* ---------- sizing ---------- */
+  function resize(){
+    const rect = viz.getBoundingClientRect();
+    state.w = rect.width; state.h = rect.height;
+    state.dpr = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width  = Math.round(state.w*state.dpr);
+    canvas.height = Math.round(state.h*state.dpr);
+    canvas.style.width  = state.w+'px';
+    canvas.style.height = state.h+'px';
+    ctx.setTransform(state.dpr,0,0,state.dpr,0,0);
+    build();
+    if(reduce) drawStatic();
+  }
+
+  /* ---------- draw ---------- */
+  function edgeHL(e){ return (state.hover && e.hover.indexOf(state.hover)!==-1) ? CONFIG.hoverBoost : 1; }
+  function nodeHL(n){ return (state.hover && n.hover.indexOf(state.hover)!==-1) ? 1.7 : 1; }
+
+  function strokeEdge(e,hl){
+    const pts=e.pts;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+    // glow underlay
+    ctx.globalCompositeOperation='lighter';
+    ctx.strokeStyle='rgba(70,150,255,'+(0.10*hl*CONFIG.glow)+')';
+    ctx.lineWidth=5; ctx.lineCap='round'; ctx.stroke();
+    // crisp core
+    ctx.globalCompositeOperation='source-over';
+    ctx.strokeStyle='rgba(59,157,255,'+(CONFIG.lineAlpha*hl)+')';
+    ctx.lineWidth=1.3; ctx.stroke();
+  }
+
+  function drawGlow(x,y,size,alpha){
+    ctx.globalAlpha=alpha;
+    ctx.drawImage(glowSprite, x-size/2, y-size/2, size, size);
+  }
+  function drawCore(x,y,size,alpha){
+    ctx.globalAlpha=alpha;
+    ctx.drawImage(coreSprite, x-size/2, y-size/2, size, size);
+  }
+
+  function frame(now){
+    const dt = Math.min(0.05,(now-last)/1000); last=now;
+    ctx.clearRect(0,0,state.w,state.h);
+
+    // 1) lines
+    edges.forEach(e=> strokeEdge(e, edgeHL(e)));
+
+    // 2) glowing overlay (nodes + particles), additive
+    ctx.globalCompositeOperation='lighter';
+
+    // nodes
+    for(const n of nodes){
+      const hl=nodeHL(n);
+      const pr = n.r*(1 + 0.18*Math.sin(now*0.003 + n.phase));
+      drawGlow(n.x,n.y, pr*4.2*CONFIG.glow, 0.55*hl);
+      drawCore(n.x,n.y, pr*1.8, 0.9*hl);
+    }
+
+    // particles
+    for(const e of edges){
+      const hl = edgeHL(e);
+      const bMul = state.hover && e.hover.indexOf(state.hover)!==-1 ? CONFIG.hoverSpeed : 1;
+      const step = (e.speed*bMul*dt)/Math.max(1,e.len);
+      const bright = e.kind==='link' ? 0.7 : 1;
+
+      for(let i=0;i<e.parts.length;i++){
+        let t=e.parts[i]+step; if(t>1) t-=1; e.parts[i]=t;
+        const pos=posAt(e.pts,e.len,t);
+        const fade=Math.max(0,Math.min(1, Math.min(t*7,(1-t)*7,1)));
+        drawGlow(pos.x,pos.y, 11*CONFIG.glow, 0.5*fade*bright*hl);
+        drawCore(pos.x,pos.y, 4.2, 0.95*fade*bright);
+      }
+
+      // occasional brighter energy pulse
+      if(e.pulse){
+        if(e.pulseActive){
+          e.pulseP += (e.speed*1.1*bMul*dt)/Math.max(1,e.len);
+          if(e.pulseP>1){ e.pulseActive=false; e.pulseTimer=CONFIG.pulseGap*(0.7+Math.random()*0.6); }
+          else{
+            const pos=posAt(e.pts,e.len,e.pulseP);
+            const fade=Math.max(0,Math.min(1, Math.min(e.pulseP*6,(1-e.pulseP)*6,1)));
+            drawGlow(pos.x,pos.y, 20*CONFIG.glow, 0.7*fade*hl);
+            drawCore(pos.x,pos.y, 6.5, 1*fade);
+          }
+        } else {
+          e.pulseTimer-=dt;
+          if(e.pulseTimer<=0){ e.pulseActive=true; e.pulseP=0; }
+        }
+      }
+    }
+
+    ctx.globalAlpha=1;
+    ctx.globalCompositeOperation='source-over';
+    raf=requestAnimationFrame(frame);
+  }
+
+  // static single frame for reduced-motion
+  function drawStatic(){
+    ctx.clearRect(0,0,state.w,state.h);
+    edges.forEach(e=> strokeEdge(e,1));
+    ctx.globalCompositeOperation='lighter';
+    for(const n of nodes){ drawGlow(n.x,n.y,n.r*4,0.5); drawCore(n.x,n.y,n.r*1.7,0.85); }
+    for(const e of edges){ const m=posAt(e.pts,e.len,0.5); drawGlow(m.x,m.y,10,0.45); drawCore(m.x,m.y,4,0.9); }
+    ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+  }
+
+  /* ---------- hover / focus wiring ---------- */
+  Object.values(els).forEach(el=>{
+    const key = el.dataset.hover;
+    const on  = ()=>{ state.hover=key; el.classList.add('is-active'); };
+    const off = ()=>{ if(state.hover===key) state.hover=null; el.classList.remove('is-active'); };
+    el.addEventListener('mouseenter',on);
+    el.addEventListener('mouseleave',off);
+    el.addEventListener('focus',on);
+    el.addEventListener('blur',off);
+  });
+
+  /* ---------- boot ---------- */
+  function boot(){
+    resize();
+    requestAnimationFrame(()=>viz.classList.add('ready'));
+    if(!reduce){ last=performance.now(); raf=requestAnimationFrame(frame); }
+
+    let rt;
+    const onResize=()=>{ clearTimeout(rt); rt=setTimeout(resize,120); };
+    window.addEventListener('resize',onResize);
+    window.addEventListener('orientationchange',onResize);
+    if('ResizeObserver' in window){ new ResizeObserver(onResize).observe(viz); }
+    // re-measure after fonts / late layout settle
+    setTimeout(resize,220); setTimeout(resize,600);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+</body>
+</html>

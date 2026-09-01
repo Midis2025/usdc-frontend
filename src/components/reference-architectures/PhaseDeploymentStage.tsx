@@ -196,9 +196,9 @@ export default function PhaseDeploymentStage({ currentPhase }: PhaseDeploymentSt
         }
         :global(.phase-stage-root .t-island-warn) {
           font-size: 10px;
-          letter-spacing: 1.4px;
+          letter-spacing: 1.1px;
           fill: #fbbf24;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         /* Network Skid & Fabric (Phase 3) */
@@ -487,8 +487,24 @@ export default function PhaseDeploymentStage({ currentPhase }: PhaseDeploymentSt
           {isPhase2 && (
             <g transform="translate(20, 175)">
               <rect x="10" y="0" width="660" height="114" rx="12" className="island-box" />
-              <rect x="230" y="104" width="220" height="22" rx="4" fill="rgba(245,158,11,0.2)" stroke="#fbbf24" strokeWidth="1" />
-              <text x="340" y="119" textAnchor="middle" className="t-island-warn">
+              <rect
+                x="185"
+                y="101"
+                width="310"
+                height="26"
+                rx="6"
+                fill="#161208"
+                stroke="#f59e0b"
+                strokeWidth="1.2"
+                style={{ filter: "drop-shadow(0 0 8px rgba(245,158,11,0.25))" }}
+              />
+              <text
+                x="340"
+                y="114"
+                textAnchor="middle"
+                dominantBaseline="central"
+                className="t-island-warn"
+              >
                 ⚠ 3 ISOLATED ISLANDS · NO FABRIC YET
               </text>
             </g>

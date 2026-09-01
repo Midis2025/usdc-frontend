@@ -1,514 +1,646 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 export default function PodReferenceCards() {
-  const [hoveredRack, setHoveredRack] = useState<string | null>(null);
-
   return (
-    <div className="grid-2 pod-ref-cards-grid">
+    <div className="envelope-wrapper">
+      {/* 2 Pod Reference Cards Grid */}
+      <div className="envelope-cards-grid">
+        {/* ═══ CARD 01: NVIDIA Vera Rubin NVL72 ═══ */}
+        <article className="env-hud-card">
+          {/* Card Header */}
+          <div className="env-card-header">
+            <div className="env-num-badge">01</div>
+            <div className="env-header-text">
+              <span className="env-header-eyebrow">POD REFERENCE</span>
+              <h3 className="env-header-title">NVIDIA Vera Rubin NVL72</h3>
+            </div>
+          </div>
+
+          <div className="env-divider" aria-hidden="true" />
+
+          {/* Card Middle Specs Grid */}
+          <div className="env-specs-grid">
+            {/* Left: IT Load */}
+            <div className="env-load-col">
+              <span className="env-meta-lbl">IT LOAD</span>
+              <span className="env-load-pre">About</span>
+              <div className="env-load-stat">
+                <span className="env-load-num">2.8</span>
+                <span className="env-load-unit">MW</span>
+              </div>
+            </div>
+
+            {/* Right: Specs (Physical Unit + Source) */}
+            <div className="env-details-col">
+              {/* Physical Unit */}
+              <div className="env-detail-item">
+                <div className="env-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" strokeOpacity="0.4" />
+                    <line x1="7" y1="8" x2="17" y2="8" />
+                    <line x1="7" y1="12" x2="17" y2="12" />
+                    <line x1="7" y1="16" x2="17" y2="16" />
+                    <circle cx="5" cy="8" r="0.8" fill="#38bdf8" />
+                    <circle cx="5" cy="12" r="0.8" fill="#38bdf8" />
+                    <circle cx="5" cy="16" r="0.8" fill="#38bdf8" />
+                  </svg>
+                </div>
+                <div className="env-detail-text">
+                  <span className="env-detail-lbl">PHYSICAL UNIT</span>
+                  <p className="env-detail-desc">
+                    14 IT racks plus 2 network and storage racks in a single row, network racks in the middle.
+                  </p>
+                </div>
+              </div>
+
+              {/* Source */}
+              <div className="env-detail-item">
+                <div className="env-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeOpacity="0.4" />
+                    <polyline points="14 2 14 8 20 8" strokeOpacity="0.4" />
+                    <line x1="8" y1="13" x2="16" y2="13" />
+                    <line x1="8" y1="17" x2="13" y2="17" />
+                  </svg>
+                </div>
+                <div className="env-detail-text">
+                  <span className="env-detail-lbl">SOURCE</span>
+                  <p className="env-detail-desc">
+                    Vera Rubin NVL72 Facility Planning Summary
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Schematic Box: Single Row Layout */}
+          <div className="env-schematic-box">
+            <div className="env-schematic-head">
+              <span className="env-schematic-title">SINGLE ROW LAYOUT</span>
+            </div>
+
+            <div className="env-schematic-subhead">
+              <span className="env-subhead-left">14 IT racks</span>
+              <span className="env-subhead-mid">2 N/W / storage</span>
+            </div>
+
+            {/* SVG 16 Racks (7 blue + 2 dashed gray + 7 blue) */}
+            <div className="env-racks-svg-wrap">
+              <svg viewBox="0 0 460 36" className="env-racks-svg" preserveAspectRatio="none">
+                <g>
+                  {/* 7 Left IT Racks (Solid Blue) */}
+                  {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+                    <rect
+                      key={`it-l-${i}`}
+                      x={2 + i * 28.5}
+                      y="2"
+                      width="23.5"
+                      height="32"
+                      rx="2"
+                      fill="rgba(37, 99, 235, 0.12)"
+                      stroke="#2563eb"
+                      strokeWidth="1.2"
+                    />
+                  ))}
+
+                  {/* 2 Middle Network Racks (Dashed Gray/Slate) */}
+                  {[0, 1].map((i) => (
+                    <rect
+                      key={`nw-m-${i}`}
+                      x={201.5 + i * 28.5}
+                      y="2"
+                      width="23.5"
+                      height="32"
+                      rx="2"
+                      fill="rgba(148, 163, 184, 0.06)"
+                      stroke="#94a3b8"
+                      strokeWidth="1.2"
+                      strokeDasharray="2.5 2.5"
+                    />
+                  ))}
+
+                  {/* 7 Right IT Racks (Solid Blue) */}
+                  {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+                    <rect
+                      key={`it-r-${i}`}
+                      x={258.5 + i * 28.5}
+                      y="2"
+                      width="23.5"
+                      height="32"
+                      rx="2"
+                      fill="rgba(37, 99, 235, 0.12)"
+                      stroke="#2563eb"
+                      strokeWidth="1.2"
+                    />
+                  ))}
+                </g>
+              </svg>
+            </div>
+
+            {/* Dimension Line with Center Text */}
+            <div className="env-dim-row">
+              <div className="env-dim-arrow-l">◀</div>
+              <div className="env-dim-line" />
+              <span className="env-dim-label">Single row</span>
+              <div className="env-dim-line" />
+              <div className="env-dim-arrow-r">▶</div>
+            </div>
+          </div>
+        </article>
+
+        {/* ═══ CARD 02: Cerebras CS4 ═══ */}
+        <article className="env-hud-card">
+          {/* Card Header */}
+          <div className="env-card-header">
+            <div className="env-num-badge">02</div>
+            <div className="env-header-text">
+              <span className="env-header-eyebrow">POD REFERENCE</span>
+              <h3 className="env-header-title">Cerebras CS4</h3>
+            </div>
+          </div>
+
+          <div className="env-divider" aria-hidden="true" />
+
+          {/* Card Middle Specs Grid */}
+          <div className="env-specs-grid">
+            {/* Left: IT Load */}
+            <div className="env-load-col">
+              <span className="env-meta-lbl">IT LOAD</span>
+              <span className="env-load-pre">About</span>
+              <div className="env-load-stat">
+                <span className="env-load-num">2.5</span>
+                <span className="env-load-unit">MW</span>
+              </div>
+            </div>
+
+            {/* Right: Specs (Physical Unit + Source) */}
+            <div className="env-details-col">
+              {/* Physical Unit */}
+              <div className="env-detail-item">
+                <div className="env-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" strokeOpacity="0.4" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                  </svg>
+                </div>
+                <div className="env-detail-text">
+                  <span className="env-detail-lbl">PHYSICAL UNIT</span>
+                  <p className="env-detail-desc">
+                    11 containers, about 3,970 sq ft.
+                  </p>
+                </div>
+              </div>
+
+              {/* Source */}
+              <div className="env-detail-item">
+                <div className="env-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeOpacity="0.4" />
+                    <polyline points="14 2 14 8 20 8" strokeOpacity="0.4" />
+                    <line x1="8" y1="13" x2="16" y2="13" />
+                    <line x1="8" y1="17" x2="13" y2="17" />
+                  </svg>
+                </div>
+                <div className="env-detail-text">
+                  <span className="env-detail-lbl">SOURCE</span>
+                  <p className="env-detail-desc">
+                    DigiPowerX Cerebras CS4 Business Case
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Schematic Box: Container Layout */}
+          <div className="env-schematic-box">
+            <div className="env-schematic-head">
+              <span className="env-schematic-title">CONTAINER LAYOUT</span>
+            </div>
+
+            <div className="env-schematic-subhead">
+              <span className="env-subhead-left">11 containers</span>
+            </div>
+
+            {/* SVG 11 Containers (Solid Blue) */}
+            <div className="env-racks-svg-wrap">
+              <svg viewBox="0 0 460 36" className="env-racks-svg" preserveAspectRatio="none">
+                <g>
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+                    <rect
+                      key={`cs-${i}`}
+                      x={2 + i * 41.6}
+                      y="2"
+                      width="35.5"
+                      height="32"
+                      rx="2"
+                      fill="rgba(37, 99, 235, 0.12)"
+                      stroke="#2563eb"
+                      strokeWidth="1.2"
+                    />
+                  ))}
+                </g>
+              </svg>
+            </div>
+
+            {/* Dimension Line with Right-Aligned Label */}
+            <div className="env-dim-row-right">
+              <div className="env-dim-arrow-l">◀</div>
+              <div className="env-dim-line" />
+              <span className="env-dim-label">≈ 3,970 sq ft</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      {/* ═══ BOTTOM FULL-WIDTH BANNER: MULTI-POD LAYOUT ═══ */}
+      <div className="env-multi-banner">
+        <div className="env-banner-left">
+          <div className="env-banner-hex-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="#38bdf8" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="20 2, 36 11, 36 29, 20 38, 4 29, 4 11" stroke="rgba(56,189,248,0.3)" fill="rgba(14,38,74,0.4)" />
+              {/* 3 Isometric Cubes */}
+              <g transform="translate(11, 10) scale(0.75)">
+                <path d="M12 2 L20 6.5 L12 11 L4 6.5 Z" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" />
+                <path d="M4 6.5 L12 11 L12 20 L4 15.5 Z" stroke="#38bdf8" />
+                <path d="M20 6.5 L12 11 L12 20 L20 15.5 Z" stroke="#38bdf8" />
+              </g>
+            </svg>
+          </div>
+          <span className="env-banner-title">MULTI-POD LAYOUT</span>
+        </div>
+
+        <div className="env-banner-divider" aria-hidden="true" />
+
+        <div className="env-banner-right">
+          <p className="env-banner-desc">
+            Rows of IT pods placed contiguously across the length, with one network skid per five IT pods. A ten to fifteen megawatt campus is therefore four to six pods and one to two network skids.
+          </p>
+        </div>
+      </div>
+
       <style jsx>{`
-        .pod-ref-cards-grid {
+        .envelope-wrapper {
+          width: 100%;
+          font-family: inherit;
+        }
+
+        /* Two Cards Grid */
+        .envelope-cards-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 24px;
-          margin-top: 24px;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(20px, 2.5vw, 32px);
         }
 
-        .ref-card {
+        /* HUD Card Container */
+        .env-hud-card {
+          background: #040914;
+          border: 1px solid rgba(56, 189, 248, 0.18);
+          border-radius: 12px;
+          padding: clamp(20px, 2.5vw, 28px);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+          display: flex;
+          flex-direction: column;
           position: relative;
-          background: radial-gradient(800px 400px at 50% 0%, #0a1428 0%, #05070f 70%, #03040a 100%);
-          border: 1px solid rgba(93, 140, 230, 0.28);
-          border-radius: 18px;
-          padding: 24px;
-          box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-          overflow: hidden;
-          font-family: var(--font-mono), ui-monospace, monospace;
         }
 
-        .ref-card:hover {
-          transform: translateY(-3px);
-          border-color: rgba(110, 160, 255, 0.65);
-          box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.7), 0 0 24px rgba(79, 139, 255, 0.15);
-        }
-
-        /* Top Corner Ticks */
-        .corner-tick-tl {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          width: 8px;
-          height: 8px;
-          border-top: 1.5px solid rgba(120, 165, 255, 0.5);
-          border-left: 1.5px solid rgba(120, 165, 255, 0.5);
-        }
-        .corner-tick-br {
-          position: absolute;
-          bottom: 10px;
-          right: 10px;
-          width: 8px;
-          height: 8px;
-          border-bottom: 1.5px solid rgba(120, 165, 255, 0.5);
-          border-right: 1.5px solid rgba(120, 165, 255, 0.5);
-        }
-
-        /* Header */
-        .card-header {
+        /* Card Header */
+        .env-card-header {
           display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
+          align-items: center;
           gap: 16px;
-          padding-bottom: 18px;
-          border-bottom: 1px solid rgba(83, 125, 210, 0.2);
         }
 
-        .ref-index-wrap {
+        .env-num-badge {
+          width: 44px;
+          height: 44px;
+          background: #1d4ed8;
+          border-radius: 6px;
           display: flex;
           align-items: center;
-          gap: 8px;
-        }
-
-        .ref-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #4f8bff;
-          box-shadow: 0 0 8px #4f8bff;
-        }
-        .ref-dot.cerebras {
-          background: #2fdbe6;
-          box-shadow: 0 0 8px #2fdbe6;
-        }
-
-        .ref-index {
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 2px;
-          color: #768db8;
-          text-transform: uppercase;
-        }
-
-        .ref-name {
-          font-size: 16px;
+          justify-content: center;
+          font-family: var(--font-mono, monospace);
+          font-size: 19px;
           font-weight: 700;
-          letter-spacing: 0.5px;
           color: #ffffff;
-          text-align: right;
-          background: linear-gradient(135deg, #ffffff 40%, #c4d7fe 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          flex-shrink: 0;
+          box-shadow: 0 0 16px rgba(29, 78, 216, 0.4);
         }
 
-        /* Load Block */
-        .load-block {
-          margin-top: 20px;
-        }
-
-        .load-meta-label {
+        .env-header-text {
           display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 10px;
-          letter-spacing: 2px;
-          color: #7ea8ff;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .env-header-eyebrow {
+          font-family: var(--font-mono, monospace);
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          color: #38bdf8;
+          font-weight: 700;
           text-transform: uppercase;
+        }
+
+        .env-header-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+          letter-spacing: -0.01em;
+        }
+
+        /* Subtle Horizontal Divider */
+        .env-divider {
+          width: 100%;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.08);
+          margin: 20px 0;
+        }
+
+        /* Specs Grid */
+        .env-specs-grid {
+          display: grid;
+          grid-template-columns: 110px 1fr;
+          gap: 20px;
+          align-items: flex-start;
+          min-height: 108px;
+          margin-bottom: 20px;
+        }
+
+        /* Load Col */
+        .env-load-col {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .env-meta-lbl {
+          font-family: var(--font-mono, monospace);
+          font-size: 10.5px;
+          letter-spacing: 0.16em;
+          color: #64748b;
           font-weight: 600;
+          text-transform: uppercase;
+          margin-bottom: 6px;
+        }
+
+        .env-load-pre {
+          font-size: 13px;
+          color: #94a3b8;
           margin-bottom: 4px;
         }
 
-        .load-val-wrap {
+        .env-load-stat {
           display: flex;
           align-items: baseline;
-          gap: 8px;
+          gap: 4px;
         }
 
-        .load-pre {
-          font-size: 14px;
-          color: #8da4cf;
-          font-weight: 400;
-          letter-spacing: 1px;
-        }
-
-        .load-number {
-          font-size: clamp(42px, 4.5vw, 56px);
+        .env-load-num {
+          font-size: clamp(38px, 3.8vw, 48px);
           font-weight: 800;
-          letter-spacing: -1.5px;
           line-height: 1;
-          color: #ffffff;
-          text-shadow: 0 0 24px rgba(79, 139, 255, 0.35);
+          color: #38bdf8;
+          letter-spacing: -0.03em;
         }
 
-        .load-unit {
-          font-size: 16px;
-          font-weight: 700;
-          letter-spacing: 1.5px;
-          color: #6892e8;
+        .env-load-unit {
+          font-family: var(--font-mono, monospace);
+          font-size: 15px;
+          font-weight: 600;
+          color: #94a3b8;
+          letter-spacing: 0.05em;
         }
 
-        /* Power Bar Meter */
-        .power-meter {
-          width: 100%;
-          height: 4px;
-          background: rgba(40, 60, 110, 0.4);
-          border-radius: 2px;
-          margin-top: 10px;
-          overflow: hidden;
-          position: relative;
-        }
-        .power-meter-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #4f8bff 0%, #79abff 100%);
-          box-shadow: 0 0 10px #4f8bff;
-          border-radius: 2px;
-        }
-        .power-meter-fill.cerebras {
-          background: linear-gradient(90deg, #2fdbe6 0%, #6ef4fb 100%);
-          box-shadow: 0 0 10px #2fdbe6;
-        }
-
-        /* Spec Rows */
-        .spec-list {
-          margin-top: 20px;
+        /* Details Col */
+        .env-details-col {
           display: flex;
           flex-direction: column;
           gap: 12px;
         }
 
-        .spec-item {
-          display: grid;
-          grid-template-columns: 110px 1fr;
+        .env-detail-item {
+          display: flex;
+          align-items: flex-start;
           gap: 12px;
-          padding: 10px 0;
-          border-top: 1px solid rgba(83, 125, 210, 0.15);
-          font-size: 13px;
-          color: #d1deff;
-          align-items: baseline;
         }
 
-        .spec-k {
-          font-size: 9.5px;
-          letter-spacing: 1.6px;
-          text-transform: uppercase;
-          color: #6d84af;
-          font-weight: 600;
+        .env-detail-item:first-child {
+          min-height: 48px;
         }
 
-        .spec-v {
-          line-height: 1.45;
-          color: #c2d5fa;
+        .env-detail-item:last-child {
+          min-height: 38px;
         }
 
-        .source-tag {
-          display: inline-block;
-          font-size: 11.5px;
-          color: #9abaff;
-          background: rgba(79, 139, 255, 0.1);
-          border: 1px solid rgba(79, 139, 255, 0.25);
-          padding: 3px 8px;
+        .env-detail-icon {
+          width: 32px;
+          height: 32px;
           border-radius: 6px;
-        }
-
-        /* Visual Floorplan Schematic Container */
-        .floorplan-container {
-          margin-top: 22px;
-          padding: 16px 14px;
-          background: rgba(10, 18, 38, 0.6);
-          border: 1px solid rgba(83, 125, 210, 0.25);
-          border-radius: 12px;
-        }
-
-        .floorplan-header {
+          background: rgba(14, 38, 74, 0.4);
+          border: 1px solid rgba(56, 189, 248, 0.25);
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          margin-bottom: 12px;
+          justify-content: center;
+          flex-shrink: 0;
+          padding: 6px;
+        }
+
+        .env-detail-text {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .env-detail-lbl {
+          font-family: var(--font-mono, monospace);
           font-size: 10px;
-          letter-spacing: 1.4px;
+          letter-spacing: 0.14em;
+          color: #64748b;
+          font-weight: 600;
           text-transform: uppercase;
         }
 
-        .fp-badge-it {
-          color: #7ea8ff;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-        .fp-badge-nw {
-          color: #c4b5fd;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-        .fp-badge-dim {
-          color: #7187ad;
+        .env-detail-desc {
+          font-size: 13px;
+          line-height: 1.45;
+          color: #cbd5e1;
+          margin: 0;
         }
 
-        .fp-color-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 2px;
-          display: inline-block;
-        }
-        .fp-color-dot.it {
-          background: #4f8bff;
-          box-shadow: 0 0 6px #4f8bff;
-        }
-        .fp-color-dot.nw {
-          background: #a48bff;
-          box-shadow: 0 0 6px #a48bff;
-        }
-        .fp-color-dot.cs {
-          background: #2fdbe6;
-          box-shadow: 0 0 6px #2fdbe6;
+        /* Schematic Blueprint Box */
+        .env-schematic-box {
+          background: rgba(3, 7, 18, 0.85);
+          border: 1px solid rgba(56, 189, 248, 0.15);
+          border-radius: 8px;
+          padding: 14px 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: auto;
         }
 
-        /* Floorplan SVG Racks */
-        svg.rack-layout {
+        .env-schematic-head {
+          display: flex;
+          align-items: center;
+        }
+
+        .env-schematic-title {
+          font-family: var(--font-mono, monospace);
+          font-size: 11px;
+          letter-spacing: 0.14em;
+          color: #38bdf8;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        .env-schematic-subhead {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 11.5px;
+          color: #94a3b8;
+          min-height: 18px;
+        }
+
+        .env-subhead-left {
+          flex: 1;
+        }
+
+        .env-subhead-mid {
+          flex: 1;
+          text-align: center;
+        }
+
+        .env-racks-svg-wrap {
           width: 100%;
-          height: auto;
+          height: 38px;
+        }
+
+        .env-racks-svg {
+          width: 100%;
+          height: 100%;
           display: block;
         }
 
-        :global(.pod-ref-cards-grid .rack-unit) {
-          transition: all 0.25s ease;
-          cursor: pointer;
-        }
-        :global(.pod-ref-cards-grid .rack-it) {
-          fill: rgba(30, 60, 130, 0.35);
-          stroke: rgba(79, 139, 255, 0.65);
-          stroke-width: 1.2;
-        }
-        :global(.pod-ref-cards-grid .rack-unit:hover .rack-it) {
-          fill: rgba(79, 139, 255, 0.4);
-          stroke: #79abff;
-          filter: drop-shadow(0 0 8px rgba(79, 139, 255, 0.8));
-        }
-
-        :global(.pod-ref-cards-grid .rack-nw) {
-          fill: rgba(70, 45, 140, 0.35);
-          stroke: rgba(168, 132, 255, 0.7);
-          stroke-width: 1.2;
-        }
-        :global(.pod-ref-cards-grid .rack-unit:hover .rack-nw) {
-          fill: rgba(168, 132, 255, 0.4);
-          stroke: #cbb8ff;
-          filter: drop-shadow(0 0 8px rgba(168, 132, 255, 0.8));
-        }
-
-        :global(.pod-ref-cards-grid .rack-cs) {
-          fill: rgba(20, 75, 95, 0.35);
-          stroke: rgba(47, 219, 230, 0.65);
-          stroke-width: 1.2;
-        }
-        :global(.pod-ref-cards-grid .rack-unit:hover .rack-cs) {
-          fill: rgba(47, 219, 230, 0.4);
-          stroke: #6ef4fb;
-          filter: drop-shadow(0 0 8px rgba(47, 219, 230, 0.8));
-        }
-
-        :global(.pod-ref-cards-grid .slot-led) {
-          fill: #4f8bff;
-        }
-        :global(.pod-ref-cards-grid .slot-led.nw) {
-          fill: #a48bff;
-        }
-        :global(.pod-ref-cards-grid .slot-led.cs) {
-          fill: #2fdbe6;
-        }
-
-        .floorplan-footer {
+        /* Dimension Lines */
+        .env-dim-row {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          margin-top: 10px;
-          font-size: 9.5px;
-          color: #768db8;
-          letter-spacing: 1.2px;
+          gap: 8px;
+          margin-top: 4px;
+        }
+
+        .env-dim-row-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 4px;
+        }
+
+        .env-dim-arrow-l,
+        .env-dim-arrow-r {
+          font-size: 8px;
+          color: #64748b;
+          line-height: 1;
+        }
+
+        .env-dim-line {
+          flex: 1;
+          height: 1px;
+          background: rgba(100, 116, 139, 0.4);
+        }
+
+        .env-dim-label {
+          font-family: var(--font-mono, monospace);
+          font-size: 10.5px;
+          color: #94a3b8;
+          white-space: nowrap;
+        }
+
+        /* Multi-Pod Layout Banner */
+        .env-multi-banner {
+          margin-top: 24px;
+          background: #040914;
+          border: 1px solid rgba(56, 189, 248, 0.18);
+          border-radius: 10px;
+          padding: 18px 24px;
+          display: flex;
+          align-items: center;
+          gap: 28px;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .env-banner-left {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-shrink: 0;
+        }
+
+        .env-banner-hex-icon {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .env-banner-title {
+          font-family: var(--font-mono, monospace);
+          font-size: 12px;
+          letter-spacing: 0.18em;
+          color: #38bdf8;
+          font-weight: 700;
           text-transform: uppercase;
+          white-space: nowrap;
+        }
+
+        .env-banner-divider {
+          width: 1px;
+          height: 36px;
+          background: rgba(255, 255, 255, 0.12);
+          flex-shrink: 0;
+        }
+
+        .env-banner-right {
+          flex: 1;
+        }
+
+        .env-banner-desc {
+          font-size: 13.5px;
+          line-height: 1.55;
+          color: #cbd5e1;
+          margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+          .envelope-cards-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+
+          .env-specs-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .env-multi-banner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+          }
+
+          .env-banner-divider {
+            display: none;
+          }
         }
       `}</style>
-
-      {/* ═══ CARD 01: NVIDIA Vera Rubin NVL72 ═══ */}
-      <article className="ref-card reveal">
-        <div className="corner-tick-tl" />
-        <div className="corner-tick-br" />
-
-        <div className="card-header">
-          <div className="ref-index-wrap">
-            <span className="ref-dot" />
-            <span className="ref-index">POD REFERENCE · 01</span>
-          </div>
-          <span className="ref-name">NVIDIA Vera Rubin NVL72</span>
-        </div>
-
-        <div className="load-block">
-          <div className="load-meta-label">
-            <span>IT POWER ENVELOPE</span>
-          </div>
-          <div className="load-val-wrap">
-            <span className="load-pre">About</span>
-            <span className="load-number">2.8</span>
-            <span className="load-unit">MW</span>
-          </div>
-          <div className="power-meter">
-            <div className="power-meter-fill" style={{ width: "92%" }} />
-          </div>
-        </div>
-
-        <div className="spec-list">
-          <div className="spec-item">
-            <span className="spec-k">Physical unit</span>
-            <span className="spec-v">14 IT compute racks plus 2 network and storage racks in a single continuous row (network racks in middle).</span>
-          </div>
-          <div className="spec-item">
-            <span className="spec-k">Source</span>
-            <span className="spec-v">
-              <span className="source-tag">Vera Rubin NVL72 Facility Planning Summary</span>
-            </span>
-          </div>
-        </div>
-
-        {/* Rack Layout Visual */}
-        <div className="floorplan-container">
-          <div className="floorplan-header">
-            <span className="fp-badge-it">
-              <span className="fp-color-dot it" /> 14 IT Racks
-            </span>
-            <span className="fp-badge-nw">
-              <span className="fp-color-dot nw" /> 2 Network / Storage
-            </span>
-            <span className="fp-badge-dim">Single Row</span>
-          </div>
-
-          <svg viewBox="0 0 400 48" className="rack-layout" role="img" aria-label="16 rack single row layout">
-            <g>
-              {/* 7 Left IT Racks */}
-              {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-                <g key={`it-left-${i}`} className="rack-unit" transform={`translate(${4 + i * 23.5}, 4)`}>
-                  <rect width="20.5" height="38" rx="3" className="rack-it" />
-                  <rect x="3" y="6" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="8" r="1.2" className="slot-led" />
-                  <rect x="3" y="13" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="15" r="1.2" className="slot-led" />
-                  <rect x="3" y="20" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="22" r="1.2" className="slot-led" />
-                  <rect x="3" y="27" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="29" r="1.2" className="slot-led" />
-                </g>
-              ))}
-
-              {/* 2 Middle Network / Storage Racks */}
-              {[0, 1].map((i) => (
-                <g key={`nw-${i}`} className="rack-unit" transform={`translate(${172 + i * 23.5}, 4)`}>
-                  <rect width="20.5" height="38" rx="3" className="rack-nw" />
-                  <rect x="3" y="6" width="14.5" height="4" rx="1" fill="rgba(168,132,255,0.3)" />
-                  <circle cx="6" cy="8" r="1.2" className="slot-led nw" />
-                  <rect x="3" y="13" width="14.5" height="4" rx="1" fill="rgba(168,132,255,0.3)" />
-                  <circle cx="6" cy="15" r="1.2" className="slot-led nw" />
-                  <rect x="3" y="20" width="14.5" height="4" rx="1" fill="rgba(168,132,255,0.3)" />
-                  <circle cx="6" cy="22" r="1.2" className="slot-led nw" />
-                  <rect x="3" y="27" width="14.5" height="4" rx="1" fill="rgba(168,132,255,0.3)" />
-                  <circle cx="6" cy="29" r="1.2" className="slot-led nw" />
-                </g>
-              ))}
-
-              {/* 7 Right IT Racks */}
-              {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-                <g key={`it-right-${i}`} className="rack-unit" transform={`translate(${223 + i * 23.5}, 4)`}>
-                  <rect width="20.5" height="38" rx="3" className="rack-it" />
-                  <rect x="3" y="6" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="8" r="1.2" className="slot-led" />
-                  <rect x="3" y="13" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="15" r="1.2" className="slot-led" />
-                  <rect x="3" y="20" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="22" r="1.2" className="slot-led" />
-                  <rect x="3" y="27" width="14.5" height="4" rx="1" fill="rgba(120,165,255,0.25)" />
-                  <circle cx="6" cy="29" r="1.2" className="slot-led" />
-                </g>
-              ))}
-            </g>
-          </svg>
-
-          <div className="floorplan-footer">
-            <span>Liquid Cooled · Direct-to-Chip</span>
-            <span>16 Rack Continuous Row</span>
-          </div>
-        </div>
-      </article>
-
-      {/* ═══ CARD 02: Cerebras CS4 ═══ */}
-      <article className="ref-card reveal" data-delay="1">
-        <div className="corner-tick-tl" />
-        <div className="corner-tick-br" />
-
-        <div className="card-header">
-          <div className="ref-index-wrap">
-            <span className="ref-dot cerebras" />
-            <span className="ref-index">POD REFERENCE · 02</span>
-          </div>
-          <span className="ref-name">Cerebras CS4</span>
-        </div>
-
-        <div className="load-block">
-          <div className="load-meta-label" style={{ color: "#2fdbe6" }}>
-            <span>IT POWER ENVELOPE</span>
-          </div>
-          <div className="load-val-wrap">
-            <span className="load-number">2.5</span>
-            <span className="load-unit" style={{ color: "#2fdbe6" }}>MW</span>
-          </div>
-          <div className="power-meter">
-            <div className="power-meter-fill cerebras" style={{ width: "82%" }} />
-          </div>
-        </div>
-
-        <div className="spec-list">
-          <div className="spec-item">
-            <span className="spec-k">Physical unit</span>
-            <span className="spec-v">11 modular containers, about 3,970 sq ft footprint.</span>
-          </div>
-          <div className="spec-item">
-            <span className="spec-k">Source</span>
-            <span className="spec-v">
-              <span className="source-tag" style={{ color: "#74f0f6", borderColor: "rgba(47,219,230,0.3)", background: "rgba(47,219,230,0.08)" }}>
-                DigiPowerX Cerebras CS4 Business Case
-              </span>
-            </span>
-          </div>
-        </div>
-
-        {/* Container Layout Visual */}
-        <div className="floorplan-container">
-          <div className="floorplan-header">
-            <span className="fp-badge-it" style={{ color: "#2fdbe6" }}>
-              <span className="fp-color-dot cs" /> 11 Modular Containers
-            </span>
-            <span className="fp-badge-dim">≈ 3,970 sq ft Footprint</span>
-          </div>
-
-          <svg viewBox="0 0 400 48" className="rack-layout" role="img" aria-label="11 modular container layout">
-            <g>
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                <g key={`cs-cont-${i}`} className="rack-unit" transform={`translate(${4 + i * 36}, 4)`}>
-                  <rect width="32" height="38" rx="4" className="rack-cs" />
-                  {/* Container ribs */}
-                  <line x1="10" y1="8" x2="10" y2="34" stroke="rgba(47,219,230,0.4)" strokeWidth="1" />
-                  <line x1="16" y1="8" x2="16" y2="34" stroke="rgba(47,219,230,0.4)" strokeWidth="1" />
-                  <line x1="22" y1="8" x2="22" y2="34" stroke="rgba(47,219,230,0.4)" strokeWidth="1" />
-                  <circle cx="6" cy="8" r="1.2" className="slot-led cs" />
-                  <circle cx="26" cy="8" r="1.2" className="slot-led cs" />
-                </g>
-              ))}
-            </g>
-          </svg>
-
-          <div className="floorplan-footer">
-            <span>Wafer-Scale Engine Cluster</span>
-            <span>11 Prefabricated Modules</span>
-          </div>
-        </div>
-      </article>
     </div>
   );
 }

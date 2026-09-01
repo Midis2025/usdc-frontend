@@ -77,7 +77,7 @@ export default function TeamGrid() {
       name: "Jim McCabe",
       role: "Advisor",
       image: "/images/ChatGPT%20Image%20May%2018%2C%202026%2C%2004_04_42%20PM.avif",
-      bio: "Real estate and infrastructure development veteran with 15+ years of experience leading hyperscale site acquisitions and construction."
+      bio: "Financial services veteran with 15+ years of experience of scaling businesses and providing capital to early stage, high growth companies with innovative technology."
     },
     {
       id: "eddie-cloud",

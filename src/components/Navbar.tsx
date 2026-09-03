@@ -82,7 +82,7 @@ const navLinks: NavLink[] = [
       },
     ],
   },
-  // { label: "Use Cases", href: "/use-cases" },
+  { label: "Use Cases", href: "/use-cases" },
   { label: "Career", href: "/career" },
 ];
 
@@ -290,12 +290,20 @@ export default function Navbar() {
               );
             }
 
+            const isActive =
+              pathname === link.href ||
+              (link.href === "/use-cases" && pathname === "/reference-architectures");
+
             return (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => handleLinkClick(link.href)}
-                className="relative text-white/80 text-[13px] xl:text-[14px] 2xl:text-[15px] font-medium hover:text-[#3daeff] transition-colors duration-300 py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-[#3daeff] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left font-sans whitespace-nowrap"
+                className={`relative text-[13px] xl:text-[14px] 2xl:text-[15px] font-medium transition-colors duration-300 py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-[#3daeff] after:transition-transform after:duration-300 after:origin-left font-sans whitespace-nowrap ${
+                  isActive
+                    ? "text-[#3daeff] after:scale-x-100"
+                    : "text-white/80 hover:text-[#3daeff] after:scale-x-0 hover:after:scale-x-100"
+                }`}
               >
                 {link.label}
               </Link>
@@ -516,6 +524,10 @@ export default function Navbar() {
               );
             }
 
+            const isActive =
+              pathname === link.href ||
+              (link.href === "/use-cases" && pathname === "/reference-architectures");
+
             return (
               <Link
                 key={link.label}
@@ -524,7 +536,9 @@ export default function Navbar() {
                   setIsMobileMenuOpen(false);
                   handleLinkClick(link.href);
                 }}
-                className="text-white text-[15px] font-semibold tracking-wide py-3.5 border-b border-white/[0.05] block active:text-[#3daeff] transition-colors duration-200"
+                className={`text-[15px] font-semibold tracking-wide py-3.5 border-b border-white/[0.05] block transition-colors duration-200 ${
+                  isActive ? "text-[#3daeff]" : "text-white active:text-[#3daeff]"
+                }`}
                 style={transitionStyles}
               >
                 {link.label}

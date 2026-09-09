@@ -80,13 +80,6 @@ export default function TeamGrid() {
       bio: "Financial services veteran with 15+ years of experience of scaling businesses and providing capital to early stage, high growth companies with innovative technology."
     },
     {
-      id: "eddie-cloud",
-      name: "Eddie Cloud",
-      role: "Infrastructure and Development Lead",
-      image: "/images/ChatGPT%20Image%20May%2018%2C%202026%2C%2004_04_43%20PM.avif",
-      bio: "Specialist in thermal dynamics and structural engineering, pioneering innovative liquid cooling architectures for high-density AI clusters."
-    },
-    {
       id: "venkat-rangasamy",
       name: "Venkat Rangasamy",
       role: "VP of AI Infrastructure",

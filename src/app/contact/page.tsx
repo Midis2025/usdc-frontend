@@ -6,7 +6,6 @@ import ContactHero from "@/components/contact/ContactHero";
 import SmartContactCards from "@/components/contact/SmartContactCards";
 import ContactPortal from "@/components/contact/ContactPortal";
 
-import ContactCTA from "@/components/contact/ContactCTA";
 import PartnerSection from "@/components/PartnerSection";
 
 export const metadata: Metadata = {
@@ -28,11 +27,6 @@ export default function ContactPage() {
 
       {/* Immersive communication portal (the form) */}
       <ContactPortal />
-
-
-
-      {/* Closing call-to-action */}
-      <ContactCTA />
 
       {/* Partner Section */}
       <PartnerSection />

@@ -194,29 +194,6 @@ export default function UseCasesPage() {
               <p className="lead">
                 USDC plans deployments in a repeatable way. Each reference architecture runs the same seven blocks in the same order, states only sourced figures and closes with what it does not solve.
               </p>
-              <div className="template-row" aria-label="Seven-block template">
-                <div>
-                  <b>01</b>Hero
-                </div>
-                <div>
-                  <b>02</b>Situation
-                </div>
-                <div>
-                  <b>03</b>Constraint
-                </div>
-                <div>
-                  <b>04</b>What USDC deploys
-                </div>
-                <div>
-                  <b>05</b>How it works
-                </div>
-                <div>
-                  <b>06</b>For the facility
-                </div>
-                <div className="last">
-                  <b>07</b>Does not solve
-                </div>
-              </div>
             </div>
           </div>
 

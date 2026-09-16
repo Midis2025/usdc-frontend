@@ -61,7 +61,7 @@ export default function TeamGrid() {
     {
       id: "daniel-rotunno",
       name: "Daniel Rotunno",
-      role: "VP of Operations",
+      role: "Senior Vice President",
       image: "/images/WhatsApp%20Image%202026-09-15%20at%2010.57.25%20AM.jpeg",
       bio: "Operations expert managing the complex logistics and site deployments for modular data centers."
     },

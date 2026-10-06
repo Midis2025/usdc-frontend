@@ -80,11 +80,12 @@ export default function TeamGrid() {
       bio: "Financial services veteran with 15+ years of experience of scaling businesses and providing capital to early stage, high growth companies with innovative technology."
     },
     {
-      id: "venkat-rangasamy",
-      name: "Venkat Rangasamy",
-      role: "VP of AI Infrastructure",
-      image: "/images/ChatGPT%20Image%20May%2018%2C%202026%2C%2004_04_45%20PM.avif",
-      bio: "Energy sector expert specializing in grid-scale renewable integration, microgrids and high-voltage substation designs."
+      id: "faraz-zobairi",
+      name: "Faraz Zobairi",
+      role: "Head of Technical Operations & Compliance",
+      image: "/images/DD8E484D-F10A-4DDE-9C0B-A55D4D2A6C19_1_201_a.jpeg",
+      bio: "Cybersecurity, Operations, and Compliance leader with over 20 years of experience leading high performing teams.",
+      linkedin: "https://www.linkedin.com/in/farazzobairi"
     },
     {
       id: "naresh-kumar",
